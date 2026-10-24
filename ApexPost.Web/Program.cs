@@ -5,6 +5,7 @@ using ApexPost.Web.Filters;
 using ApexPost.Web.Middleware;
 using ApexPost.Web.Security;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,8 @@ builder.Services.AddScoped<AuditActionFilter>();
 builder.Services.AddScoped<ValidationActionFilter>();
 builder.Services.AddScoped<PerformanceActionFilter>();
 
+builder.Services.AddScoped<IAuthorizationHandler, SameBranchAuthorizationHandler>();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -35,11 +38,32 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.SameSite = SameSiteMode.Lax;
         options.SlidingExpiration = true;
         options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.Events = new CookieAuthenticationEvents
+        {
+            OnRedirectToLogin = context =>
+            {
+                var redirect = context.Request.PathBase + "/account/login?ReturnUrl=" + Uri.EscapeDataString(context.Request.Path + context.Request.QueryString);
+                context.Response.Redirect(redirect);
+                return Task.CompletedTask;
+            },
+            OnRedirectToAccessDenied = context =>
+            {
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                return Task.CompletedTask;
+            }
+        };
     });
+
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(WebPolicies.BranchManager, policy => policy.RequireRole("BranchManager", "Administrator"));
     options.AddPolicy(WebPolicies.Administrator, policy => policy.RequireRole("Administrator"));
+    options.AddPolicy(WebPolicies.SameBranch, policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.AddRequirements(new SameBranchRequirement());
+    });
+    options.AddPolicy(WebPolicies.BranchManagerOnly, policy => policy.RequireRole("BranchManager", "Administrator"));
 });
 
 builder.Services.AddCors(options =>

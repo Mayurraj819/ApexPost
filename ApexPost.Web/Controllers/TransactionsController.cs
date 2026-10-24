@@ -15,7 +15,7 @@ public sealed class TransactionsController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    [Authorize(Policy = WebPolicies.BranchManager)]
+    [Authorize(Policy = WebPolicies.BranchManagerOnly)]
     public async Task<IActionResult> Void(Guid transactionId, string reason, CancellationToken cancellationToken)
     {
         if (!Guid.TryParse(User.FindFirstValue(WebClaimTypes.StaffId), out var managerId))

@@ -25,6 +25,7 @@ public static class DependencyInjection
         services.AddSingleton<IJsonStore<Branch>>(_ => new FileJsonStore<Branch>(Path.Combine(dataDirectory, "branches.json"), serializerOptions));
         services.AddSingleton<IJsonStore<Product>>(_ => new FileJsonStore<Product>(Path.Combine(dataDirectory, "products.json"), serializerOptions));
         services.AddSingleton<IJsonStore<Transaction>>(_ => new FileJsonStore<Transaction>(Path.Combine(dataDirectory, "transactions.json"), serializerOptions));
+        services.AddSingleton<IAuditStore>(_ => new JsonAuditStore(dataDirectory));
 
         services.AddSingleton<IBranchRepository, JsonBranchRepository>();
         services.AddSingleton<IProductRepository, JsonProductRepository>();

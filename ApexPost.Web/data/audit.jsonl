@@ -1,0 +1,224 @@
+{
+  "occurredAt": "2026-10-24T09:41:54.2933649+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "7807955b-0b9e-4ac9-ba31-63bd38d04f9f",
+  "statusCode": 200,
+  "durationMs": 3.1808,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:41:54.5284643+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "688a023c-db18-4d71-95a4-9bcd4d298dce",
+  "statusCode": 200,
+  "durationMs": 7.7574,
+  "routeValues": "model=ApexPost.Web.Models.LoginViewModel;cancellationToken=System.Threading.CancellationToken",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:43:05.9474512+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "1a2ec0ae-5276-4071-9bdd-58dc388d3df6",
+  "statusCode": 200,
+  "durationMs": 4.4156,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:43:06.2189756+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "7e380c69-57cd-4c29-bdf3-8faa89f38b6e",
+  "statusCode": 200,
+  "durationMs": 7.1808,
+  "routeValues": "model=ApexPost.Web.Models.LoginViewModel;cancellationToken=System.Threading.CancellationToken",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:43:06.3966066+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "5f12ac91-3eb4-421f-b940-85b8127f5f5c",
+  "statusCode": 200,
+  "durationMs": 0.4477,
+  "routeValues": "model=ApexPost.Web.Models.LoginViewModel;cancellationToken=System.Threading.CancellationToken",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:43:06.4330745+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "d92a5c7a-1fcb-4a1d-abc2-714e3e7fe48c",
+  "statusCode": 200,
+  "durationMs": 0.0808,
+  "routeValues": "model=ApexPost.Web.Models.LoginViewModel;cancellationToken=System.Threading.CancellationToken",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:43:06.4439744+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "0bf66c03-d99c-41d8-9c47-3b7c1492f07d",
+  "statusCode": 200,
+  "durationMs": 0.1096,
+  "routeValues": "model=ApexPost.Web.Models.LoginViewModel;cancellationToken=System.Threading.CancellationToken",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:45:41.5509524+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "0e615351-a041-4122-adfd-1ad206b5512c",
+  "statusCode": 200,
+  "durationMs": 2.2746,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:45:41.7824331+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "c7f2660c-1d76-4e13-8afa-0eb3c99e9c6b",
+  "statusCode": 200,
+  "durationMs": 12.2127,
+  "routeValues": "model=ApexPost.Web.Models.LoginViewModel;cancellationToken=System.Threading.CancellationToken",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:45:41.9215854+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "f636e3cc-fcfe-4366-ae05-d36c6be253e1",
+  "statusCode": 200,
+  "durationMs": 0.1385,
+  "routeValues": "model=ApexPost.Web.Models.LoginViewModel;cancellationToken=System.Threading.CancellationToken",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:45:41.958921+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "78c93240-f9d0-46a5-8c73-b1d937c01cc9",
+  "statusCode": 200,
+  "durationMs": 0.1253,
+  "routeValues": "model=ApexPost.Web.Models.LoginViewModel;cancellationToken=System.Threading.CancellationToken",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:45:41.9684042+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "4ddd5577-9b21-426f-89fe-d614ff73f24f",
+  "statusCode": 200,
+  "durationMs": 0.0679,
+  "routeValues": "model=ApexPost.Web.Models.LoginViewModel;cancellationToken=System.Threading.CancellationToken",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:46:40.3620814+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "3958a49c-0eb8-4fd1-b0a1-6ec7644bbb06",
+  "statusCode": 200,
+  "durationMs": 10.8176,
+  "routeValues": "model=ApexPost.Web.Models.LoginViewModel;cancellationToken=System.Threading.CancellationToken",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:46:40.5537853+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "778e325f-6800-47cb-ae05-a44ac98e8505",
+  "statusCode": 200,
+  "durationMs": 0.1937,
+  "routeValues": "model=ApexPost.Web.Models.LoginViewModel;cancellationToken=System.Threading.CancellationToken",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T09:46:40.571086+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "1c1c5af4-3059-4620-96b1-a8eba396b651",
+  "statusCode": 200,
+  "durationMs": 0.09,
+  "routeValues": "model=ApexPost.Web.Models.LoginViewModel;cancellationToken=System.Threading.CancellationToken",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-24T10:00:24.2980846+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "70062508-3d86-4e45-be01-e04c57664e7a",
+  "statusCode": 200,
+  "durationMs": 3.6565,
+  "routeValues": "returnUrl=/",
+  "result": "completed",
+  "details": null
+}

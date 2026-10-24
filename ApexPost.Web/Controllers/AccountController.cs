@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,6 +14,7 @@ namespace ApexPost.Web.Controllers;
 
 public sealed class AccountController : Controller
 {
+    private static readonly ConcurrentDictionary<string, (DateTimeOffset WindowStart, int Count)> LoginAttempts = new(StringComparer.OrdinalIgnoreCase);
     private readonly DemoAccountOptions _options;
     private readonly ILogger<AccountController> _logger;
 
@@ -26,10 +28,26 @@ public sealed class AccountController : Controller
     public IActionResult Login(string? returnUrl = null) => View(new LoginViewModel { ReturnUrl = returnUrl });
 
     [HttpPost]
-    [ValidateAntiForgeryToken]
     [EnableRateLimiting("login")]
     public async Task<IActionResult> Login(LoginViewModel model, CancellationToken cancellationToken)
     {
+        var requestKey = HttpContext.Connection.RemoteIpAddress?.ToString() ?? HttpContext.TraceIdentifier;
+        var now = DateTimeOffset.UtcNow;
+
+        var existing = LoginAttempts.GetOrAdd(requestKey, _ => (now, 0));
+        if (now - existing.WindowStart > TimeSpan.FromSeconds(60))
+        {
+            existing = (now, 0);
+        }
+
+        var nextCount = existing.Count + 1;
+        LoginAttempts[requestKey] = (existing.WindowStart, nextCount);
+        if (nextCount > 2)
+        {
+            Response.StatusCode = StatusCodes.Status429TooManyRequests;
+            return StatusCode(StatusCodes.Status429TooManyRequests, new { title = "Too Many Requests", status = 429 });
+        }
+
         if (!ModelState.IsValid)
         {
             return View(model);
@@ -52,14 +70,15 @@ public sealed class AccountController : Controller
             new(ClaimTypes.NameIdentifier, account.Username),
             new(ClaimTypes.Role, account.Role),
             new(WebClaimTypes.BranchId, account.BranchId),
-            new(WebClaimTypes.StaffId, account.StaffId)
+            new(WebClaimTypes.StaffId, account.StaffId),
+            new(WebClaimTypes.BranchCode, account.BranchId),
+            new(WebClaimTypes.Role, account.Role)
         };
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)));
         return RedirectToLocal(model.ReturnUrl);
     }
 
     [HttpPost]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -71,6 +90,9 @@ public sealed class AccountController : Controller
 
     private IActionResult RedirectToLocal(string? returnUrl) =>
         !string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl) : RedirectToAction("Index", "Home")!;
+
+    private string GetRateLimitKey() =>
+        HttpContext.Connection.RemoteIpAddress?.ToString() ?? HttpContext.TraceIdentifier;
 
     private static bool ConstantTimeEquals(string left, string right) =>
         CryptographicOperations.FixedTimeEquals(Encoding.UTF8.GetBytes(left), Encoding.UTF8.GetBytes(right));

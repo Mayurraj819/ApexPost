@@ -25,8 +25,16 @@ public sealed class ApiKeyMiddleware
             return;
         }
 
+        var configuredKeys = _options.CurrentValue.IntegrationApiKeys ?? Array.Empty<string>();
+        if (configuredKeys.Length == 0)
+        {
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            await context.Response.WriteAsJsonAsync(new { title = "API key configuration missing", status = 500, detail = "The integration API key has not been configured." });
+            return;
+        }
+
         var supplied = context.Request.Headers[HeaderName].FirstOrDefault();
-        var valid = !string.IsNullOrEmpty(supplied) && _options.CurrentValue.IntegrationApiKeys.Any(configured => ConstantTimeEquals(supplied, configured));
+        var valid = !string.IsNullOrEmpty(supplied) && configuredKeys.Any(configured => ConstantTimeEquals(supplied, configured));
         if (!valid)
         {
             context.Response.StatusCode = StatusCodes.Status401Unauthorized;
