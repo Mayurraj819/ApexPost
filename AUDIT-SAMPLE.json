@@ -1,0 +1,44 @@
+[
+  {
+    "occurredAt": "2026-10-24T09:15:00Z",
+    "controller": "Transactions",
+    "action": "Void",
+    "staffId": "a13e0ba0-1125-484d-b02a-7d0281ef062d",
+    "role": "BranchManager",
+    "branchId": "3c2f9393-df45-49f9-9f57-85504f0042a7",
+    "correlationId": "7d0b8b8a-1b5f-4c6f-a9a0-f0e8d60d9437",
+    "statusCode": 200,
+    "durationMs": 23.4,
+    "routeValues": "id=tx-101",
+    "result": "completed",
+    "details": "Void approved with valid reason."
+  },
+  {
+    "occurredAt": "2026-10-24T09:18:00Z",
+    "controller": "MoneyOrders",
+    "action": "VerifyIdentity",
+    "staffId": "f0efea45-3f4b-49ed-b176-19515a197042",
+    "role": "CounterClerk",
+    "branchId": "3c2f9393-df45-49f9-9f57-85504f0042a7",
+    "correlationId": "d2f9d5d5-0e2a-4f7e-af60-4ec4f0513ed2",
+    "statusCode": 202,
+    "durationMs": 18.2,
+    "routeValues": "transactionId=tx-208",
+    "result": "accepted",
+    "details": "Identity match verified for high-value money order."
+  },
+  {
+    "occurredAt": "2026-10-24T09:22:10Z",
+    "controller": "Account",
+    "action": "Login",
+    "staffId": null,
+    "role": null,
+    "branchId": null,
+    "correlationId": "381df4dd-d3c5-4b6e-a2ef-1e1c68a571dd",
+    "statusCode": 429,
+    "durationMs": 11.8,
+    "routeValues": "returnUrl=%2F",
+    "result": "rejected",
+    "details": "Too many failed login attempts from a single client key."
+  }
+]

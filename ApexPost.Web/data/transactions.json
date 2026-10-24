@@ -1,0 +1,1945 @@
+﻿[
+    {
+        "staffId":  "c64d0a5a-c63b-49e3-8e98-8fe0d0a048d1",
+        "id":  "954f8889-2706-46be-a1b2-6bbaff43f62c",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "9e401e68-c0dd-42ef-af6e-fda0df58ef3c",
+                          "code":  "SKU-1",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  12
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  12
+                                        }
+                      }
+                  ],
+        "counterId":  "51ca8968-d1d1-4035-9e9f-187b8f7a05a8",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  12
+                  },
+        "statusReason":  null,
+        "status":  0,
+        "branchId":  "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+        "occurredAt":  "2026-09-02T17:00:00.0000000+00:00"
+    },
+    {
+        "staffId":  "3d7d9e0d-0b8a-4d5d-ae8d-937d4c5b9a1a",
+        "id":  "e6edf781-217a-4f81-b86e-77e13fc91ee6",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "6d4dfeb7-33d2-4683-9472-f55af1ba2ac5",
+                          "code":  "SKU-2",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  38
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  19
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "357f7f09-5bfa-4bd8-811e-918d7d81479d",
+                          "code":  "SKU-3",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  78
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  26
+                                        }
+                      }
+                  ],
+        "counterId":  "265d0fa7-94af-4d94-8957-85f332e704e5",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  116
+                  },
+        "statusReason":  null,
+        "status":  1,
+        "branchId":  "fda2be0e-5d9a-44fb-bf10-af339c8f1b39",
+        "occurredAt":  "2026-09-03T19:01:00.0000000+00:00"
+    },
+    {
+        "staffId":  "6d7ab791-86ca-4073-b4da-296febd0fe30",
+        "id":  "bab0c903-b696-44f7-87ce-7962a15971f3",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "357f7f09-5bfa-4bd8-811e-918d7d81479d",
+                          "code":  "SKU-3",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  78
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  26
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "5c379faa-4ca1-47c2-a8ea-6f0cfc0ceff4",
+                          "code":  "SKU-4",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  33
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  33
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "95038943-b59a-447d-8be5-e7cd5341c10c",
+                          "code":  "SKU-5",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  80
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  40
+                                        }
+                      }
+                  ],
+        "counterId":  "2b3220bc-2cca-425f-811d-cb433f84357f",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  191
+                  },
+        "statusReason":  "Duplicate sale attempt",
+        "status":  2,
+        "branchId":  "7b3f41b1-1776-4389-8d3f-4d30241b9d48",
+        "occurredAt":  "2026-09-04T21:02:00.0000000+00:00"
+    },
+    {
+        "staffId":  "65b37c63-2d6a-4dfe-b07d-f05a93013f0d",
+        "id":  "7ff08d93-dac8-47a5-8289-6c85cbc1640c",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "5c379faa-4ca1-47c2-a8ea-6f0cfc0ceff4",
+                          "code":  "SKU-4",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  33
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  33
+                                        }
+                      }
+                  ],
+        "counterId":  "ebcb36b8-7765-4468-8e1e-77e00d4174ec",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  33
+                  },
+        "statusReason":  "Customer return",
+        "status":  3,
+        "branchId":  "0d89ca33-fd1d-49d0-9d86-5007bc3748e4",
+        "occurredAt":  "2026-09-05T23:03:00.0000000+00:00"
+    },
+    {
+        "staffId":  "06837c3d-4d31-4d91-9fc1-c350e6d7d179",
+        "id":  "9aa9aed4-8d68-4550-9a7e-4d2e500b7cd8",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "95038943-b59a-447d-8be5-e7cd5341c10c",
+                          "code":  "SKU-5",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  80
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  40
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "f32dd611-8f52-4d09-90db-6b211af2b749",
+                          "code":  "SKU-6",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  141
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  47
+                                        }
+                      }
+                  ],
+        "counterId":  "354b1f69-38a8-40f2-93a5-3a63657b1748",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  221
+                  },
+        "statusReason":  null,
+        "status":  0,
+        "branchId":  "bdd5981e-69d8-4b8c-9b63-5e5c7d888a15",
+        "occurredAt":  "2026-09-07T01:04:00.0000000+00:00"
+    },
+    {
+        "staffId":  "c3c82d44-e5d8-4ca0-9d0b-31936f97af9e",
+        "id":  "b1bc410a-ec71-4295-8959-72abd6fa719c",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "f32dd611-8f52-4d09-90db-6b211af2b749",
+                          "code":  "SKU-6",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  141
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  47
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "d714f22e-bb61-4d59-a2ed-1e0d0ab1391f",
+                          "code":  "SKU-7",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  54
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  54
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "527ed702-3504-4de1-a3e5-ba86ef0b8d0d",
+                          "code":  "SKU-8",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  122
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  61
+                                        }
+                      }
+                  ],
+        "counterId":  "6192b8b3-fd10-43de-a759-1ca654107919",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  317
+                  },
+        "statusReason":  null,
+        "status":  1,
+        "branchId":  "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+        "occurredAt":  "2026-09-08T03:05:00.0000000+00:00"
+    },
+    {
+        "staffId":  "c1de8d44-28aa-4d37-a6d0-530dc7741b7f",
+        "id":  "b5710ac3-4fbf-4b16-a3b3-860ee31e1726",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "d714f22e-bb61-4d59-a2ed-1e0d0ab1391f",
+                          "code":  "SKU-7",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  54
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  54
+                                        }
+                      }
+                  ],
+        "counterId":  "56852844-81c4-41cd-b42b-36c5c0f43918",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  54
+                  },
+        "statusReason":  "Duplicate sale attempt",
+        "status":  2,
+        "branchId":  "fda2be0e-5d9a-44fb-bf10-af339c8f1b39",
+        "occurredAt":  "2026-09-08T17:06:00.0000000+00:00"
+    },
+    {
+        "staffId":  "ad6b7860-d246-46e8-b233-1f2d13fd5d94",
+        "id":  "8ab38bb1-c853-411d-963c-76e3c765b04d",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "527ed702-3504-4de1-a3e5-ba86ef0b8d0d",
+                          "code":  "SKU-8",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  122
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  61
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "5a1ad850-da4e-4651-9cb9-8d9d379ae250",
+                          "code":  "SKU-9",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  204
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  68
+                                        }
+                      }
+                  ],
+        "counterId":  "71ea0659-8a24-42dc-864d-9fce142c5bc5",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  326
+                  },
+        "statusReason":  "Customer return",
+        "status":  3,
+        "branchId":  "7b3f41b1-1776-4389-8d3f-4d30241b9d48",
+        "occurredAt":  "2026-09-09T19:07:00.0000000+00:00"
+    },
+    {
+        "staffId":  "d38887e4-d2fd-4ca5-a8f7-64d5d1ad1c7f",
+        "id":  "afafb4d7-1eb1-4212-837e-ab164915498c",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "5a1ad850-da4e-4651-9cb9-8d9d379ae250",
+                          "code":  "SKU-9",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  204
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  68
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "b2776a98-4012-4db6-bd4b-bda93295544d",
+                          "code":  "SKU-10",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  75
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  75
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "031cf3d6-2d5b-4e89-a0a4-7d994d4c05ca",
+                          "code":  "SKU-11",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  164
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  82
+                                        }
+                      }
+                  ],
+        "counterId":  "559c524d-b470-4cf8-add6-085d2fbded3a",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  443
+                  },
+        "statusReason":  null,
+        "status":  0,
+        "branchId":  "0d89ca33-fd1d-49d0-9d86-5007bc3748e4",
+        "occurredAt":  "2026-09-10T21:08:00.0000000+00:00"
+    },
+    {
+        "staffId":  "bb31a9f2-4b1e-4875-8b0e-485f1fb7e30b",
+        "id":  "ae66ff59-ecbb-4437-b1b3-93f10a4d513e",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "b2776a98-4012-4db6-bd4b-bda93295544d",
+                          "code":  "SKU-10",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  75
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  75
+                                        }
+                      }
+                  ],
+        "counterId":  "14769b09-f4e9-4b1d-a522-fa1b3ff47b5f",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  75
+                  },
+        "statusReason":  null,
+        "status":  1,
+        "branchId":  "bdd5981e-69d8-4b8c-9b63-5e5c7d888a15",
+        "occurredAt":  "2026-09-11T23:09:00.0000000+00:00"
+    },
+    {
+        "staffId":  "5f0420af-ad5d-49fb-9c7a-1a4d66b8fcd2",
+        "id":  "ff397a8b-f5bf-46b1-ac9b-c28550521ebc",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "031cf3d6-2d5b-4e89-a0a4-7d994d4c05ca",
+                          "code":  "SKU-11",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  164
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  82
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "9b73bc7b-7703-454d-bc08-5cf3f9df79c0",
+                          "code":  "SKU-12",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  267
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  89
+                                        }
+                      }
+                  ],
+        "counterId":  "11c17eba-12a0-4515-91e5-d28d277c3177",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  431
+                  },
+        "statusReason":  "Duplicate sale attempt",
+        "status":  2,
+        "branchId":  "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+        "occurredAt":  "2026-09-13T01:10:00.0000000+00:00"
+    },
+    {
+        "staffId":  "d779eb76-9c29-40e6-bc2d-d45e89ece747",
+        "id":  "112a7dd4-23d4-4bff-8c34-ed92f5d368e1",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "9b73bc7b-7703-454d-bc08-5cf3f9df79c0",
+                          "code":  "SKU-12",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  267
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  89
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "d2339909-e6fd-4450-b67d-7d422a8dba28",
+                          "code":  "SKU-13",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  96
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  96
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "efaf6346-7549-4a4d-8f6c-ee94d4a3a176",
+                          "code":  "SKU-14",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  206
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  103
+                                        }
+                      }
+                  ],
+        "counterId":  "23565e16-7228-40eb-a63c-9ebcdbd1fbc8",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  569
+                  },
+        "statusReason":  "Customer return",
+        "status":  3,
+        "branchId":  "fda2be0e-5d9a-44fb-bf10-af339c8f1b39",
+        "occurredAt":  "2026-09-14T03:11:00.0000000+00:00"
+    },
+    {
+        "staffId":  "f08370ce-2b17-46d0-a1fd-5b8b4f23f4f5",
+        "id":  "ac7ad6bd-e54d-4145-b0d0-8af32e479e63",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "d2339909-e6fd-4450-b67d-7d422a8dba28",
+                          "code":  "SKU-13",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  96
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  96
+                                        }
+                      }
+                  ],
+        "counterId":  "64763daf-f2b8-42f3-a36e-ffcfa90b4235",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  96
+                  },
+        "statusReason":  null,
+        "status":  0,
+        "branchId":  "7b3f41b1-1776-4389-8d3f-4d30241b9d48",
+        "occurredAt":  "2026-09-14T17:12:00.0000000+00:00"
+    },
+    {
+        "staffId":  "d2b1718f-f4cc-473d-9bcb-8f0253d8fa41",
+        "id":  "2b6266a2-7f6d-4cc0-b863-146c47b5b85d",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "efaf6346-7549-4a4d-8f6c-ee94d4a3a176",
+                          "code":  "SKU-14",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  206
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  103
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "c8789f62-bf30-43d4-b47f-ef663df5b14f",
+                          "code":  "SKU-15",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  330
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  110
+                                        }
+                      }
+                  ],
+        "counterId":  "ff907514-4948-444f-a3dd-619fd0d42463",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  536
+                  },
+        "statusReason":  null,
+        "status":  1,
+        "branchId":  "0d89ca33-fd1d-49d0-9d86-5007bc3748e4",
+        "occurredAt":  "2026-09-15T19:13:00.0000000+00:00"
+    },
+    {
+        "staffId":  "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+        "id":  "acedd5c6-839e-47fa-9b29-8f9c28bdba2c",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "c8789f62-bf30-43d4-b47f-ef663df5b14f",
+                          "code":  "SKU-15",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  330
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  110
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "bffe9c2d-ec36-4202-8c48-c7830d48ef7a",
+                          "code":  "SKU-16",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  117
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  117
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "7a3d0ab4-d2d8-450d-a59d-fb36f5af34f7",
+                          "code":  "SKU-17",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  248
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  124
+                                        }
+                      }
+                  ],
+        "counterId":  "216a96f7-080f-419d-8139-309ae9094de0",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  695
+                  },
+        "statusReason":  "Duplicate sale attempt",
+        "status":  2,
+        "branchId":  "bdd5981e-69d8-4b8c-9b63-5e5c7d888a15",
+        "occurredAt":  "2026-09-16T21:14:00.0000000+00:00"
+    },
+    {
+        "staffId":  "b4ef7c31-9d04-452b-b3ef-6b4d47939581",
+        "id":  "478448bf-3eb7-4026-a39b-cf9f23c5f936",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "bffe9c2d-ec36-4202-8c48-c7830d48ef7a",
+                          "code":  "SKU-16",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  117
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  117
+                                        }
+                      }
+                  ],
+        "counterId":  "30c77308-14f8-48e5-83d3-482352caa158",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  117
+                  },
+        "statusReason":  "Customer return",
+        "status":  3,
+        "branchId":  "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+        "occurredAt":  "2026-09-17T23:15:00.0000000+00:00"
+    },
+    {
+        "staffId":  "9d0a3db7-41dd-4e39-9b7f-5285ff17f8de",
+        "id":  "bc731a1a-ccba-42ec-9bb0-b4cd8da83bad",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "7a3d0ab4-d2d8-450d-a59d-fb36f5af34f7",
+                          "code":  "SKU-17",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  248
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  124
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "e68f82bf-3f8f-47be-918a-01d9e97b6ef5",
+                          "code":  "SKU-18",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  393
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  131
+                                        }
+                      }
+                  ],
+        "counterId":  "819027d2-25b8-46bf-b915-c1e80ccc5cf6",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  641
+                  },
+        "statusReason":  null,
+        "status":  0,
+        "branchId":  "fda2be0e-5d9a-44fb-bf10-af339c8f1b39",
+        "occurredAt":  "2026-09-19T01:16:00.0000000+00:00"
+    },
+    {
+        "staffId":  "4e3f62e8-9cb1-4f93-8d2e-a01df06d3e05",
+        "id":  "ac3f264b-4d7d-4637-a2c1-42f443eba704",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "e68f82bf-3f8f-47be-918a-01d9e97b6ef5",
+                          "code":  "SKU-18",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  393
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  131
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "5cc7d80a-c983-46e2-8c7d-c931f3d587c5",
+                          "code":  "SKU-19",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  18
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  18
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "ebc639ba-8f52-4d68-a46a-6edfe6037d20",
+                          "code":  "SKU-20",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  50
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  25
+                                        }
+                      }
+                  ],
+        "counterId":  "476ed759-2406-4d85-aacf-07ed65d7d58b",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  461
+                  },
+        "statusReason":  null,
+        "status":  1,
+        "branchId":  "7b3f41b1-1776-4389-8d3f-4d30241b9d48",
+        "occurredAt":  "2026-09-20T03:17:00.0000000+00:00"
+    },
+    {
+        "staffId":  "8fe86a5d-3f75-4d94-9ddc-870a4a49d7dd",
+        "id":  "b007a59b-9d1d-49b8-90fd-5267a4d7bfee",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "5cc7d80a-c983-46e2-8c7d-c931f3d587c5",
+                          "code":  "SKU-19",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  18
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  18
+                                        }
+                      }
+                  ],
+        "counterId":  "c0efd8bd-9590-484c-a3a3-8412d9419f00",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  18
+                  },
+        "statusReason":  "Duplicate sale attempt",
+        "status":  2,
+        "branchId":  "0d89ca33-fd1d-49d0-9d86-5007bc3748e4",
+        "occurredAt":  "2026-09-02T17:18:00.0000000+00:00"
+    },
+    {
+        "staffId":  "7c0dbeae-aaa4-401e-ab30-aa160e4d7e7d",
+        "id":  "b5ff261f-11b2-46f6-b1ed-cc1f40b8ce8a",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "ebc639ba-8f52-4d68-a46a-6edfe6037d20",
+                          "code":  "SKU-20",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  50
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  25
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "7cbcb0d3-d73c-4d8b-a707-c22a0c8d5a0b",
+                          "code":  "SKU-21",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  96
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  32
+                                        }
+                      }
+                  ],
+        "counterId":  "eb8bf44f-5d95-4131-a1ca-84fba31f9e55",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  146
+                  },
+        "statusReason":  "Customer return",
+        "status":  3,
+        "branchId":  "bdd5981e-69d8-4b8c-9b63-5e5c7d888a15",
+        "occurredAt":  "2026-09-03T19:19:00.0000000+00:00"
+    },
+    {
+        "staffId":  "c64d0a5a-c63b-49e3-8e98-8fe0d0a048d1",
+        "id":  "c667a038-f000-49e2-84a4-4fcd9fca2b0f",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "7cbcb0d3-d73c-4d8b-a707-c22a0c8d5a0b",
+                          "code":  "SKU-21",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  96
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  32
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "2d5e7424-2d1d-4946-8bbd-39c59f32f2c1",
+                          "code":  "SKU-22",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  39
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  39
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "b6df8f4a-3fb2-409d-a90d-2bf67a6357ac",
+                          "code":  "SKU-23",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  92
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  46
+                                        }
+                      }
+                  ],
+        "counterId":  "7b21a4da-c071-429f-8fcc-771eb43406b3",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  227
+                  },
+        "statusReason":  null,
+        "status":  0,
+        "branchId":  "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+        "occurredAt":  "2026-09-04T21:20:00.0000000+00:00"
+    },
+    {
+        "staffId":  "3d7d9e0d-0b8a-4d5d-ae8d-937d4c5b9a1a",
+        "id":  "bb016ce5-0ffe-41f8-9dcc-d96af89be704",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "2d5e7424-2d1d-4946-8bbd-39c59f32f2c1",
+                          "code":  "SKU-22",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  39
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  39
+                                        }
+                      }
+                  ],
+        "counterId":  "b1722663-cc99-4020-99ad-1b68ddee2343",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  39
+                  },
+        "statusReason":  null,
+        "status":  1,
+        "branchId":  "fda2be0e-5d9a-44fb-bf10-af339c8f1b39",
+        "occurredAt":  "2026-09-05T23:21:00.0000000+00:00"
+    },
+    {
+        "staffId":  "6d7ab791-86ca-4073-b4da-296febd0fe30",
+        "id":  "f23ceac8-56f3-4b6d-b0f5-f23f8c5a785b",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "b6df8f4a-3fb2-409d-a90d-2bf67a6357ac",
+                          "code":  "SKU-23",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  92
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  46
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "8547e34c-62a2-4dc5-9719-528c9ab4a144",
+                          "code":  "SKU-24",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  159
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  53
+                                        }
+                      }
+                  ],
+        "counterId":  "dd5d9f53-f892-45eb-8570-0f3577960578",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  251
+                  },
+        "statusReason":  "Duplicate sale attempt",
+        "status":  2,
+        "branchId":  "7b3f41b1-1776-4389-8d3f-4d30241b9d48",
+        "occurredAt":  "2026-09-07T01:22:00.0000000+00:00"
+    },
+    {
+        "staffId":  "65b37c63-2d6a-4dfe-b07d-f05a93013f0d",
+        "id":  "402afe1e-0af6-4471-935f-701ffcec46c7",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "8547e34c-62a2-4dc5-9719-528c9ab4a144",
+                          "code":  "SKU-24",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  159
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  53
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "29444c7e-09ea-472f-8b0d-4dcf3a63cbb7",
+                          "code":  "SKU-25",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  60
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  60
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "a3fe4f2b-e55b-4c6e-a5da-2b6fb9b5dffa",
+                          "code":  "SKU-26",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  134
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  67
+                                        }
+                      }
+                  ],
+        "counterId":  "341e97e7-9cec-4062-9a0a-4dcc19892346",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  353
+                  },
+        "statusReason":  "Customer return",
+        "status":  3,
+        "branchId":  "0d89ca33-fd1d-49d0-9d86-5007bc3748e4",
+        "occurredAt":  "2026-09-08T03:23:00.0000000+00:00"
+    },
+    {
+        "staffId":  "06837c3d-4d31-4d91-9fc1-c350e6d7d179",
+        "id":  "2eaba1f8-d25c-4d86-b910-de38fa64493e",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "29444c7e-09ea-472f-8b0d-4dcf3a63cbb7",
+                          "code":  "SKU-25",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  60
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  60
+                                        }
+                      }
+                  ],
+        "counterId":  "2d64a193-6478-41be-83d3-71b56cbfcc48",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  60
+                  },
+        "statusReason":  null,
+        "status":  0,
+        "branchId":  "bdd5981e-69d8-4b8c-9b63-5e5c7d888a15",
+        "occurredAt":  "2026-09-08T17:24:00.0000000+00:00"
+    },
+    {
+        "staffId":  "c3c82d44-e5d8-4ca0-9d0b-31936f97af9e",
+        "id":  "df06b48f-6caa-4d49-9dad-00b65ad90a67",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "a3fe4f2b-e55b-4c6e-a5da-2b6fb9b5dffa",
+                          "code":  "SKU-26",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  134
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  67
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "c2ea1eb9-c4a5-4d7f-bee2-2f90db2d7d2a",
+                          "code":  "SKU-27",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  222
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  74
+                                        }
+                      }
+                  ],
+        "counterId":  "a332aae2-63a0-4b83-bed2-c2e98ccb0ff7",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  356
+                  },
+        "statusReason":  null,
+        "status":  1,
+        "branchId":  "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+        "occurredAt":  "2026-09-09T19:25:00.0000000+00:00"
+    },
+    {
+        "staffId":  "c1de8d44-28aa-4d37-a6d0-530dc7741b7f",
+        "id":  "b41e8519-7b7f-492e-ab4c-74bec7772c7d",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "c2ea1eb9-c4a5-4d7f-bee2-2f90db2d7d2a",
+                          "code":  "SKU-27",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  222
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  74
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "0d6e3d93-32d1-48f0-abd7-f31753d9074a",
+                          "code":  "SKU-28",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  81
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  81
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "cb9a25a7-9a83-4b41-be3a-132dbe5d14d9",
+                          "code":  "SKU-29",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  176
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  88
+                                        }
+                      }
+                  ],
+        "counterId":  "a1221d87-1c1c-498f-8bf4-f79007e0e2de",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  479
+                  },
+        "statusReason":  "Duplicate sale attempt",
+        "status":  2,
+        "branchId":  "fda2be0e-5d9a-44fb-bf10-af339c8f1b39",
+        "occurredAt":  "2026-09-10T21:26:00.0000000+00:00"
+    },
+    {
+        "staffId":  "ad6b7860-d246-46e8-b233-1f2d13fd5d94",
+        "id":  "8fee90fd-e764-46c5-9e0c-697b046316ed",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "0d6e3d93-32d1-48f0-abd7-f31753d9074a",
+                          "code":  "SKU-28",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  81
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  81
+                                        }
+                      }
+                  ],
+        "counterId":  "8b7b32b8-e535-48d8-acec-96b03a6e0999",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  81
+                  },
+        "statusReason":  "Customer return",
+        "status":  3,
+        "branchId":  "7b3f41b1-1776-4389-8d3f-4d30241b9d48",
+        "occurredAt":  "2026-09-11T23:27:00.0000000+00:00"
+    },
+    {
+        "staffId":  "d38887e4-d2fd-4ca5-a8f7-64d5d1ad1c7f",
+        "id":  "bafd5bab-2477-4ce7-a727-a86effec6395",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "cb9a25a7-9a83-4b41-be3a-132dbe5d14d9",
+                          "code":  "SKU-29",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  176
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  88
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "bbf9f55d-e4bd-42a7-8f3a-7e5f75c88ea0",
+                          "code":  "SKU-30",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  285
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  95
+                                        }
+                      }
+                  ],
+        "counterId":  "0f0f2c02-f15f-4a60-8dff-5b32f42d9f2c",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  461
+                  },
+        "statusReason":  null,
+        "status":  0,
+        "branchId":  "0d89ca33-fd1d-49d0-9d86-5007bc3748e4",
+        "occurredAt":  "2026-09-13T01:28:00.0000000+00:00"
+    },
+    {
+        "staffId":  "bb31a9f2-4b1e-4875-8b0e-485f1fb7e30b",
+        "id":  "fbb51dfe-d93f-43bd-b7e2-9c4addbbf9cc",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "bbf9f55d-e4bd-42a7-8f3a-7e5f75c88ea0",
+                          "code":  "SKU-30",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  285
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  95
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "9e401e68-c0dd-42ef-af6e-fda0df58ef3c",
+                          "code":  "SKU-31",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  102
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  102
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "6d4dfeb7-33d2-4683-9472-f55af1ba2ac5",
+                          "code":  "SKU-32",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  218
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  109
+                                        }
+                      }
+                  ],
+        "counterId":  "4fcc7d3f-9bc1-4ed1-984c-9a4642369773",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  605
+                  },
+        "statusReason":  null,
+        "status":  1,
+        "branchId":  "bdd5981e-69d8-4b8c-9b63-5e5c7d888a15",
+        "occurredAt":  "2026-09-14T03:29:00.0000000+00:00"
+    },
+    {
+        "staffId":  "5f0420af-ad5d-49fb-9c7a-1a4d66b8fcd2",
+        "id":  "e40ce94b-9c46-4b79-9956-0f36ab27c552",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "9e401e68-c0dd-42ef-af6e-fda0df58ef3c",
+                          "code":  "SKU-31",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  102
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  102
+                                        }
+                      }
+                  ],
+        "counterId":  "e5feb09c-c381-4fe5-a66a-19e75c2b929f",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  102
+                  },
+        "statusReason":  "Duplicate sale attempt",
+        "status":  2,
+        "branchId":  "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+        "occurredAt":  "2026-09-14T17:00:00.0000000+00:00"
+    },
+    {
+        "staffId":  "d779eb76-9c29-40e6-bc2d-d45e89ece747",
+        "id":  "80c1a79e-b5bc-45a9-aded-a7e07f4ee714",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "6d4dfeb7-33d2-4683-9472-f55af1ba2ac5",
+                          "code":  "SKU-32",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  218
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  109
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "357f7f09-5bfa-4bd8-811e-918d7d81479d",
+                          "code":  "SKU-33",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  348
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  116
+                                        }
+                      }
+                  ],
+        "counterId":  "779ccc3a-caaa-4bb8-a577-a784c2c13290",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  566
+                  },
+        "statusReason":  "Customer return",
+        "status":  3,
+        "branchId":  "fda2be0e-5d9a-44fb-bf10-af339c8f1b39",
+        "occurredAt":  "2026-09-15T19:01:00.0000000+00:00"
+    },
+    {
+        "staffId":  "f08370ce-2b17-46d0-a1fd-5b8b4f23f4f5",
+        "id":  "24d0b93a-4dbf-4221-94fc-54fd7f43e3ed",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "357f7f09-5bfa-4bd8-811e-918d7d81479d",
+                          "code":  "SKU-33",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  348
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  116
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "5c379faa-4ca1-47c2-a8ea-6f0cfc0ceff4",
+                          "code":  "SKU-34",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  123
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  123
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "95038943-b59a-447d-8be5-e7cd5341c10c",
+                          "code":  "SKU-35",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  260
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  130
+                                        }
+                      }
+                  ],
+        "counterId":  "7ffe7ccd-44ef-40b7-b720-a3b4d9421c16",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  731
+                  },
+        "statusReason":  null,
+        "status":  0,
+        "branchId":  "7b3f41b1-1776-4389-8d3f-4d30241b9d48",
+        "occurredAt":  "2026-09-16T21:02:00.0000000+00:00"
+    },
+    {
+        "staffId":  "d2b1718f-f4cc-473d-9bcb-8f0253d8fa41",
+        "id":  "59d412c7-dba4-449c-a3d5-71622e4194b0",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "5c379faa-4ca1-47c2-a8ea-6f0cfc0ceff4",
+                          "code":  "SKU-34",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  123
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  123
+                                        }
+                      }
+                  ],
+        "counterId":  "09ae4921-e784-4466-a075-c39b4e6d6e7a",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  123
+                  },
+        "statusReason":  null,
+        "status":  1,
+        "branchId":  "0d89ca33-fd1d-49d0-9d86-5007bc3748e4",
+        "occurredAt":  "2026-09-17T23:03:00.0000000+00:00"
+    },
+    {
+        "staffId":  "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+        "id":  "317549fa-68b0-4a8c-8d4c-f3b81b037210",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "95038943-b59a-447d-8be5-e7cd5341c10c",
+                          "code":  "SKU-35",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  260
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  130
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "f32dd611-8f52-4d09-90db-6b211af2b749",
+                          "code":  "SKU-36",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  51
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  17
+                                        }
+                      }
+                  ],
+        "counterId":  "a8214fe8-5ea6-4e53-8be1-d8725a40bc12",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  311
+                  },
+        "statusReason":  "Duplicate sale attempt",
+        "status":  2,
+        "branchId":  "bdd5981e-69d8-4b8c-9b63-5e5c7d888a15",
+        "occurredAt":  "2026-09-19T01:04:00.0000000+00:00"
+    },
+    {
+        "staffId":  "b4ef7c31-9d04-452b-b3ef-6b4d47939581",
+        "id":  "5cfe7fa9-f0cc-40f0-a5fd-320b7526ee85",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "f32dd611-8f52-4d09-90db-6b211af2b749",
+                          "code":  "SKU-36",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  51
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  17
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "d714f22e-bb61-4d59-a2ed-1e0d0ab1391f",
+                          "code":  "SKU-37",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  24
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  24
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "527ed702-3504-4de1-a3e5-ba86ef0b8d0d",
+                          "code":  "SKU-38",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  62
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  31
+                                        }
+                      }
+                  ],
+        "counterId":  "b420feee-5a4a-4d67-89d6-0f9cadc6d4fb",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  137
+                  },
+        "statusReason":  "Customer return",
+        "status":  3,
+        "branchId":  "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+        "occurredAt":  "2026-09-20T03:05:00.0000000+00:00"
+    },
+    {
+        "staffId":  "9d0a3db7-41dd-4e39-9b7f-5285ff17f8de",
+        "id":  "74b9b098-ee7a-40c4-8f7b-ca9dd1e408b9",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "d714f22e-bb61-4d59-a2ed-1e0d0ab1391f",
+                          "code":  "SKU-37",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  24
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  24
+                                        }
+                      }
+                  ],
+        "counterId":  "4cca54a9-8636-4447-a4dc-2bedd0ec6b33",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  24
+                  },
+        "statusReason":  null,
+        "status":  0,
+        "branchId":  "fda2be0e-5d9a-44fb-bf10-af339c8f1b39",
+        "occurredAt":  "2026-09-02T17:06:00.0000000+00:00"
+    },
+    {
+        "staffId":  "4e3f62e8-9cb1-4f93-8d2e-a01df06d3e05",
+        "id":  "905cb1c4-66f9-40bd-9a89-358de3ea3c2c",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "527ed702-3504-4de1-a3e5-ba86ef0b8d0d",
+                          "code":  "SKU-38",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  62
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  31
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "5a1ad850-da4e-4651-9cb9-8d9d379ae250",
+                          "code":  "SKU-39",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  114
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  38
+                                        }
+                      }
+                  ],
+        "counterId":  "afe20e3b-a850-440a-a42f-7362bb773d8e",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  176
+                  },
+        "statusReason":  null,
+        "status":  1,
+        "branchId":  "7b3f41b1-1776-4389-8d3f-4d30241b9d48",
+        "occurredAt":  "2026-09-03T19:07:00.0000000+00:00"
+    },
+    {
+        "staffId":  "8fe86a5d-3f75-4d94-9ddc-870a4a49d7dd",
+        "id":  "9adba867-27d5-41b6-9500-5ab2b2830efe",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  3
+                                       },
+                          "productId":  "5a1ad850-da4e-4651-9cb9-8d9d379ae250",
+                          "code":  "SKU-39",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  114
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  38
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "b2776a98-4012-4db6-bd4b-bda93295544d",
+                          "code":  "SKU-40",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  45
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  45
+                                        }
+                      },
+                      {
+                          "quantity":  {
+                                           "value":  2
+                                       },
+                          "productId":  "031cf3d6-2d5b-4e89-a0a4-7d994d4c05ca",
+                          "code":  "SKU-41",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  104
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  52
+                                        }
+                      }
+                  ],
+        "counterId":  "9a5f73fc-a451-4083-85a5-7a16df3f6323",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  263
+                  },
+        "statusReason":  "Duplicate sale attempt",
+        "status":  2,
+        "branchId":  "0d89ca33-fd1d-49d0-9d86-5007bc3748e4",
+        "occurredAt":  "2026-09-04T21:08:00.0000000+00:00"
+    },
+    {
+        "staffId":  "7c0dbeae-aaa4-401e-ab30-aa160e4d7e7d",
+        "id":  "d2addb34-b3b8-484f-8512-e7fa3b99859b",
+        "lines":  [
+                      {
+                          "quantity":  {
+                                           "value":  1
+                                       },
+                          "productId":  "b2776a98-4012-4db6-bd4b-bda93295544d",
+                          "code":  "SKU-40",
+                          "shippingLevel":  null,
+                          "total":  {
+                                        "currency":  "PHP",
+                                        "amount":  45
+                                    },
+                          "type":  0,
+                          "unitPrice":  {
+                                            "currency":  "PHP",
+                                            "amount":  45
+                                        }
+                      }
+                  ],
+        "counterId":  "b4edd1bc-e7a3-4b06-8127-fe9ed289c9b5",
+        "total":  {
+                      "currency":  "PHP",
+                      "amount":  45
+                  },
+        "statusReason":  "Customer return",
+        "status":  3,
+        "branchId":  "bdd5981e-69d8-4b8c-9b63-5e5c7d888a15",
+        "occurredAt":  "2026-09-05T23:09:00.0000000+00:00"
+    }
+]

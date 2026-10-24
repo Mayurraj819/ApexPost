@@ -1,0 +1,42 @@
+@model ApexPost.Web.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Branch dashboard";
+}
+
+<h1>Branch dashboard</h1>
+
+<div>
+    <p>Active branches: @Model.Branches.Count</p>
+    <p>Products in catalogue: @Model.Products.Count</p>
+    <p>Sales summary: @((Model.SalesSummary is null ? "No branch selected" : $"{Model.SalesSummary.PaidTotal.Amount} {Model.SalesSummary.PaidTotal.Currency}"))</p>
+</div>
+
+<h2>Alerts</h2>
+@if (Model.Alerts.Count == 0)
+{
+    <p>No stock alerts.</p>
+}
+else
+{
+    <ul>
+        @foreach (var alert in Model.Alerts)
+        {
+            <li>@alert</li>
+        }
+    </ul>
+}
+
+<h2>Quick actions</h2>
+<ul>
+    <li><a asp-controller="Home" asp-action="Index">Overview</a></li>
+    <li><a href="/health">Health check</a></li>
+    <li><a href="/account/login">Login</a></li>
+</ul>
+
+<h2>Catalogue preview</h2>
+<ul>
+    @foreach (var product in Model.Products.Take(10))
+    {
+        <li>@product.Name (@product.Sku.Value) - @product.UnitPrice.Amount @product.UnitPrice.Currency</li>
+    }
+</ul>

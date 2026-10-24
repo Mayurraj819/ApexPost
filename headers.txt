@@ -1,0 +1,40 @@
+HTTP/1.1 302 Found
+Content-Length: 0
+Date: Sat, 24 Oct 2026 17:53:33 GMT
+Server: Kestrel
+Cache-Control: no-cache,no-store
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Location: /
+Pragma: no-cache
+Set-Cookie: ApexPost.Auth=CfDJ8IyW_Wmwm6RDqr5GytQNk_3WTXBfucFiSRKuHYXEgzjibrSMwv9t9Z_kunLDDo4hWQjMCiSdulSCFuio0llD4faEvfsug-BQdkPqUAHrXaW_Yp2h_yuH-D32cwKKYYkV-Vy7wfD7XJFUUYrIA20I7DueiBZdz55yROYGEW-dFpTd9KAlTwjgTq8quslU_a1zxCHSWewcjdTInSXDD6Q-QQP13WgaJyTZEw3goJTQbQ-4L5mow6oks7OAzy3s3aBhtcyFLr4d8agN_jCTMGY37Z5t7dTcepw1UyqB--Riu0T1FFOWvMR3VHi5MfY8qnMqVUA2KO6wZBPcEM_sm4SsQGt2AJkmyjSia2vnk0ZVJm6dMKfe952eJ1fGds8huI5wt_v60WS-O4LPCJ8WoOk_tJuMgklToLlBHUrVd7-iE-kF5OZV4FbAkbm-i3AtW7Fz7fUdJ8Fz8hTbkegiVRteruOPyavuq_OpV06HoF76jHZglyf06cXWq5xNjXGQzLn79UxdL6jrN6mi8Jx8WjOw4dRPQrpmPYZpXZnBuhgUtOOpeMbpRlrqTbA9iEAW8p6Etq84c5yKrLaHCx6OHpAoNS3RDTKZwPgclgznW5wY3A0YqMeyv2EO9zfNwn3PL2f6IjJk0N00kl5CHgcOqXkDIINo5PfIeUF6sxSIsagVJvHKWPF08y3lGRRkPRX47Y49ZnuMR78kawfQ2RC6T7YGxcmWRoQ7KD7nJJ3RZktqQeULnGBC98hCAOvWQU82ze6oQ5vguZnOClPTAlRRvxQPgK-a4Jr8Oj5j6mubQdVZOcLQmsoM8GGmxgQzBwZ-czr0RGHmSJpvxqpapRx2uWHikmE; path=/; secure; samesite=lax; httponly
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+Content-Security-Policy: default-src 'self'; frame-ancestors 'none'; form-action 'self'
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Correlation-ID: 688d1491-d9a1-4a8f-b09a-e05c2330d891
+
+HTTP/1.1 302 Found
+Content-Length: 0
+Date: Sat, 24 Oct 2026 17:53:33 GMT
+Server: Kestrel
+Location: /Home/Dashboard
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+Content-Security-Policy: default-src 'self'; frame-ancestors 'none'; form-action 'self'
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Correlation-ID: 6c3fafe1-da60-4a09-b693-1e32cb9779c6
+
+HTTP/1.1 405 Method Not Allowed
+Content-Length: 0
+Date: Sat, 24 Oct 2026 17:53:33 GMT
+Server: Kestrel
+Allow: GET
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+Content-Security-Policy: default-src 'self'; frame-ancestors 'none'; form-action 'self'
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Correlation-ID: 07cfe244-556c-45ef-93f6-64c77e5ddf1c
+

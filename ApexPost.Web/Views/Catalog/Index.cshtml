@@ -1,0 +1,28 @@
+@model IReadOnlyList<ApexPost.Domain.Entities.Product>
+@{
+    ViewData["Title"] = "Catalogue";
+}
+
+<h1>Catalogue</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>SKU</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Sku.Value</td>
+                <td>@product.Name</td>
+                <td>@product.Category</td>
+                <td>@product.UnitPrice.Amount @product.UnitPrice.Currency</td>
+            </tr>
+        }
+    </tbody>
+</table>

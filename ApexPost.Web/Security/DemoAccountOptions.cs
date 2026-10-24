@@ -12,5 +12,6 @@ public sealed class DemoAccount
     public string Role { get; init; } = string.Empty;
     public string BranchId { get; init; } = string.Empty;
     public string StaffId { get; init; } = string.Empty;
+    public string Password { get; init; } = string.Empty;
     public string PasswordEnvironmentVariable { get; init; } = string.Empty;
 }

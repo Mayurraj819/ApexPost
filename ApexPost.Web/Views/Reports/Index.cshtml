@@ -1,0 +1,17 @@
+@model ApexPost.Application.Contracts.TransactionReport
+@{
+    ViewData["Title"] = "Reports";
+}
+
+<h1>Branch sales report</h1>
+
+<ul>
+    <li>Branch Id: @Model.BranchId</li>
+    <li>From: @Model.From</li>
+    <li>To: @Model.To</li>
+    <li>Transactions: @Model.TransactionCount</li>
+    <li>Paid: @Model.PaidCount</li>
+    <li>Voided: @Model.VoidedCount</li>
+    <li>Refunded: @Model.RefundedCount</li>
+    <li>Total: @Model.PaidTotal.Amount @Model.PaidTotal.Currency</li>
+</ul>

@@ -4,6 +4,7 @@ using ApexPost.Web.Configuration;
 using ApexPost.Web.Filters;
 using ApexPost.Web.Middleware;
 using ApexPost.Web.Security;
+using ApexPost.Web.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.RateLimiting;
@@ -100,6 +101,7 @@ builder.Services.AddRateLimiter(options =>
 });
 
 builder.Services.AddInfrastructure(Path.Combine(builder.Environment.ContentRootPath, "data"));
+builder.Services.AddSingleton<IProductCatalogCache, ProductCatalogCache>();
 
 var app = builder.Build();
 
@@ -117,8 +119,13 @@ app.UseHttpsRedirection();
 app.UseMiddleware<SecurityHeadersMiddleware>();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseMiddleware<ApiKeyMiddleware>();
-app.UseMiddleware<IpAllowlistMiddleware>();
+app.UseWhen(
+    context => context.Request.Path.StartsWithSegments("/integration") || context.Request.Path.StartsWithSegments("/admin"),
+    branch =>
+    {
+        branch.UseMiddleware<ApiKeyMiddleware>();
+        branch.UseMiddleware<IpAllowlistMiddleware>();
+    });
 app.UseCors("configured");
 app.UseAuthentication();
 app.UseAuthorization();
@@ -135,7 +142,14 @@ app.MapGet("/integration/ping", () => Results.Ok(new
     status = "Accepted",
     service = "ApexPost.Web",
     correlationId = "available-in-response-header"
-})).RequireRateLimiting("integration");
+})).WithMetadata(new RequireApiKeyAttribute()).RequireRateLimiting("integration");
+
+app.MapGet("/admin/health", () => Results.Ok(new
+{
+    status = "Healthy",
+    service = "ApexPost.Web",
+    scope = "admin"
+})).WithMetadata(new RequireApiKeyAttribute()).WithMetadata(new RequireAllowedIpAttribute());
 
 app.MapControllerRoute(
     name: "default",

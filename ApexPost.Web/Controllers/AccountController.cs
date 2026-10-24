@@ -31,7 +31,7 @@ public sealed class AccountController : Controller
     [EnableRateLimiting("login")]
     public async Task<IActionResult> Login(LoginViewModel model, CancellationToken cancellationToken)
     {
-        var requestKey = HttpContext.Connection.RemoteIpAddress?.ToString() ?? HttpContext.TraceIdentifier;
+        var requestKey = BuildLoginRateLimitKey();
         var now = DateTimeOffset.UtcNow;
 
         var existing = LoginAttempts.GetOrAdd(requestKey, _ => (now, 0));
@@ -54,7 +54,7 @@ public sealed class AccountController : Controller
         }
 
         var account = _options.Accounts.FirstOrDefault(item => string.Equals(item.Username, model.Username, StringComparison.OrdinalIgnoreCase));
-        var configuredPassword = account is null ? null : Environment.GetEnvironmentVariable(account.PasswordEnvironmentVariable);
+        var configuredPassword = GetConfiguredPassword(account);
         var valid = account is not null && !string.IsNullOrEmpty(configuredPassword) && ConstantTimeEquals(model.Password, configuredPassword);
         if (!valid)
         {
@@ -91,8 +91,38 @@ public sealed class AccountController : Controller
     private IActionResult RedirectToLocal(string? returnUrl) =>
         !string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl) : RedirectToAction("Index", "Home")!;
 
-    private string GetRateLimitKey() =>
-        HttpContext.Connection.RemoteIpAddress?.ToString() ?? HttpContext.TraceIdentifier;
+    private string BuildLoginRateLimitKey()
+    {
+        var forwardedFor = HttpContext.Request.Headers["X-Forwarded-For"].FirstOrDefault();
+        var remoteIp = HttpContext.Connection.RemoteIpAddress?.ToString();
+        var userAgent = HttpContext.Request.Headers.UserAgent.ToString();
+
+        return string.IsNullOrWhiteSpace(forwardedFor)
+            ? string.IsNullOrWhiteSpace(remoteIp)
+                ? string.IsNullOrWhiteSpace(userAgent) ? "apexpost-login-fallback" : $"ua:{userAgent}"
+                : $"ip:{remoteIp}"
+            : $"forwarded:{forwardedFor}";
+    }
+
+    private static string? GetConfiguredPassword(DemoAccount? account)
+    {
+        if (account is null)
+        {
+            return null;
+        }
+
+        if (!string.IsNullOrWhiteSpace(account.Password))
+        {
+            return account.Password;
+        }
+
+        if (string.IsNullOrWhiteSpace(account.PasswordEnvironmentVariable))
+        {
+            return null;
+        }
+
+        return Environment.GetEnvironmentVariable(account.PasswordEnvironmentVariable);
+    }
 
     private static bool ConstantTimeEquals(string left, string right) =>
         CryptographicOperations.FixedTimeEquals(Encoding.UTF8.GetBytes(left), Encoding.UTF8.GetBytes(right));

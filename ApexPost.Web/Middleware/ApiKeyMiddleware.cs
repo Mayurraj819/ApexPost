@@ -1,7 +1,8 @@
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.Extensions.Options;
 using ApexPost.Web.Configuration;
+using ApexPost.Web.Security;
+using Microsoft.Extensions.Options;
 
 namespace ApexPost.Web.Middleware;
 
@@ -19,7 +20,10 @@ public sealed class ApiKeyMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-        if (!context.Request.Path.StartsWithSegments("/integration"))
+        var endpoint = context.GetEndpoint();
+        var metadata = endpoint?.Metadata;
+        var requiresApiKey = context.Request.Path.StartsWithSegments("/integration") || metadata?.GetMetadata<RequireApiKeyAttribute>() is not null;
+        if (!requiresApiKey)
         {
             await _next(context);
             return;
