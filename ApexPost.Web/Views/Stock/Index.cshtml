@@ -1,0 +1,27 @@
+@model ApexPost.Web.Models.StockEditorModel
+@using ApexPost.Domain.Entities
+@{
+ ViewData["Title"] = "Stock management";
+ var products = ViewBag.Products as IReadOnlyList<Product> ?? Array.Empty<Product>();
+ var stock = ViewBag.Stock as Dictionary<Guid,int> ?? new();
+ var manager = User.IsInRole("BranchManager") || User.IsInRole("Administrator");
+}
+<div class="d-flex justify-content-between align-items-center mb-3"><div><h1>Branch stock</h1><p class="text-muted">Current stock quantities for your branch.</p></div><a asp-controller="Catalog" asp-action="Index" class="btn btn-outline-secondary">Catalogue</a></div>
+@if(manager){
+<div class="card mb-4"><div class="card-header">Set stock quantity</div><div class="card-body">
+<form asp-action="Set" method="post" class="row g-3 align-items-end">
+@Html.AntiForgeryToken()
+<div class="col-md-7"><label class="form-label" asp-for="ProductId">Product</label><select asp-for="ProductId" class="form-select">
+<option value="">Select a product</option>@foreach(var p in products){<option value="@p.Id">@p.Name (@p.Sku.Value)</option>}
+</select></div>
+<div class="col-md-3"><label asp-for="Quantity" class="form-label">New quantity</label><input asp-for="Quantity" class="form-control" type="number" min="0" max="1000000" /></div>
+<div class="col-md-2"><button class="btn btn-primary w-100" type="submit">Save stock</button></div>
+</form></div></div>
+}
+<div class="card"><div class="card-body"><div class="table-responsive"><table class="table table-hover">
+<thead><tr><th>SKU</th><th>Product</th><th>Quantity</th><th>Status</th></tr></thead><tbody>
+@foreach(var p in products.OrderBy(x=>x.Name)){
+ var qty=stock.GetValueOrDefault(p.Id);
+ <tr><td><code>@p.Sku.Value</code></td><td>@p.Name</td><td>@qty</td><td>@if(qty<=3){<span class="badge text-bg-warning">Low stock</span>}else{<span class="badge text-bg-success">Available</span>}</td></tr>
+}
+</tbody></table></div></div></div>

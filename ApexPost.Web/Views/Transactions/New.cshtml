@@ -1,14 +1,14 @@
 @model IReadOnlyList<ApexPost.Domain.Entities.Counter>
 @{ ViewData["Title"] = "New transaction"; }
-<h1>New transaction</h1>
-<form asp-action="Start" method="post">
-    @Html.AntiForgeryToken()
-    <label for="counterId">Counter</label>
-    <select id="counterId" name="counterId" required>
-        @foreach (var counter in Model)
-        {
-            <option value="@counter.Id">@counter.Name (#@counter.Number)</option>
-        }
-    </select>
-    <button type="submit">Start</button>
+<h1>Start a transaction</h1>
+<p class="text-muted">Select a counter and start a new sale. Branch opening hours are enforced.</p>
+<div class="card"><div class="card-body">
+<form asp-action="Start" method="post" class="row g-3 align-items-end">
+@Html.AntiForgeryToken()
+<div class="col-md-8"><label class="form-label" for="counterId">Counter</label><select id="counterId" name="counterId" class="form-select" required>
+@foreach(var counter in Model){<option value="@counter.Id">@counter.Name (#@counter.Number)</option>}
+</select></div>
+<div class="col-md-4"><button class="btn btn-primary w-100" type="submit" disabled="@(Model.Count==0)">Start transaction</button></div>
 </form>
+@if(Model.Count==0){<div class="alert alert-warning mt-3">No counter is configured for your branch.</div>}
+</div></div>

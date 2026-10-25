@@ -2910,3 +2910,815 @@
   "result": "faulted",
   "details": "NotSupportedException"
 }
+{
+  "occurredAt": "2026-10-25T10:16:57.3740297+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "2fb72d09-27d4-42a7-8f19-6a656f459ee0",
+  "statusCode": 200,
+  "durationMs": 3.9242,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T10:22:36.8194808+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "721e11f4-3e6c-4cf3-a07d-51fdb0d6f7ed",
+  "statusCode": 200,
+  "durationMs": 24.8322,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T10:22:36.9283179+00:00",
+  "controller": "Home",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "35fd612a-fe5b-46d4-ba12-88d544875381",
+  "statusCode": 200,
+  "durationMs": 0.4212,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T10:22:37.1573334+00:00",
+  "controller": "Home",
+  "action": "Dashboard",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "a58898b1-a1ad-4917-8d21-23fc3db4633f",
+  "statusCode": 200,
+  "durationMs": 192.1134,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T10:38:37.8584924+00:00",
+  "controller": "Stock",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "e8056799-8ebe-4987-997f-c49f120258fb",
+  "statusCode": 200,
+  "durationMs": 411.3597,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T10:38:56.1477207+00:00",
+  "controller": "Stock",
+  "action": "Set",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "05a6b76a-88fb-4799-9ed2-febeb3dd8d15",
+  "statusCode": 200,
+  "durationMs": 72.2569,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T10:38:56.1846296+00:00",
+  "controller": "Stock",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "85496fec-0e01-467c-8d8f-a5518a24389d",
+  "statusCode": 200,
+  "durationMs": 2.4882,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T10:39:18.7032738+00:00",
+  "controller": "Stock",
+  "action": "Set",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "0b475e45-17c4-44eb-b7d4-65c51220c4ad",
+  "statusCode": 200,
+  "durationMs": 10.1808,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T10:39:18.7473988+00:00",
+  "controller": "Stock",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "190117c5-b9d9-4ea7-a00b-562dc4c7ca05",
+  "statusCode": 200,
+  "durationMs": 0.9273,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:36:18.6672647+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "c323755d-dbf2-4b0a-8312-892848578cfa",
+  "statusCode": 200,
+  "durationMs": 0.7344,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:36:21.9986594+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "23b861a2-a8cc-4f3c-9434-55c36af128eb",
+  "statusCode": 200,
+  "durationMs": 8.8101,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:36:36.9921486+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "16fe85c7-c0a5-4045-ad4f-e03e835efaea",
+  "statusCode": 200,
+  "durationMs": 0.1965,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:36:41.5191021+00:00",
+  "controller": "Account",
+  "action": "Logout",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "6ccf3fe8-bcdd-4aab-a7b0-ff56bbb3780a",
+  "statusCode": 200,
+  "durationMs": 13.3561,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:36:41.5395195+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "e10da8ca-2bf7-4f85-bf70-0638fb238742",
+  "statusCode": 200,
+  "durationMs": 1.003,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:36:45.9654986+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "04894f29-7a52-492a-8fbe-cd3800beddf5",
+  "statusCode": 200,
+  "durationMs": 0.3671,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:36:45.9867007+00:00",
+  "controller": "Home",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "ee231e7a-6275-46a6-aaa3-34f2fb9402a9",
+  "statusCode": 200,
+  "durationMs": 0.0166,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:36:46.0127529+00:00",
+  "controller": "Home",
+  "action": "Dashboard",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "7ad9496a-97c6-48cb-b302-d523fa3c9527",
+  "statusCode": 200,
+  "durationMs": 16.206,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:36:54.8879049+00:00",
+  "controller": "Stock",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "7ea5d8a5-5886-4281-8b86-822f543e6fdf",
+  "statusCode": 200,
+  "durationMs": 3.1613,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:37:06.1405982+00:00",
+  "controller": "Stock",
+  "action": "Set",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "432d1987-536a-4a37-8a15-683be7348de4",
+  "statusCode": 200,
+  "durationMs": 10.7285,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:37:06.1636032+00:00",
+  "controller": "Stock",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "337ba4ac-ec4c-4c37-a490-284c66ed53ad",
+  "statusCode": 200,
+  "durationMs": 4.0637,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:37:15.2090154+00:00",
+  "controller": "Stock",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "c2e98210-766d-4602-ade8-644ed49f572b",
+  "statusCode": 200,
+  "durationMs": 3.0918,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:37:20.8086221+00:00",
+  "controller": "Transactions",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "5771c634-174b-46c1-bc1b-f945362d41cd",
+  "statusCode": 200,
+  "durationMs": 17.5259,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:37:28.8381221+00:00",
+  "controller": "Transactions",
+  "action": "New",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "f6327c14-7a00-49ad-9742-168bf3136bc0",
+  "statusCode": 200,
+  "durationMs": 27.1153,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:38:44.9014609+00:00",
+  "controller": "Transactions",
+  "action": "Start",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "138caf51-6ceb-47b1-aedc-ba88b0713c93",
+  "statusCode": 200,
+  "durationMs": 73169.2301,
+  "routeValues": "",
+  "result": "faulted",
+  "details": "NotSupportedException"
+}
+{
+  "occurredAt": "2026-10-25T15:38:51.4614154+00:00",
+  "controller": "Transactions",
+  "action": "New",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "8a24d1ff-de82-41ec-a49b-d7c361c10ba7",
+  "statusCode": 200,
+  "durationMs": 4.2396,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:38:55.1723388+00:00",
+  "controller": "Stock",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "869d3134-97d9-41a2-b8cd-c9f66dcb656c",
+  "statusCode": 200,
+  "durationMs": 5.5083,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:40:21.8746414+00:00",
+  "controller": "OperationalAlerts",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "9da3489b-b4ec-44b7-9df2-dbc924b544c3",
+  "statusCode": 200,
+  "durationMs": 68.3546,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:40:28.9842457+00:00",
+  "controller": "Home",
+  "action": "Dashboard",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "d2148435-55e8-4adb-994e-d336c1074b18",
+  "statusCode": 200,
+  "durationMs": 4.1677,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:42:16.1504827+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "0c4fa230-f0a2-4d0f-85a8-c8e5fc9f1381",
+  "statusCode": 200,
+  "durationMs": 109.2764,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:42:20.0442611+00:00",
+  "controller": "Catalog",
+  "action": "Create",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "b8260266-c8c1-4636-a83c-7c2f700c45f0",
+  "statusCode": 200,
+  "durationMs": 0.6734,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:42:54.4868039+00:00",
+  "controller": "Catalog",
+  "action": "Save",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "3698349c-7054-484d-a486-f1db1e0a3385",
+  "statusCode": 200,
+  "durationMs": 37.9743,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:42:54.5054618+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "29a7c79e-0d0a-4611-891e-12cf0cd4d30f",
+  "statusCode": 200,
+  "durationMs": 0.9938,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:43:04.7215658+00:00",
+  "controller": "Catalog",
+  "action": "Edit",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "d7cac88d-897c-469c-ac55-cc5419544619",
+  "statusCode": 200,
+  "durationMs": 2.241,
+  "routeValues": "id=f32dd611-8f52-4d09-90db-6b211af2b749",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:43:11.7305172+00:00",
+  "controller": "Catalog",
+  "action": "Save",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "35b99e64-e22a-43c9-9c53-cf240149466f",
+  "statusCode": 200,
+  "durationMs": 8.3576,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:43:11.7437327+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "ef30e11f-8d50-47e2-9e03-045fb27906fd",
+  "statusCode": 200,
+  "durationMs": 0.8251,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:43:22.1651913+00:00",
+  "controller": "Catalog",
+  "action": "Delete",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "1267576a-0495-40c3-a11f-877daaa58876",
+  "statusCode": 200,
+  "durationMs": 20.9601,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:43:22.1781376+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "aef9bb29-daca-47cf-a3a2-637b6a313312",
+  "statusCode": 200,
+  "durationMs": 1.9562,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:43:33.4045598+00:00",
+  "controller": "Stock",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "115c731d-4dad-4bc7-84db-a71ff33b6325",
+  "statusCode": 200,
+  "durationMs": 1.1778,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:43:36.1886821+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "5673db79-6cf4-418b-8ab2-119979def175",
+  "statusCode": 200,
+  "durationMs": 0.7876,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:43:42.6448387+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "1e8c7ce6-7c6d-464b-b969-d4b5a3fc9f0a",
+  "statusCode": 200,
+  "durationMs": 1.0984,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:43:45.0705732+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "94ae0e92-7eb9-4caa-a33c-fddbea62b424",
+  "statusCode": 200,
+  "durationMs": 1.2143,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:43:46.6693157+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "2e2fcd68-421b-434e-b857-2a692a11472b",
+  "statusCode": 200,
+  "durationMs": 0.8959,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:43:47.5343415+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "940455fa-c66a-473a-8826-08e87bfc24c4",
+  "statusCode": 200,
+  "durationMs": 0.82,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:43:53.0051122+00:00",
+  "controller": "Home",
+  "action": "Dashboard",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "9c69b412-a099-4d36-bb0c-a6f93988d0ee",
+  "statusCode": 200,
+  "durationMs": 5.2409,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:43:59.1817368+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "d9239ac1-770b-481b-8787-57b8fd0e824d",
+  "statusCode": 200,
+  "durationMs": 1.2121,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:44:03.045692+00:00",
+  "controller": "Catalog",
+  "action": "Delete",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "66836b03-ae90-4874-94fe-85689e3008a6",
+  "statusCode": 200,
+  "durationMs": 11.1769,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:44:03.0632545+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "244b5779-89a9-4132-a834-200149f40e5d",
+  "statusCode": 200,
+  "durationMs": 0.6851,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:44:05.6646045+00:00",
+  "controller": "Home",
+  "action": "Dashboard",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "eb3673e8-07a8-4e33-989a-2af9fe941f10",
+  "statusCode": 200,
+  "durationMs": 1.746,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:44:09.4778833+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "a424ee29-e940-4f95-af5d-95dd2899978a",
+  "statusCode": 200,
+  "durationMs": 0.8065,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:44:14.7816355+00:00",
+  "controller": "Catalog",
+  "action": "Edit",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "9ea8fa83-fd10-4b93-a9ed-2f14a34d8dba",
+  "statusCode": 200,
+  "durationMs": 1.114,
+  "routeValues": "id=7a3d0ab4-d2d8-450d-a59d-fb36f5af34f7",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:44:30.4042196+00:00",
+  "controller": "Catalog",
+  "action": "Save",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "ab7ef3f2-28d4-46a3-aeb0-dc79887ba1a0",
+  "statusCode": 200,
+  "durationMs": 5.6568,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:44:30.420802+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "cbf0a552-666e-4f63-a8df-980cdaf30beb",
+  "statusCode": 200,
+  "durationMs": 0.641,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:46:16.8637787+00:00",
+  "controller": "Stock",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "05d7545c-3575-41c5-99b8-335a94450ee0",
+  "statusCode": 200,
+  "durationMs": 6.5184,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:46:33.7649001+00:00",
+  "controller": "Stock",
+  "action": "Set",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "7d6073c1-f4d4-48d9-aa70-789df120d5d4",
+  "statusCode": 200,
+  "durationMs": 6.8307,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:46:33.7903624+00:00",
+  "controller": "Stock",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "8c7efbad-b683-4bca-84b9-a00cb613cd14",
+  "statusCode": 200,
+  "durationMs": 4.8011,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:47:58.8944477+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "d56fa072-c354-42e2-98ac-4cb88d07eea3",
+  "statusCode": 200,
+  "durationMs": 2.7666,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:48:03.9307121+00:00",
+  "controller": "Transactions",
+  "action": "New",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "9f225c9e-b84f-4dd2-926b-d0072a73de0d",
+  "statusCode": 200,
+  "durationMs": 1.8568,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T15:48:07.708783+00:00",
+  "controller": "Reports",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "bb320b3c-0413-459b-bedc-dda9b2cc91fb",
+  "statusCode": 200,
+  "durationMs": 37.1836,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
