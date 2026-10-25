@@ -190,6 +190,9 @@ public sealed record TransactionLine
     public ShippingServiceLevel? ShippingLevel { get; }
     public Money Total => new(UnitPrice.Amount * Quantity.Value, UnitPrice.Currency);
 
+    public object Description { get; set; }
+    public object Id { get; set; }
+
     public static TransactionLine ForProduct(Product product, Quantity quantity)
     {
         ArgumentNullException.ThrowIfNull(product);

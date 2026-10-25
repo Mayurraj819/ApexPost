@@ -1,0 +1,62 @@
+@model ApexPost.Domain.Entities.Transaction
+@using ApexPost.Domain.Entities
+@using ApexPost.Domain.Enums
+@{
+    ViewData["Title"] = "Transaction";
+    var products = ViewBag.Products as IReadOnlyList<Product> ?? Array.Empty<Product>();
+}
+<h1>Transaction @Model.Id</h1>
+<p>Status: @Model.Status | Total: @Model.Total.Amount @Model.Total.Currency</p>
+<table class="table">
+    <thead><tr><th>Code</th><th>Type</th><th>Qty</th><th>Total</th></tr></thead>
+    <tbody>
+    @foreach (var line in Model.Lines)
+    {
+        <tr><td>@line.Code</td><td>@line.Type</td><td>@line.Quantity.Value</td><td>@line.Total.Amount</td></tr>
+    }
+    </tbody>
+</table>
+@if (Model.Status == TransactionStatus.Open)
+{
+    <form asp-action="AddProduct" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@Model.Id" />
+        <label for="productId">Product</label>
+        <select id="productId" name="productId">
+            @foreach (var product in products)
+            {
+                <option value="@product.Id">@product.Name</option>
+            }
+        </select>
+        <label for="quantity">Quantity</label>
+        <input id="quantity" type="number" min="1" name="quantity" value="1" />
+        <button type="submit">Add product</button>
+    </form>
+    <form asp-action="Pay" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit">Pay</button>
+    </form>
+}
+@if (User.IsInRole("BranchManager") || User.IsInRole("Administrator"))
+{
+    if (Model.Status == TransactionStatus.Open || Model.Status == TransactionStatus.Paid)
+    {
+        <form asp-action="Void" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="transactionId" value="@Model.Id" />
+            <input name="reason" required placeholder="Void reason" />
+            <button type="submit">Void</button>
+        </form>
+    }
+    if (Model.Status == TransactionStatus.Paid)
+    {
+        <form asp-action="Refund" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="transactionId" value="@Model.Id" />
+            <input name="reason" required placeholder="Refund reason" />
+            <button type="submit">Refund</button>
+        </form>
+    }
+}
+<a asp-action="Index">Back</a>

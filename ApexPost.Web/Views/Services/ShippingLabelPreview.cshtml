@@ -1,0 +1,40 @@
+﻿@* @model ApexPost.Web.Models.ShippingLabelPreview;
+@{
+    ViewData["Title"] = "Shipping Label Preview";
+}
+
+<div class="container py-4">
+    <div class="card mx-auto shadow" style="max-width: 600px; border: 2px dashed #333;">
+        <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+                <h3 class="fw-bold mb-0">ApexPost LOGISTICS</h3>
+                <span class="badge bg-dark fs-6">@Model.ServiceLevel</span>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <small class="text-muted d-block">DELIVER TO:</small>
+                    <h5>@Model.RecipientName</h5>
+                    <p class="mb-0">@Model.DestinationAddress</p>
+                    <p class="fw-bold">@Model.DestinationZone</p>
+                </div>
+                <div class="col-sm-6 text-end">
+                    <small class="text-muted d-block">WEIGHT & RATE:</small>
+                    <h4>@Model.WeightKg kg</h4>
+                    <p class="fs-5 text-success mb-0">Total: @Model.CalculatedQuote.ToString("C")</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-4 pt-3 border-top">
+                <h4 class="font-monospace tracking-wide">@Model.TrackingNumber</h4>
+                <div class="bg-dark text-white py-2 font-monospace fs-4">||| | ||||| || |||| |||| | |||</div>
+                <small class="text-muted">Standard Post Tracking Barcode</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <a asp-action="Shipping" class="btn btn-secondary me-2">New Label</a>
+        <button onclick="window.print()" class="btn btn-primary">Print Label</button>
+    </div>
+</div> *@

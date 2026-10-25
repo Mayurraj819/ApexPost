@@ -1,0 +1,5 @@
+@{ ViewData["Title"] = "Money order created"; }
+<h1>Money order created</h1>
+<p>Reference: @TempData.Peek("MoneyOrderReference")</p>
+<p>Document: @TempData.Peek("MaskedDocument")</p>
+<a asp-action="New">Create another</a>

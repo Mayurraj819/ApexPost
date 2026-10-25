@@ -12,4 +12,5 @@ public sealed class WebSecurityOptions
     public int IntegrationRateLimitWindowSeconds { get; init; } = 60;
     public int LoginRateLimitPermitLimit { get; init; } = 5;
     public int LoginRateLimitWindowSeconds { get; init; } = 60;
+    public int SlowActionThresholdMilliseconds { get; init; } = 500;
 }

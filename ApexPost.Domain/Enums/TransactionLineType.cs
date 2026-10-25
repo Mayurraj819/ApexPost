@@ -4,5 +4,6 @@ public enum TransactionLineType
 {
     RetailProduct,
     PostalService,
-    FinancialService
+    FinancialService,
+    ParcelShipping
 }
