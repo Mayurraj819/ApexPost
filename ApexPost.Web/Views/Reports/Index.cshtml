@@ -1,17 +1,26 @@
-@model ApexPost.Application.Contracts.TransactionReport
-@{
-    ViewData["Title"] = "Reports";
-}
-
-<h1>Branch sales report</h1>
-
-<ul>
-    <li>Branch Id: @Model.BranchId</li>
-    <li>From: @Model.From</li>
-    <li>To: @Model.To</li>
-    <li>Transactions: @Model.TransactionCount</li>
-    <li>Paid: @Model.PaidCount</li>
-    <li>Voided: @Model.VoidedCount</li>
-    <li>Refunded: @Model.RefundedCount</li>
-    <li>Total: @Model.PaidTotal.Amount @Model.PaidTotal.Currency</li>
-</ul>
+@model ApexPost.Web.Models.FullReportsViewModel
+@{ ViewData["Title"] = "Operations reports"; }
+<h1>Operations reports</h1>
+<p>Period: @Model.From.ToString("yyyy-MM-dd") to @Model.To.ToString("yyyy-MM-dd")</p>
+<form method="get">
+    <label>From <input type="date" name="from" value="@Model.From.ToString("yyyy-MM-dd")" /></label>
+    <label>To <input type="date" name="to" value="@Model.To.ToString("yyyy-MM-dd")" /></label>
+    <button type="submit">Filter</button>
+</form>
+<h2>Daily retail vs service sales</h2>
+<table class="table"><thead><tr><th>Branch</th><th>Day</th><th>Retail</th><th>Services</th><th>Currency</th></tr></thead><tbody>
+@foreach (var r in Model.Sales) { <tr><td>@r.BranchId</td><td>@r.Day</td><td>@r.Retail.ToString("N2")</td><td>@r.Services.ToString("N2")</td><td>@r.Currency</td></tr> }
+</tbody></table>
+<h2>Low stock (3 or fewer)</h2>
+<table class="table"><thead><tr><th>Branch</th><th>Product</th><th>Quantity</th></tr></thead><tbody>
+@foreach (var r in Model.LowStock) { <tr><td>@r.BranchId</td><td>@r.Product</td><td>@r.Quantity</td></tr> }
+</tbody></table>
+<h2>Shipping by service level</h2>
+<table class="table"><thead><tr><th>Branch</th><th>Level</th><th>Quantity</th><th>Revenue</th></tr></thead><tbody>
+@foreach (var r in Model.Shipping) { <tr><td>@r.BranchId</td><td>@r.ServiceLevel</td><td>@r.Count</td><td>@r.Revenue.ToString("N2")</td></tr> }
+</tbody></table>
+<h2>Money orders</h2>
+<table class="table"><thead><tr><th>Branch</th><th>Count</th><th>Amount</th><th>Identity fingerprints recorded*</th></tr></thead><tbody>
+@foreach (var r in Model.MoneyOrders) { <tr><td>@r.BranchId</td><td>@r.Count</td><td>@r.Total.ToString("N2")</td><td>@r.FingerprintsRecorded</td></tr> }
+</tbody></table>
+<p><small>*A stored fingerprint is not proof of independent identity verification. Shipping zone reporting is unavailable because zone is not stored in transaction lines.</small></p>

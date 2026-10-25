@@ -2532,3 +2532,381 @@
   "result": "completed",
   "details": null
 }
+{
+  "occurredAt": "2026-10-25T07:46:36.0045757+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "09f79b1e-4d85-481f-a5dd-2a549a3283e2",
+  "statusCode": 200,
+  "durationMs": 2.618,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:47:27.3430593+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "dcfea503-21a1-4efd-9c47-d1a2b0d328c7",
+  "statusCode": 200,
+  "durationMs": 12.496,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:47:27.3995159+00:00",
+  "controller": "Home",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "ac88d49f-9623-4a95-8be3-6e5c2362f511",
+  "statusCode": 200,
+  "durationMs": 0.2111,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:47:27.6303449+00:00",
+  "controller": "Home",
+  "action": "Dashboard",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "c15370e7-b606-4415-8530-ad00e3bb5c0a",
+  "statusCode": 200,
+  "durationMs": 186.3333,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:48:31.8547592+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "ae0a0713-de5e-4006-9310-2c073c8d659f",
+  "statusCode": 200,
+  "durationMs": 11.9335,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:49:28.698738+00:00",
+  "controller": "Transactions",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "d7c9c5b0-50cf-429b-9521-2575135da039",
+  "statusCode": 200,
+  "durationMs": 45.8224,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:49:49.0427509+00:00",
+  "controller": "Transactions",
+  "action": "New",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "debef762-3c41-40c5-a6e7-f521134123a4",
+  "statusCode": 200,
+  "durationMs": 46.9284,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:49:55.3696075+00:00",
+  "controller": "Transactions",
+  "action": "Start",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "df43526f-abfd-446a-846e-fc7d1949a9ca",
+  "statusCode": 200,
+  "durationMs": 85.4174,
+  "routeValues": "",
+  "result": "faulted",
+  "details": "NotSupportedException"
+}
+{
+  "occurredAt": "2026-10-25T07:50:04.5772226+00:00",
+  "controller": "Transactions",
+  "action": "New",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "25e6b7c4-5ca6-4c27-83f2-527d3e5a1106",
+  "statusCode": 200,
+  "durationMs": 1.3634,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:50:06.3185016+00:00",
+  "controller": "Transactions",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "70f86204-a00f-4dfe-bfd2-a2f648491410",
+  "statusCode": 200,
+  "durationMs": 2.7337,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:50:09.2849493+00:00",
+  "controller": "Transactions",
+  "action": "Details",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "17fab0b7-858e-4594-a9e2-400ec9d83d53",
+  "statusCode": 200,
+  "durationMs": 105.6985,
+  "routeValues": "id=5cfe7fa9-f0cc-40f0-a5fd-320b7526ee85",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:50:30.5484268+00:00",
+  "controller": "Transactions",
+  "action": "Pay",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "7484ad9a-7bf0-4e99-87d5-140fb289a595",
+  "statusCode": 200,
+  "durationMs": 16.2945,
+  "routeValues": "",
+  "result": "faulted",
+  "details": "NotSupportedException"
+}
+{
+  "occurredAt": "2026-10-25T07:50:33.811216+00:00",
+  "controller": "Transactions",
+  "action": "Details",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "f543ce07-6cd0-4e4a-8b8c-68c4d3ec14c2",
+  "statusCode": 200,
+  "durationMs": 2.1059,
+  "routeValues": "id=5cfe7fa9-f0cc-40f0-a5fd-320b7526ee85",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:50:36.0543991+00:00",
+  "controller": "Transactions",
+  "action": "Void",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "300ef9d2-c60e-4c25-ba1a-8fb34cc8a9a3",
+  "statusCode": 200,
+  "durationMs": 6.7916,
+  "routeValues": "",
+  "result": "faulted",
+  "details": "NotSupportedException"
+}
+{
+  "occurredAt": "2026-10-25T07:50:41.4778778+00:00",
+  "controller": "Transactions",
+  "action": "Details",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "6cb117cc-d3fe-41e3-aa74-1d9da19ccf1f",
+  "statusCode": 200,
+  "durationMs": 1.925,
+  "routeValues": "id=5cfe7fa9-f0cc-40f0-a5fd-320b7526ee85",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:50:53.602673+00:00",
+  "controller": "Transactions",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "208ad46e-3797-4a7f-ad83-9dc9ebfa1ea7",
+  "statusCode": 200,
+  "durationMs": 1.7214,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:51:14.789132+00:00",
+  "controller": "Transactions",
+  "action": "New",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "a511f864-dacd-4c10-bd78-1edc6b83b4ad",
+  "statusCode": 200,
+  "durationMs": 4.4246,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:52:03.7696054+00:00",
+  "controller": "OperationalAlerts",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "93e99129-d38b-414b-8419-5ae9806b2141",
+  "statusCode": 200,
+  "durationMs": 98.4142,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:53:22.0402946+00:00",
+  "controller": "Account",
+  "action": "Logout",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "b782b9de-4b39-4bef-bef8-b181ac590072",
+  "statusCode": 200,
+  "durationMs": 42.521,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:53:22.0677895+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "b97268e9-9b07-4a1b-b2f0-9d40f4739cf6",
+  "statusCode": 200,
+  "durationMs": 1.0572,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:53:29.1661526+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "e7c9473d-cc75-4953-a75c-9dffaa6a940b",
+  "statusCode": 200,
+  "durationMs": 29.5407,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:53:36.3122535+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "2b7ba527-b926-4b9c-b844-81942700a582",
+  "statusCode": 200,
+  "durationMs": 0.0561,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:53:43.6269083+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "33caa733-58f9-41e9-b026-0b0b59434db4",
+  "statusCode": 200,
+  "durationMs": 2.2914,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:53:43.6425495+00:00",
+  "controller": "Home",
+  "action": "Index",
+  "staffId": "c64d0a5a-c63b-49e3-8e98-8fe0d0a048d1",
+  "role": "CounterClerk",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "59c039e5-8aa9-4de5-8e20-00bcf56e3975",
+  "statusCode": 200,
+  "durationMs": 0.0334,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:53:43.6645539+00:00",
+  "controller": "Home",
+  "action": "Dashboard",
+  "staffId": "c64d0a5a-c63b-49e3-8e98-8fe0d0a048d1",
+  "role": "CounterClerk",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "ec8c5a07-eeed-4c79-80f0-d833cfbb1ffa",
+  "statusCode": 200,
+  "durationMs": 10.5895,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:53:58.5388316+00:00",
+  "controller": "Transactions",
+  "action": "New",
+  "staffId": "c64d0a5a-c63b-49e3-8e98-8fe0d0a048d1",
+  "role": "CounterClerk",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "4fbbd9e5-4bd7-4b65-914e-801f5aeb3b0d",
+  "statusCode": 200,
+  "durationMs": 3.9367,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T07:54:01.1115553+00:00",
+  "controller": "Transactions",
+  "action": "Start",
+  "staffId": "c64d0a5a-c63b-49e3-8e98-8fe0d0a048d1",
+  "role": "CounterClerk",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "a4669fb8-684d-430f-a571-c9161ed451b3",
+  "statusCode": 200,
+  "durationMs": 18.2238,
+  "routeValues": "",
+  "result": "faulted",
+  "details": "NotSupportedException"
+}
