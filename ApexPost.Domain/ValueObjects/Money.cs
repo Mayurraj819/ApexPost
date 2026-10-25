@@ -1,21 +1,26 @@
+using System.Text.Json.Serialization;
 namespace ApexPost.Domain.ValueObjects;
 
 public readonly record struct Money
 {
-    public Money(decimal amount, string currency = "PHP")
+    [JsonConstructor]
+    public Money(decimal amount, string? currency = "PHP")
     {
         if (amount < 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(amount), "Money cannot be negative.");
+            throw new ArgumentOutOfRangeException(
+                nameof(amount),
+                "Money cannot be negative.");
         }
 
-        if (string.IsNullOrWhiteSpace(currency))
-        {
-            throw new ArgumentException("Currency is required.", nameof(currency));
-        }
+        Currency = string.IsNullOrWhiteSpace(currency)
+            ? "PHP"
+            : currency.Trim().ToUpperInvariant();
 
-        Amount = decimal.Round(amount, 2, MidpointRounding.ToEven);
-        Currency = currency.Trim().ToUpperInvariant();
+        Amount = decimal.Round(
+            amount,
+            2,
+            MidpointRounding.ToEven);
     }
 
     public decimal Amount { get; }

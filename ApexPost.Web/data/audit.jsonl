@@ -3722,3 +3722,185 @@
   "result": "completed",
   "details": null
 }
+{
+  "occurredAt": "2026-10-25T16:03:34.0473249+00:00",
+  "controller": "Home",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "d763402c-0f94-4426-ac1e-62000d0fb329",
+  "statusCode": 200,
+  "durationMs": 13.273,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T16:08:36.5236907+00:00",
+  "controller": "Home",
+  "action": "Dashboard",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "b77a073d-5937-4af8-9dd0-0be89936e437",
+  "statusCode": 200,
+  "durationMs": 301789.8128,
+  "routeValues": "",
+  "result": "faulted",
+  "details": "ArgumentException"
+}
+{
+  "occurredAt": "2026-10-25T16:20:50.9504281+00:00",
+  "controller": "Home",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "0111b07f-b091-4409-8008-6695fe5125f7",
+  "statusCode": 200,
+  "durationMs": 37.9561,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T16:20:51.6468841+00:00",
+  "controller": "Home",
+  "action": "Dashboard",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "c26e1068-2d3c-4a96-a714-0c78895ddd7d",
+  "statusCode": 200,
+  "durationMs": 122.2807,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T16:21:03.6467541+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "7e94078f-211e-4b28-9de2-693333b78bf5",
+  "statusCode": 200,
+  "durationMs": 93.8586,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T16:21:23.6483485+00:00",
+  "controller": "Catalog",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "77af9909-7235-4e19-b377-0f0c425d7064",
+  "statusCode": 200,
+  "durationMs": 6.6377,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T16:21:36.5954279+00:00",
+  "controller": "Stock",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "dec444bd-f226-4dec-9d8b-82804dbf9b85",
+  "statusCode": 200,
+  "durationMs": 18.943,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T16:22:02.7131279+00:00",
+  "controller": "Stock",
+  "action": "Set",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "3ae6a96e-d601-4259-bd61-a66c1f60462c",
+  "statusCode": 200,
+  "durationMs": 26.4117,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T16:22:02.9679237+00:00",
+  "controller": "Stock",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "9e800577-3384-4907-aa6d-4790377efcfc",
+  "statusCode": 200,
+  "durationMs": 3.752,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T16:22:31.2854279+00:00",
+  "controller": "Transactions",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "f59cd297-6ffa-4611-bbec-39e1f848a580",
+  "statusCode": 200,
+  "durationMs": 13.255,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T16:22:40.8223509+00:00",
+  "controller": "Reports",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "3a6cbbcf-4739-4c72-826c-2d53bc40fe18",
+  "statusCode": 200,
+  "durationMs": 31.8257,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T16:22:48.7947723+00:00",
+  "controller": "OperationalAlerts",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "122647bb-a241-43d9-a8d2-81a0017b45d0",
+  "statusCode": 200,
+  "durationMs": 7.6888,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-25T16:22:54.752442+00:00",
+  "controller": "Home",
+  "action": "Dashboard",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "276b24c7-6978-43ea-8916-a621916a5942",
+  "statusCode": 200,
+  "durationMs": 4.1341,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}

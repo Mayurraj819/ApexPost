@@ -1,7 +1,9 @@
+using System.Text.Json.Serialization;
 namespace ApexPost.Domain.ValueObjects;
 
 public readonly record struct Quantity
 {
+    [JsonConstructor]
     public Quantity(int value)
     {
         if (value < 0)
