@@ -4618,3 +4618,59 @@
   "result": "completed",
   "details": null
 }
+{
+  "occurredAt": "2026-10-26T13:18:51.2928615+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "fbac1eff-864f-4b0e-948c-922fab2078be",
+  "statusCode": 200,
+  "durationMs": 3.5135,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-26T13:18:55.6525178+00:00",
+  "controller": "Account",
+  "action": "Login",
+  "staffId": null,
+  "role": null,
+  "branchId": null,
+  "correlationId": "979a4a2b-bf2f-4097-895a-c450aab87e7d",
+  "statusCode": 200,
+  "durationMs": 7.9296,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-26T13:18:55.6821553+00:00",
+  "controller": "Home",
+  "action": "Index",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "638a7731-ec32-4cf0-8e35-cbaa0bddeeed",
+  "statusCode": 200,
+  "durationMs": 0.2802,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
+{
+  "occurredAt": "2026-10-26T13:18:55.8489447+00:00",
+  "controller": "Home",
+  "action": "Dashboard",
+  "staffId": "2a7d5f34-9fd3-4ae0-8008-6a219a1eae29",
+  "role": "BranchManager",
+  "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+  "correlationId": "65282042-a9ba-4d3e-82a1-a926157a70a9",
+  "statusCode": 200,
+  "durationMs": 144.5067,
+  "routeValues": "",
+  "result": "completed",
+  "details": null
+}
