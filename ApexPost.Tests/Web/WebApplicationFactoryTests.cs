@@ -1,8 +1,9 @@
-using System.Net;
-using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace ApexPost.Tests.Web;
 
@@ -54,20 +55,45 @@ public sealed class WebApplicationFactoryTests
     [Fact]
     public async Task LoginRateLimitReturns429()
     {
-        using var factory = CreateFactory(new Dictionary<string, string?>
-        {
-            ["ApexPost:Security:LoginRateLimitPermitLimit"] = "2",
-            ["ApexPost:Security:LoginRateLimitWindowSeconds"] = "60"
-        });
+        using var factory = CreateFactory(
+            new Dictionary<string, string?>
+            {
+                ["ApexPost:Security:LoginRateLimitPermitLimit"] = "2",
+                ["ApexPost:Security:LoginRateLimitWindowSeconds"] = "60"
+            });
+
         using var client = CreateClient(factory);
-        client.DefaultRequestHeaders.Add("X-Forwarded-For", "198.51.100.20");
-        var form = new FormUrlEncodedContent([]);
 
-        _ = await client.PostAsync("/account/login", form);
-        _ = await client.PostAsync("/account/login", form);
-        using var response = await client.PostAsync("/account/login", form);
+        using var loginPage = await client.GetAsync("/account/login");
+        loginPage.EnsureSuccessStatusCode();
 
-        Assert.Equal((HttpStatusCode)429, response.StatusCode);
+        var html = await loginPage.Content.ReadAsStringAsync();
+
+        var token = Regex.Match(
+            html,
+            "name=\"__RequestVerificationToken\"[^>]*value=\"([^\"]+)\""
+        ).Groups[1].Value;
+
+        Assert.False(string.IsNullOrWhiteSpace(token));
+
+        for (int i = 0; i < 3; i++)
+        {
+            using var response = await client.PostAsync(
+                "/account/login",
+                new FormUrlEncodedContent(
+                    new Dictionary<string, string>
+                    {
+                        ["__RequestVerificationToken"] = token,
+                        ["Username"] = "invalid-user",
+                        ["Password"] = "invalid-password"
+                    }));
+
+            Assert.Equal(
+                i < 2
+                    ? HttpStatusCode.OK
+                    : HttpStatusCode.TooManyRequests,
+                response.StatusCode);
+        }
     }
 
     [Fact]

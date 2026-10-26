@@ -1,4 +1,3 @@
-using System.Threading.RateLimiting;
 using ApexPost.Infrastructure;
 using ApexPost.Web.Configuration;
 using ApexPost.Web.Filters;
@@ -7,7 +6,9 @@ using ApexPost.Web.Security;
 using ApexPost.Web.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -66,39 +67,96 @@ builder.Services.AddAuthorization(options =>
     });
     options.AddPolicy(WebPolicies.BranchManagerOnly, policy => policy.RequireRole("BranchManager", "Administrator"));
 });
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("configured", policy =>
+builder.Services.AddOptions<CorsOptions>()
+    .Configure<IConfiguration>((options, configuration) =>
     {
-        if (securityOptions.AllowedCorsOrigins.Length > 0)
+        var security = configuration
+            .GetSection("ApexPost:Security")
+            .Get<WebSecurityOptions>()
+            ?? new WebSecurityOptions();
+
+        options.AddPolicy("configured", policy =>
         {
-            policy.WithOrigins(securityOptions.AllowedCorsOrigins)
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
-        }
+            if (security.AllowedCorsOrigins.Length > 0)
+            {
+                policy.WithOrigins(security.AllowedCorsOrigins)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            }
+        });
     });
-});
 
-builder.Services.AddRateLimiter(options =>
-{
-    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
-    options.AddFixedWindowLimiter("integration", limiterOptions =>
+builder.Services.AddCors();
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("configured", policy =>
+//    {
+//        if (securityOptions.AllowedCorsOrigins.Length > 0)
+//        {
+//            policy.WithOrigins(securityOptions.AllowedCorsOrigins)
+//                .AllowAnyHeader()
+//                .AllowAnyMethod()
+//                .AllowCredentials();
+//        }
+//    });
+//});
+builder.Services.AddOptions<RateLimiterOptions>()
+    .Configure<IConfiguration>((options, configuration) =>
     {
-        limiterOptions.PermitLimit = Math.Max(1, securityOptions.IntegrationRateLimitPermitLimit);
-        limiterOptions.Window = TimeSpan.FromSeconds(Math.Max(1, securityOptions.IntegrationRateLimitWindowSeconds));
-        limiterOptions.QueueLimit = 0;
-        limiterOptions.AutoReplenishment = true;
+        var security = configuration
+            .GetSection("ApexPost:Security")
+            .Get<WebSecurityOptions>()
+            ?? new WebSecurityOptions();
+
+        options.RejectionStatusCode =
+            StatusCodes.Status429TooManyRequests;
+
+        options.AddFixedWindowLimiter("integration", limiter =>
+        {
+            limiter.PermitLimit = Math.Max(
+                1, security.IntegrationRateLimitPermitLimit);
+
+            limiter.Window = TimeSpan.FromSeconds(
+                Math.Max(1, security.IntegrationRateLimitWindowSeconds));
+
+            limiter.QueueLimit = 0;
+            limiter.AutoReplenishment = true;
+        });
+
+        options.AddFixedWindowLimiter("login", limiter =>
+        {
+            limiter.PermitLimit = Math.Max(
+                1, security.LoginRateLimitPermitLimit);
+
+            limiter.Window = TimeSpan.FromSeconds(
+                Math.Max(1, security.LoginRateLimitWindowSeconds));
+
+            limiter.QueueLimit = 0;
+            limiter.AutoReplenishment = true;
+        });
     });
-    options.AddFixedWindowLimiter("login", limiterOptions =>
-    {
-        limiterOptions.PermitLimit = Math.Max(1, securityOptions.LoginRateLimitPermitLimit);
-        limiterOptions.Window = TimeSpan.FromSeconds(Math.Max(1, securityOptions.LoginRateLimitWindowSeconds));
-        limiterOptions.QueueLimit = 0;
-        limiterOptions.AutoReplenishment = true;
-    });
-});
+
+builder.Services.AddRateLimiter(_ => { });
+
+//builder.Services.AddRateLimiter(options =>
+//{
+//    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+//    options.AddFixedWindowLimiter("integration", limiterOptions =>
+//    {
+//        limiterOptions.PermitLimit = Math.Max(1, securityOptions.IntegrationRateLimitPermitLimit);
+//        limiterOptions.Window = TimeSpan.FromSeconds(Math.Max(1, securityOptions.IntegrationRateLimitWindowSeconds));
+//        limiterOptions.QueueLimit = 0;
+//        limiterOptions.AutoReplenishment = true;
+//    });
+//    options.AddFixedWindowLimiter("login", limiterOptions =>
+//    {
+//        limiterOptions.PermitLimit = Math.Max(1, securityOptions.LoginRateLimitPermitLimit);
+//        limiterOptions.Window = TimeSpan.FromSeconds(Math.Max(1, securityOptions.LoginRateLimitWindowSeconds));
+//        limiterOptions.QueueLimit = 0;
+//        limiterOptions.AutoReplenishment = true;
+//    });
+//});
 
 builder.Services.AddInfrastructure(Path.Combine(builder.Environment.ContentRootPath, "data"));
 builder.Services.AddSingleton<IProductCatalogCache, ProductCatalogCache>();
