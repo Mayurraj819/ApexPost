@@ -1,0 +1,57 @@
+﻿@model ApexPost.Web.Models.MoneyOrderFormViewModel
+@{
+    ViewData["Title"] = "Issue Money Order";
+}
+
+<div class="container py-3" style="max-width: 650px;">
+    <h2>Issue Money Order</h2>
+    <p class="text-muted">Money orders greater than or equal to $1,000 require identity verification[cite: 3].</p>
+    <hr />
+
+    <form asp-action="MoneyOrder" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="mb-3">
+            <label asp-for="SenderName" class="form-label">Sender Name</label>
+            <input asp-for="SenderName" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="RecipientName" class="form-label">Recipient Name</label>
+            <input asp-for="RecipientName" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Amount" class="form-label">Amount ($)</label>
+            <input asp-for="Amount" class="form-control" id="orderAmount" oninput="toggleIdBlock()" />
+        </div>
+
+        <div id="idVerificationSection" class="p-3 border rounded bg-light mb-3" style="display: none;">
+            <h5 class="text-danger">Identity Verification Required</h5>
+            <small class="text-muted">High-value money orders require photo document capture[cite: 3]. (Masked for privacy)[cite: 3]</small>
+            <div class="mt-2">
+                <label asp-for="IdDocumentType" class="form-label">Document Type</label>
+                <select asp-for="IdDocumentType" class="form-select">
+                    <option value="Passport">Passport</option>
+                    <option value="DrivingLicense">Driving License</option>
+                    <option value="NationalIdentityCard">National ID</option>
+                </select>
+            </div>
+            <div class="mt-2">
+                <label asp-for="FullIdNumber" class="form-label">Document Number</label>
+                <input asp-for="FullIdNumber" class="form-control" placeholder="Full document number (will be masked)" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Issue Money Order</button>
+    </form>
+</div>
+
+<script>
+    function toggleIdBlock() {
+        const amt = parseFloat(document.getElementById('orderAmount').value) || 0;
+        document.getElementById('idVerificationSection').style.display = amt >= 1000 ? 'block' : 'none';
+    }
+    toggleIdBlock();
+</script>

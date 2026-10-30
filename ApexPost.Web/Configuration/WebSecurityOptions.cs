@@ -7,8 +7,10 @@ public sealed class WebSecurityOptions
     public string[] AllowedCorsOrigins { get; init; } = [];
     public string[] IntegrationApiKeys { get; init; } = [];
     public string[] IntegrationAllowedIpAddresses { get; init; } = [];
+    public string[] AdminAllowedIpAddresses { get; init; } = [];
     public int IntegrationRateLimitPermitLimit { get; init; } = 60;
     public int IntegrationRateLimitWindowSeconds { get; init; } = 60;
     public int LoginRateLimitPermitLimit { get; init; } = 5;
     public int LoginRateLimitWindowSeconds { get; init; } = 60;
+    public int SlowActionThresholdMilliseconds { get; init; } = 500;
 }

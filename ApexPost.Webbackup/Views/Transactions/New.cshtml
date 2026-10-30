@@ -1,0 +1,14 @@
+@model IReadOnlyList<ApexPost.Domain.Entities.Counter>
+@{ ViewData["Title"] = "New transaction"; }
+<h1>New transaction</h1>
+<form asp-action="Start" method="post">
+    @Html.AntiForgeryToken()
+    <label for="counterId">Counter</label>
+    <select id="counterId" name="counterId" required>
+        @foreach (var counter in Model)
+        {
+            <option value="@counter.Id">@counter.Name (#@counter.Number)</option>
+        }
+    </select>
+    <button type="submit">Start</button>
+</form>

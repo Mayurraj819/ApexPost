@@ -1,0 +1,42 @@
+[
+  {
+    "id": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6",
+    "code": { "value": "BR-01" },
+    "name": "Hillside Plaza",
+    "address": "17 Main Avenue, Makati",
+    "openingHours": { "opensAt": "08:00:00", "closesAt": "18:00:00" },
+    "isActive": true
+  },
+  {
+    "id": "fda2be0e-5d9a-44fb-bf10-af339c8f1b39",
+    "code": { "value": "BR-02" },
+    "name": "Harbor Point",
+    "address": "44 Harbor Road, Cebu",
+    "openingHours": { "opensAt": "09:00:00", "closesAt": "19:00:00" },
+    "isActive": true
+  },
+  {
+    "id": "7b3f41b1-1776-4389-8d3f-4d30241b9d48",
+    "code": { "value": "BR-03" },
+    "name": "Sunset Terminal",
+    "address": "88 Sunset Highway, Davao",
+    "openingHours": { "opensAt": "07:30:00", "closesAt": "17:30:00" },
+    "isActive": true
+  },
+  {
+    "id": "0d89ca33-fd1d-49d0-9d86-5007bc3748e4",
+    "code": { "value": "BR-04" },
+    "name": "Greenfield Market",
+    "address": "22 Greenfield Lane, Baguio",
+    "openingHours": { "opensAt": "08:30:00", "closesAt": "18:30:00" },
+    "isActive": true
+  },
+  {
+    "id": "bdd5981e-69d8-4b8c-9b63-5e5c7d888a15",
+    "code": { "value": "BR-05" },
+    "name": "Civic Center",
+    "address": "91 Civic Boulevard, Mandaluyong",
+    "openingHours": { "opensAt": "08:00:00", "closesAt": "17:00:00" },
+    "isActive": true
+  }
+]

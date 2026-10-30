@@ -1,0 +1,12 @@
+[
+  { "id": "f1777ec0-fcf3-4d33-b1ce-01843f0d6501", "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6", "number": 1, "name": "Counter 1" },
+  { "id": "8d8388c7-570d-4c28-a626-c0557d62c89a", "branchId": "4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6", "number": 2, "name": "Counter 2" },
+  { "id": "8532b940-c1cf-4d5b-ae4d-7d8717f5f4d7", "branchId": "fda2be0e-5d9a-44fb-bf10-af339c8f1b39", "number": 1, "name": "Harbor Counter 1" },
+  { "id": "9ef1c9b6-1841-4a0d-b73b-03fe8a2bc403", "branchId": "fda2be0e-5d9a-44fb-bf10-af339c8f1b39", "number": 2, "name": "Harbor Counter 2" },
+  { "id": "6190d52b-836d-4d80-b0c3-d8e4a4d7d08e", "branchId": "7b3f41b1-1776-4389-8d3f-4d30241b9d48", "number": 1, "name": "Sunset Counter 1" },
+  { "id": "d699eca3-1a50-4d8c-a6e7-f8d5e9f5e889", "branchId": "7b3f41b1-1776-4389-8d3f-4d30241b9d48", "number": 2, "name": "Sunset Counter 2" },
+  { "id": "7b51e062-1a0e-4384-b98f-0f4883dcb4f4", "branchId": "0d89ca33-fd1d-49d0-9d86-5007bc3748e4", "number": 1, "name": "Greenfield Counter 1" },
+  { "id": "2df4d0d6-771e-490d-b4d7-c011d9a4ddad", "branchId": "0d89ca33-fd1d-49d0-9d86-5007bc3748e4", "number": 2, "name": "Greenfield Counter 2" },
+  { "id": "91ae4584-c965-4b14-95e0-e6d905d12b87", "branchId": "bdd5981e-69d8-4b8c-9b63-5e5c7d888a15", "number": 1, "name": "Civic Counter 1" },
+  { "id": "8950d218-c0e2-4dc8-bd5b-dd0f3110d2df", "branchId": "bdd5981e-69d8-4b8c-9b63-5e5c7d888a15", "number": 2, "name": "Civic Counter 2" }
+]

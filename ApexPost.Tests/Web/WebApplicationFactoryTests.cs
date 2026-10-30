@@ -1,8 +1,9 @@
-using System.Net;
-using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace ApexPost.Tests.Web;
 
@@ -54,19 +55,45 @@ public sealed class WebApplicationFactoryTests
     [Fact]
     public async Task LoginRateLimitReturns429()
     {
-        using var factory = CreateFactory(new Dictionary<string, string?>
-        {
-            ["ApexPost:Security:LoginRateLimitPermitLimit"] = "2",
-            ["ApexPost:Security:LoginRateLimitWindowSeconds"] = "60"
-        });
+        using var factory = CreateFactory(
+            new Dictionary<string, string?>
+            {
+                ["ApexPost:Security:LoginRateLimitPermitLimit"] = "2",
+                ["ApexPost:Security:LoginRateLimitWindowSeconds"] = "60"
+            });
+
         using var client = CreateClient(factory);
-        var form = new FormUrlEncodedContent([]);
 
-        _ = await client.PostAsync("/account/login", form);
-        _ = await client.PostAsync("/account/login", form);
-        using var response = await client.PostAsync("/account/login", form);
+        using var loginPage = await client.GetAsync("/account/login");
+        loginPage.EnsureSuccessStatusCode();
 
-        Assert.Equal((HttpStatusCode)429, response.StatusCode);
+        var html = await loginPage.Content.ReadAsStringAsync();
+
+        var token = Regex.Match(
+            html,
+            "name=\"__RequestVerificationToken\"[^>]*value=\"([^\"]+)\""
+        ).Groups[1].Value;
+
+        Assert.False(string.IsNullOrWhiteSpace(token));
+
+        for (int i = 0; i < 3; i++)
+        {
+            using var response = await client.PostAsync(
+                "/account/login",
+                new FormUrlEncodedContent(
+                    new Dictionary<string, string>
+                    {
+                        ["__RequestVerificationToken"] = token,
+                        ["Username"] = "invalid-user",
+                        ["Password"] = "invalid-password"
+                    }));
+
+            Assert.Equal(
+                i < 2
+                    ? HttpStatusCode.OK
+                    : HttpStatusCode.TooManyRequests,
+                response.StatusCode);
+        }
     }
 
     [Fact]
@@ -79,6 +106,40 @@ public sealed class WebApplicationFactoryTests
 
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
         Assert.StartsWith("/account/login", response.Headers.Location?.ToString());
+    }
+
+    [Fact]
+    public async Task DirectPasswordInConfigurationCanAuthenticate()
+    {
+        const string username = "phase6-clerk";
+        const string password = "phase6-direct-config-password";
+        var branchId = Guid.NewGuid().ToString();
+        var staffId = Guid.NewGuid().ToString();
+        using var factory = CreateFactory(new Dictionary<string, string?>
+        {
+            ["ApexPost:DemoAccounts:Accounts:0:Username"] = username,
+            ["ApexPost:DemoAccounts:Accounts:0:DisplayName"] = "Phase 6 Clerk",
+            ["ApexPost:DemoAccounts:Accounts:0:Role"] = "CounterClerk",
+            ["ApexPost:DemoAccounts:Accounts:0:BranchId"] = branchId,
+            ["ApexPost:DemoAccounts:Accounts:0:StaffId"] = staffId,
+            ["ApexPost:DemoAccounts:Accounts:0:Password"] = password,
+            ["ApexPost:Security:LoginRateLimitPermitLimit"] = "100"
+        });
+        using var client = CreateClient(factory);
+        client.DefaultRequestHeaders.Add("X-Forwarded-For", "198.51.100.21");
+        var loginPage = await client.GetAsync("/account/login");
+        var html = await loginPage.Content.ReadAsStringAsync();
+        var token = Regex.Match(html, "name=\"__RequestVerificationToken\"[^>]*value=\"([^\"]+)\"").Groups[1].Value;
+        Assert.False(string.IsNullOrWhiteSpace(token));
+
+        using var loginResponse = await client.PostAsync("/account/login", new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["__RequestVerificationToken"] = token,
+            ["Username"] = username,
+            ["Password"] = password
+        }));
+
+        Assert.Equal(HttpStatusCode.Redirect, loginResponse.StatusCode);
     }
 
     [Fact]

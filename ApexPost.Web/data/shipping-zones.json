@@ -1,0 +1,12 @@
+[
+  { "id": "d1b7d3d7-4723-4418-9b55-1f10dfc242a4", "code": "Z-01", "name": "Metro North", "baseRate": 45.00, "currency": "PHP" },
+  { "id": "0e0ef80d-a3df-4d7e-9c87-f1aa8e2f62da", "code": "Z-02", "name": "Metro South", "baseRate": 48.00, "currency": "PHP" },
+  { "id": "23579a32-5d4b-4a76-8c9d-c2a7db56342f", "code": "Z-03", "name": "Metro East", "baseRate": 52.00, "currency": "PHP" },
+  { "id": "7a2b3dd5-8c5d-4a11-9df6-607d7d7f5303", "code": "Z-04", "name": "Metro West", "baseRate": 50.00, "currency": "PHP" },
+  { "id": "c3f1975d-b761-4be0-95a8-8d7a40d1c8d1", "code": "Z-05", "name": "Island Luzon", "baseRate": 60.00, "currency": "PHP" },
+  { "id": "6d6f118d-6bbf-4d3f-9e5c-2d851e8d8f39", "code": "Z-06", "name": "Island Visayas", "baseRate": 69.00, "currency": "PHP" },
+  { "id": "5fefd4a5-ef35-4f1b-a8d8-427e81d76c2d", "code": "Z-07", "name": "Island Mindanao", "baseRate": 74.00, "currency": "PHP" },
+  { "id": "4aa8035d-3200-4559-96fb-18e85d8c3a45", "code": "Z-08", "name": "Provincial North", "baseRate": 58.00, "currency": "PHP" },
+  { "id": "f0a43f8d-1b66-4210-bf1d-b74add2afd67", "code": "Z-09", "name": "Provincial South", "baseRate": 62.00, "currency": "PHP" },
+  { "id": "4369d809-7520-4f34-8b8b-3cf3b1e997b1", "code": "Z-10", "name": "Priority Express", "baseRate": 90.00, "currency": "PHP" }
+]

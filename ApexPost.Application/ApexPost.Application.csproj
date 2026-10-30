@@ -1,8 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.13" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ApexPost.Domain\ApexPost.Domain.csproj" />

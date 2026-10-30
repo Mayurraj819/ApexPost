@@ -19,6 +19,7 @@ public sealed class MaintenanceModeMiddleware
         if (_options.CurrentValue.MaintenanceMode && !context.Request.Path.StartsWithSegments("/health"))
         {
             context.Response.StatusCode = StatusCodes.Status503ServiceUnavailable;
+            context.Response.Headers["Retry-After"] = "60";
             context.Response.ContentType = "application/problem+json";
             await context.Response.WriteAsJsonAsync(new
             {

@@ -1,0 +1,19 @@
+@model ApexPost.Web.Models.DashboardViewModel
+@{ ViewData["Title"] = "Dashboard"; }
+<div class="mb-4"><h1>Branch dashboard</h1><p class="text-muted">Overview of your branch operations.</p></div>
+<div class="row g-3 mb-4">
+<div class="col-md-4"><div class="card h-100"><div class="card-body"><div class="muted-label">Active branches</div><div class="stat-number">@Model.Branches.Count</div></div></div></div>
+<div class="col-md-4"><div class="card h-100"><div class="card-body"><div class="muted-label">Products</div><div class="stat-number">@Model.Products.Count</div></div></div></div>
+<div class="col-md-4"><div class="card h-100"><div class="card-body"><div class="muted-label">7-day paid sales</div><div class="stat-number">@((Model.SalesSummary is null ? "N/A" : Model.SalesSummary.PaidTotal.Amount.ToString("N2")))</div><span class="text-muted">PHP</span></div></div></div>
+</div>
+<div class="card mb-4"><div class="card-header">Quick actions</div><div class="card-body action-bar">
+<a asp-controller="Transactions" asp-action="New" class="btn btn-primary">+ New sale</a>
+<a asp-controller="Catalog" asp-action="Index" class="btn btn-outline-primary">Products</a>
+<a asp-controller="Stock" asp-action="Index" class="btn btn-outline-primary">Manage stock</a>
+<a asp-controller="Reports" asp-action="Index" class="btn btn-outline-primary">Reports</a>
+<a asp-controller="OperationalAlerts" asp-action="Index" class="btn btn-outline-warning">Alerts</a>
+</div></div>
+<div class="card"><div class="card-header">Low stock alerts</div><div class="card-body">
+@if(Model.Alerts.Count==0){<p class="text-success mb-0">No low stock alerts.</p>}
+else{<ul class="list-group list-group-flush">@foreach(var a in Model.Alerts){<li class="list-group-item">⚠️ @a</li>}</ul>}
+</div></div>

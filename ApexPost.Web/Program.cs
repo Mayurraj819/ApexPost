@@ -1,11 +1,14 @@
-using System.Threading.RateLimiting;
 using ApexPost.Infrastructure;
 using ApexPost.Web.Configuration;
 using ApexPost.Web.Filters;
 using ApexPost.Web.Middleware;
 using ApexPost.Web.Security;
+using ApexPost.Web.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +27,8 @@ builder.Services.AddScoped<AuditActionFilter>();
 builder.Services.AddScoped<ValidationActionFilter>();
 builder.Services.AddScoped<PerformanceActionFilter>();
 
+builder.Services.AddScoped<IAuthorizationHandler, SameBranchAuthorizationHandler>();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -35,47 +40,126 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.SameSite = SameSiteMode.Lax;
         options.SlidingExpiration = true;
         options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.Events = new CookieAuthenticationEvents
+        {
+            OnRedirectToLogin = context =>
+            {
+                var redirect = context.Request.PathBase + "/account/login?ReturnUrl=" + Uri.EscapeDataString(context.Request.Path + context.Request.QueryString);
+                context.Response.Redirect(redirect);
+                return Task.CompletedTask;
+            },
+            OnRedirectToAccessDenied = context =>
+            {
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                return Task.CompletedTask;
+            }
+        };
     });
+
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(WebPolicies.BranchManager, policy => policy.RequireRole("BranchManager", "Administrator"));
     options.AddPolicy(WebPolicies.Administrator, policy => policy.RequireRole("Administrator"));
-});
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("configured", policy =>
+    options.AddPolicy(WebPolicies.SameBranch, policy =>
     {
-        if (securityOptions.AllowedCorsOrigins.Length > 0)
+        policy.RequireAuthenticatedUser();
+        policy.AddRequirements(new SameBranchRequirement());
+    });
+    options.AddPolicy(WebPolicies.BranchManagerOnly, policy => policy.RequireRole("BranchManager", "Administrator"));
+});
+builder.Services.AddOptions<CorsOptions>()
+    .Configure<IConfiguration>((options, configuration) =>
+    {
+        var security = configuration
+            .GetSection("ApexPost:Security")
+            .Get<WebSecurityOptions>()
+            ?? new WebSecurityOptions();
+
+        options.AddPolicy("configured", policy =>
         {
-            policy.WithOrigins(securityOptions.AllowedCorsOrigins)
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
-        }
+            if (security.AllowedCorsOrigins.Length > 0)
+            {
+                policy.WithOrigins(security.AllowedCorsOrigins)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            }
+        });
     });
-});
 
-builder.Services.AddRateLimiter(options =>
-{
-    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
-    options.AddFixedWindowLimiter("integration", limiterOptions =>
+builder.Services.AddCors();
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("configured", policy =>
+//    {
+//        if (securityOptions.AllowedCorsOrigins.Length > 0)
+//        {
+//            policy.WithOrigins(securityOptions.AllowedCorsOrigins)
+//                .AllowAnyHeader()
+//                .AllowAnyMethod()
+//                .AllowCredentials();
+//        }
+//    });
+//});
+builder.Services.AddOptions<RateLimiterOptions>()
+    .Configure<IConfiguration>((options, configuration) =>
     {
-        limiterOptions.PermitLimit = Math.Max(1, securityOptions.IntegrationRateLimitPermitLimit);
-        limiterOptions.Window = TimeSpan.FromSeconds(Math.Max(1, securityOptions.IntegrationRateLimitWindowSeconds));
-        limiterOptions.QueueLimit = 0;
-        limiterOptions.AutoReplenishment = true;
+        var security = configuration
+            .GetSection("ApexPost:Security")
+            .Get<WebSecurityOptions>()
+            ?? new WebSecurityOptions();
+
+        options.RejectionStatusCode =
+            StatusCodes.Status429TooManyRequests;
+
+        options.AddFixedWindowLimiter("integration", limiter =>
+        {
+            limiter.PermitLimit = Math.Max(
+                1, security.IntegrationRateLimitPermitLimit);
+
+            limiter.Window = TimeSpan.FromSeconds(
+                Math.Max(1, security.IntegrationRateLimitWindowSeconds));
+
+            limiter.QueueLimit = 0;
+            limiter.AutoReplenishment = true;
+        });
+
+        options.AddFixedWindowLimiter("login", limiter =>
+        {
+            limiter.PermitLimit = Math.Max(
+                1, security.LoginRateLimitPermitLimit);
+
+            limiter.Window = TimeSpan.FromSeconds(
+                Math.Max(1, security.LoginRateLimitWindowSeconds));
+
+            limiter.QueueLimit = 0;
+            limiter.AutoReplenishment = true;
+        });
     });
-    options.AddFixedWindowLimiter("login", limiterOptions =>
-    {
-        limiterOptions.PermitLimit = Math.Max(1, securityOptions.LoginRateLimitPermitLimit);
-        limiterOptions.Window = TimeSpan.FromSeconds(Math.Max(1, securityOptions.LoginRateLimitWindowSeconds));
-        limiterOptions.QueueLimit = 0;
-        limiterOptions.AutoReplenishment = true;
-    });
-});
+
+builder.Services.AddRateLimiter(_ => { });
+
+//builder.Services.AddRateLimiter(options =>
+//{
+//    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+//    options.AddFixedWindowLimiter("integration", limiterOptions =>
+//    {
+//        limiterOptions.PermitLimit = Math.Max(1, securityOptions.IntegrationRateLimitPermitLimit);
+//        limiterOptions.Window = TimeSpan.FromSeconds(Math.Max(1, securityOptions.IntegrationRateLimitWindowSeconds));
+//        limiterOptions.QueueLimit = 0;
+//        limiterOptions.AutoReplenishment = true;
+//    });
+//    options.AddFixedWindowLimiter("login", limiterOptions =>
+//    {
+//        limiterOptions.PermitLimit = Math.Max(1, securityOptions.LoginRateLimitPermitLimit);
+//        limiterOptions.Window = TimeSpan.FromSeconds(Math.Max(1, securityOptions.LoginRateLimitWindowSeconds));
+//        limiterOptions.QueueLimit = 0;
+//        limiterOptions.AutoReplenishment = true;
+//    });
+//});
 
 builder.Services.AddInfrastructure(Path.Combine(builder.Environment.ContentRootPath, "data"));
+builder.Services.AddSingleton<IProductCatalogCache, ProductCatalogCache>();
 
 var app = builder.Build();
 
@@ -93,8 +177,13 @@ app.UseHttpsRedirection();
 app.UseMiddleware<SecurityHeadersMiddleware>();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseMiddleware<ApiKeyMiddleware>();
-app.UseMiddleware<IpAllowlistMiddleware>();
+app.UseWhen(
+    context => context.Request.Path.StartsWithSegments("/integration") || context.Request.Path.StartsWithSegments("/admin"),
+    branch =>
+    {
+        branch.UseMiddleware<ApiKeyMiddleware>();
+        branch.UseMiddleware<IpAllowlistMiddleware>();
+    });
 app.UseCors("configured");
 app.UseAuthentication();
 app.UseAuthorization();
@@ -111,7 +200,14 @@ app.MapGet("/integration/ping", () => Results.Ok(new
     status = "Accepted",
     service = "ApexPost.Web",
     correlationId = "available-in-response-header"
-})).RequireRateLimiting("integration");
+})).WithMetadata(new RequireApiKeyAttribute()).RequireRateLimiting("integration");
+
+app.MapGet("/admin/health", () => Results.Ok(new
+{
+    status = "Healthy",
+    service = "ApexPost.Web",
+    scope = "admin"
+})).WithMetadata(new RequireApiKeyAttribute()).WithMetadata(new RequireAllowedIpAttribute());
 
 app.MapControllerRoute(
     name: "default",

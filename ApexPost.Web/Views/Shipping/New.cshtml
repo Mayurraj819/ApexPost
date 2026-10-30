@@ -1,0 +1,16 @@
+@model ApexPost.Web.Models.ShippingForm
+@using ApexPost.Domain.Enums
+@{ ViewData["Title"] = "Add shipping"; }
+<h1>Add shipping service</h1>
+<form asp-action="Add" method="post">
+    @Html.AntiForgeryToken()
+    <input asp-for="TransactionId" type="hidden" />
+    <div asp-validation-summary="All"></div>
+    <label asp-for="WeightGrams">Weight (grams)</label>
+    <input asp-for="WeightGrams" type="number" min="0.001" max="30000" step="0.001" required />
+    <label asp-for="DestinationZone">Destination zone</label>
+    <input asp-for="DestinationZone" maxlength="40" required />
+    <label asp-for="ServiceLevel">Service level</label>
+    <select asp-for="ServiceLevel" asp-items="Html.GetEnumSelectList<ShippingServiceLevel>()"></select>
+    <button type="submit">Calculate and add charge</button>
+</form>

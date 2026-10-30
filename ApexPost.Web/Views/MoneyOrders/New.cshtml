@@ -1,0 +1,18 @@
+@model ApexPost.Web.Models.MoneyOrderForm
+@{ ViewData["Title"] = "New money order"; }
+<h1>New money order</h1>
+<form asp-action="Create" method="post" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="All"></div>
+    <label asp-for="Amount"></label>
+    <input asp-for="Amount" type="number" min="0.01" step="0.01" required />
+    <label asp-for="PayeeName">Payee name</label>
+    <input asp-for="PayeeName" required />
+    <label asp-for="DocumentType">Identity document type</label>
+    <input asp-for="DocumentType" required />
+    <label asp-for="DocumentNumber">Identity document number</label>
+    <input asp-for="DocumentNumber" type="password" autocomplete="off" required />
+    <label asp-for="ConfirmDocumentNumber">Confirm document number</label>
+    <input asp-for="ConfirmDocumentNumber" type="password" autocomplete="off" required />
+    <button type="submit">Create money order</button>
+</form>

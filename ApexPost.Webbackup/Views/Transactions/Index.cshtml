@@ -1,0 +1,19 @@
+@model IReadOnlyList<ApexPost.Domain.Entities.Transaction>
+@{ ViewData["Title"] = "Transactions"; }
+<h1>Branch transactions</h1>
+<a asp-action="New">Start transaction</a>
+<table class="table">
+    <thead><tr><th>Time</th><th>ID</th><th>Status</th><th>Total</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.OccurredAt</td>
+            <td>@item.Id</td>
+            <td>@item.Status</td>
+            <td>@item.Total.Amount @item.Total.Currency</td>
+            <td><a asp-action="Details" asp-route-id="@item.Id">Open</a></td>
+        </tr>
+    }
+    </tbody>
+</table>

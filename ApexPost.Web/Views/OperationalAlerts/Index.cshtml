@@ -1,0 +1,32 @@
+@model ApexPost.Web.Models.OperationalAlertsViewModel
+@{
+    ViewData["Title"] = "Operational Alerts";
+}
+<h1>Operational Alerts</h1>
+<p>Read-only operational dashboard. These alerts are calculated from current JSON records; no email, SMS, or push delivery is configured.</p>
+<h2>Low stock (at or below @Model.LowStockThreshold units)</h2>
+<table class="table"><thead><tr><th>Branch</th><th>Product</th><th>Remaining</th></tr></thead><tbody>
+@foreach (var item in Model.LowStock)
+{
+    <tr><td>@item.BranchId</td><td>@item.ProductName</td><td>@item.Remaining</td></tr>
+}
+</tbody></table>
+@if (Model.LowStock.Count == 0) { <p>No low-stock records found.</p> }
+
+<h2>High-value money orders (at or above @Model.HighValueThreshold.ToString("N2"))</h2>
+<table class="table"><thead><tr><th>Reference</th><th>Branch</th><th>Amount</th><th>Created</th></tr></thead><tbody>
+@foreach (var item in Model.HighValueMoneyOrders)
+{
+    <tr><td>@item.Reference</td><td>@item.BranchId</td><td>@item.Amount.ToString("N2") @item.Currency</td><td>@item.CreatedAt.ToString("g")</td></tr>
+}
+</tbody></table>
+@if (Model.HighValueMoneyOrders.Count == 0) { <p>No high-value money orders found.</p> }
+
+<h2>Void and refund activity (latest 100)</h2>
+<table class="table"><thead><tr><th>Transaction</th><th>Branch</th><th>Status</th><th>Reason</th></tr></thead><tbody>
+@foreach (var item in Model.Corrections)
+{
+    <tr><td>@item.TransactionId</td><td>@item.BranchId</td><td>@item.Status</td><td>@item.Reason</td></tr>
+}
+</tbody></table>
+@if (Model.Corrections.Count == 0) { <p>No corrections found.</p> }

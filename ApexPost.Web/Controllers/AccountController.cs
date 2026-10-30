@@ -23,24 +23,22 @@ public sealed class AccountController : Controller
     }
 
     [HttpGet]
-    public IActionResult Login(string? returnUrl = null) => View(new LoginViewModel { ReturnUrl = returnUrl });
+    public IActionResult Login(string? returnUrl = null) =>
+        View(new LoginViewModel { ReturnUrl = returnUrl });
 
     [HttpPost]
     [ValidateAntiForgeryToken]
     [EnableRateLimiting("login")]
     public async Task<IActionResult> Login(LoginViewModel model, CancellationToken cancellationToken)
     {
-        if (!ModelState.IsValid)
-        {
-            return View(model);
-        }
+        if (!ModelState.IsValid) return View(model);
 
-        var account = _options.Accounts.FirstOrDefault(item => string.Equals(item.Username, model.Username, StringComparison.OrdinalIgnoreCase));
-        var configuredPassword = account is null ? null : Environment.GetEnvironmentVariable(account.PasswordEnvironmentVariable);
-        var valid = account is not null && !string.IsNullOrEmpty(configuredPassword) && ConstantTimeEquals(model.Password, configuredPassword);
-        if (!valid)
+        var account = _options.Accounts.FirstOrDefault(x =>
+            string.Equals(x.Username, model.Username, StringComparison.OrdinalIgnoreCase));
+        var expected = GetConfiguredPassword(account);
+        if (account is null || string.IsNullOrEmpty(expected) || !ConstantTimeEquals(model.Password, expected))
         {
-            _logger.LogWarning("Failed login attempt for configured username. Username={Username} CorrelationId={CorrelationId}", model.Username, HttpContext.Items["X-Correlation-ID"]?.ToString());
+            _logger.LogWarning("Failed login for {Username}", model.Username);
             ModelState.AddModelError(string.Empty, "Invalid username or password.");
             return View(model);
         }
@@ -48,14 +46,20 @@ public sealed class AccountController : Controller
         cancellationToken.ThrowIfCancellationRequested();
         var claims = new List<Claim>
         {
-            new(ClaimTypes.Name, account!.DisplayName),
+            new(ClaimTypes.Name, account.DisplayName),
             new(ClaimTypes.NameIdentifier, account.Username),
             new(ClaimTypes.Role, account.Role),
             new(WebClaimTypes.BranchId, account.BranchId),
-            new(WebClaimTypes.StaffId, account.StaffId)
+            new(WebClaimTypes.StaffId, account.StaffId),
+            new(WebClaimTypes.BranchCode, account.BranchId),
+            new(WebClaimTypes.Role, account.Role)
         };
-        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)));
-        return RedirectToLocal(model.ReturnUrl);
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)));
+        return !string.IsNullOrWhiteSpace(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl)
+            ? Redirect(model.ReturnUrl)
+            : RedirectToAction("Index", "Home");
     }
 
     [HttpPost]
@@ -69,8 +73,14 @@ public sealed class AccountController : Controller
     [HttpGet]
     public IActionResult Denied() => StatusCode(StatusCodes.Status403Forbidden);
 
-    private IActionResult RedirectToLocal(string? returnUrl) =>
-        !string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl) : RedirectToAction("Index", "Home")!;
+    private static string? GetConfiguredPassword(DemoAccount? account)
+    {
+        if (account is null) return null;
+        if (!string.IsNullOrWhiteSpace(account.Password)) return account.Password;
+        return string.IsNullOrWhiteSpace(account.PasswordEnvironmentVariable)
+            ? null
+            : Environment.GetEnvironmentVariable(account.PasswordEnvironmentVariable);
+    }
 
     private static bool ConstantTimeEquals(string left, string right) =>
         CryptographicOperations.FixedTimeEquals(Encoding.UTF8.GetBytes(left), Encoding.UTF8.GetBytes(right));
