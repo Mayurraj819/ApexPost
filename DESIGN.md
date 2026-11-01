@@ -19,6 +19,121 @@ There are 18 principal tables: the 17 named in Parts A–H plus Regions for regi
 
 ```mermaid
 erDiagram
+ Regions {
+     uniqueidentifier Id PK
+     varchar Code UK
+     nvarchar Name
+ }
+ Branches {
+     uniqueidentifier Id PK
+     uniqueidentifier RegionId FK
+     varchar Code UK
+     nvarchar Name
+ }
+ Counters {
+     uniqueidentifier Id PK
+     uniqueidentifier BranchId FK
+     int Number
+ }
+ Roles {
+     int Id PK
+     nvarchar Name UK
+ }
+ Staff {
+     uniqueidentifier Id PK
+     uniqueidentifier BranchId FK
+     int Role FK
+     varchar Email UK
+     bit IsActive
+ }
+ ProductCategories {
+     int Id PK
+     nvarchar Name UK
+ }
+ Products {
+     uniqueidentifier Id PK
+     varchar Sku UK
+     int Category FK
+     decimal UnitPriceAmount
+     varchar UnitPriceCurrency
+ }
+ BranchStock {
+     uniqueidentifier Id PK
+     uniqueidentifier BranchId FK
+     uniqueidentifier ProductId FK
+     int Quantity
+     rowversion RowVersion
+ }
+ StockAdjustments {
+     uniqueidentifier Id PK
+     uniqueidentifier BranchId FK
+     uniqueidentifier ProductId FK
+     int Delta
+     nvarchar Reason
+ }
+ ShippingZones {
+     uniqueidentifier Id PK
+     varchar Code UK
+     nvarchar Name
+ }
+ ShippingRates {
+     uniqueidentifier Id PK
+     uniqueidentifier ZoneId FK
+     int ServiceLevel
+     decimal BaseRate
+     decimal PerKilogram
+ }
+ Shipments {
+     uniqueidentifier Id PK
+     uniqueidentifier TransactionId FK
+     uniqueidentifier ZoneId FK
+     int ServiceLevel
+     decimal Weight
+ }
+ IdentityVerifications {
+     uniqueidentifier Id PK
+     varchar MaskedNumber
+     varchar Fingerprint
+     bit IsVerified
+ }
+ MoneyOrders {
+     uniqueidentifier Id PK
+     uniqueidentifier BranchId FK
+     uniqueidentifier StaffId FK
+     uniqueidentifier IdentityVerificationId FK
+     decimal OrderAmount
+ }
+ CounterTransactions {
+     uniqueidentifier Id PK
+     uniqueidentifier BranchId FK
+     uniqueidentifier CounterId FK
+     uniqueidentifier StaffId FK
+     datetime2 OccurredAt
+     int Status
+     rowversion RowVersion
+ }
+ TransactionLines {
+     uniqueidentifier Id PK
+     uniqueidentifier TransactionId FK
+     uniqueidentifier ProductId FK
+     int Type
+     int Quantity
+     decimal UnitPriceAmount
+ }
+ Payments {
+     uniqueidentifier Id PK
+     uniqueidentifier TransactionId FK
+     decimal PaidAmount
+     varchar PaidCurrency
+     datetime2 PaidAtUtc
+ }
+ AuditEntries {
+     uniqueidentifier Id PK
+     nvarchar StaffId
+     nvarchar BranchId
+     int StatusCode
+     datetime2 OccurredAtUtc
+ }
  Regions ||--o{ Branches : contains
  Branches ||--o{ Counters : has
  Branches ||--o{ Staff : employs
