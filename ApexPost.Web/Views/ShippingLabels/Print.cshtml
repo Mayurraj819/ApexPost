@@ -2,12 +2,7 @@
 @{
     ViewData["Title"] = "Shipping Receipt";
 }
-<style>
-    .shipping-receipt { max-width: 680px; margin: 2rem auto; padding: 2rem; border: 2px solid #222; }
-    .shipping-receipt dt { font-weight: 700; margin-top: .75rem; }
-    .shipping-receipt dd { margin: 0; overflow-wrap: anywhere; }
-    @@media print { .no-print, header, footer, nav { display: none !important; } .shipping-receipt { border: 1px solid #222; margin: 0; } }
-</style>
+
 <section class="shipping-receipt">
     <h1>ApexPost – Shipping Receipt</h1>
     <p><strong>Not a carrier tracking label.</strong> Tracking number, sender and recipient addresses are not captured in the current transaction schema.</p>
@@ -21,4 +16,4 @@
         <dt>Amount</dt><dd>@Model.Amount.ToString("N2") @Model.Currency</dd>
     </dl>
 </section>
-<div class="no-print text-center"><button class="btn btn-primary" type="button" onclick="window.print()">Print receipt</button></div>
+<div class="no-print text-center"><button class="btn btn-primary" type="button" data-print="true">Print receipt</button></div>

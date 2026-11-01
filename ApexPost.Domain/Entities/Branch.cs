@@ -2,9 +2,16 @@ using ApexPost.Domain.Common;
 using ApexPost.Domain.ValueObjects;
 
 namespace ApexPost.Domain.Entities;
-
 public sealed class Branch : Entity
 {
+    private Branch()
+    {
+        Code = null !;
+        Name = null !;
+        Address = null !;
+        OpeningHours = null !;
+    }
+
     public Branch(Guid id, BranchCode code, string name, string address, OpeningHours? openingHours = null) : base(id)
     {
         Code = code ?? throw new ArgumentNullException(nameof(code));
@@ -21,11 +28,7 @@ public sealed class Branch : Entity
     public bool IsActive { get; private set; }
 
     public void Close() => IsActive = false;
-
     public void Reopen() => IsActive = true;
-
     public bool CanAcceptTransactions(DateTimeOffset at) => IsActive && OpeningHours.Contains(new TimeOnly(at.Hour, at.Minute, at.Second));
-
-    private static string RequireText(string value, string parameterName) =>
-        string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Value is required.", parameterName) : value.Trim();
+    private static string RequireText(string value, string parameterName) => string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Value is required.", parameterName) : value.Trim();
 }

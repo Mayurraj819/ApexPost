@@ -2,7 +2,6 @@ using ApexPost.Application.Abstractions.Services;
 using ApexPost.Application.Contracts;
 
 namespace ApexPost.Application.Services;
-
 public sealed class IdentityVerificationService : IIdentityVerificationService
 {
     public async Task<IdentityVerificationResult> VerifyAsync(IdentityVerificationRequest request, CancellationToken cancellationToken = default)

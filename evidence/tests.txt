@@ -1,0 +1,7 @@
+Test run for /workspace/scratch/6d756eb258c9/ApexPost-Week3/ApexPost.Tests/bin/Debug/net10.0/ApexPost.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    84, Skipped:     0, Total:    84, Duration: 6 s - ApexPost.Tests.dll (net10.0)

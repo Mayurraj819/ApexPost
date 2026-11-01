@@ -1,7 +1,6 @@
 using ApexPost.Domain.Entities;
 
 namespace ApexPost.Application.Abstractions.Services;
-
 public interface IStaffManagementService
 {
     Task<Staff> CreateAsync(Staff staff, CancellationToken cancellationToken = default);

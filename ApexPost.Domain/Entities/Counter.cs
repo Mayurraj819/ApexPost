@@ -1,9 +1,13 @@
 using ApexPost.Domain.Common;
 
 namespace ApexPost.Domain.Entities;
-
 public sealed class Counter : Entity
 {
+    private Counter()
+    {
+        Name = null !;
+    }
+
     public Counter(Guid id, Guid branchId, int number, string name) : base(id)
     {
         if (branchId == Guid.Empty)

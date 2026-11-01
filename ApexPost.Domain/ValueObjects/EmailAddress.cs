@@ -1,5 +1,4 @@
 namespace ApexPost.Domain.ValueObjects;
-
 public sealed record EmailAddress
 {
     public EmailAddress(string value)

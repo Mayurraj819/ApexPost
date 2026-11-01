@@ -1,3 +1,5 @@
+> Superseded for Week 3 by ADR 0013. Audit entries now use SQL with a separate commit boundary.
+
 # 0006: Sanitized append-only audit logs
 
 - Status: Accepted

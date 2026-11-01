@@ -2,12 +2,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApexPost.Application\ApexPost.Application.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.13"><PrivateAssets>all</PrivateAssets><IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets></PackageReference>
     <ProjectReference Include="..\ApexPost.Infrastructure\ApexPost.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <UserSecretsId>ApexPost-Week3-Development</UserSecretsId>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 

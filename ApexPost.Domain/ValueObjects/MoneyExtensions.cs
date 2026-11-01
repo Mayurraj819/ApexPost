@@ -1,5 +1,4 @@
-﻿namespace ApexPost.Domain.ValueObjects;
-
+namespace ApexPost.Domain.ValueObjects;
 public static class MoneyExtensions
 {
     // C# 14 extension members syntax

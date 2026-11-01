@@ -1,5 +1,4 @@
 namespace ApexPost.Domain.ValueObjects;
-
 public sealed record OpeningHours
 {
     public OpeningHours(TimeOnly opensAt, TimeOnly closesAt)

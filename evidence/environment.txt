@@ -1,0 +1,8 @@
+UTC run: 2026-10-30T12:53:30.5646537Z
+Branches: 1000
+Stock: 30000
+Transactions: 100200
+Shipments: 33433
+MoneyOrders: 10000
+SQL Server: 17.0.5005.3
+Warm-cache single run; no production claims.

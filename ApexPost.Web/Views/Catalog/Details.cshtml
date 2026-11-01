@@ -1,0 +1,4 @@
+@model ApexPost.Application.Contracts.ProductRow
+@{ViewData["Title"]="Product";}
+<h1>@Model.Name</h1><dl><dt>SKU</dt><dd>@Model.Sku.Value</dd><dt>Category</dt><dd>@Model.Category</dd><dt>Price</dt><dd>@Model.UnitPrice.Amount @Model.UnitPrice.Currency</dd></dl>
+<a asp-action="Index" class="btn btn-outline-secondary">Back</a>

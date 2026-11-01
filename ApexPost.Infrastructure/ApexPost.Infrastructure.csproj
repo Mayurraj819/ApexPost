@@ -1,8 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <ProjectReference Include="..\ApexPost.Application\ApexPost.Application.csproj" />
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <!-- Security pin for an existing SqlClient transitive dependency; see ADR 0014. -->
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="9.0.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.13"><PrivateAssets>all</PrivateAssets><IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets></PackageReference>
   </ItemGroup>
 
 

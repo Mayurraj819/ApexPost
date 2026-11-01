@@ -1,10 +1,9 @@
 using System.Text.Json.Serialization;
-namespace ApexPost.Domain.ValueObjects;
 
+namespace ApexPost.Domain.ValueObjects;
 public readonly record struct Weight
 {
     public const decimal MaxParcelGrams = 30_000m;
-
     [JsonConstructor]
     public Weight(decimal grams)
     {
@@ -17,6 +16,5 @@ public readonly record struct Weight
     }
 
     public decimal Grams { get; }
-
     public bool IsWithinParcelLimit => Grams <= MaxParcelGrams;
 }

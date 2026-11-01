@@ -1,13 +1,13 @@
-@model ApexPost.Domain.Entities.Transaction
-@using ApexPost.Domain.Entities
+@model ApexPost.Application.Contracts.TransactionRow
+@using ApexPost.Application.Contracts
 @using ApexPost.Domain.Enums
 @{
     ViewData["Title"] = "Transaction";
-    var products = ViewBag.Products as IReadOnlyList<Product> ?? Array.Empty<Product>();
+    var products = ViewBag.Products as IReadOnlyList<ProductRow> ?? Array.Empty<ProductRow>();
 }
 <h1>Transaction @Model.Id</h1>
 <p>Status: @Model.Status | Total: @Model.Total.Amount @Model.Total.Currency</p>
-<table class="table">
+<div class="table-responsive"><table class="table">
     <thead><tr><th>Code</th><th>Type</th><th>Qty</th><th>Total</th></tr></thead>
     <tbody>
     @foreach (var line in Model.Lines)
@@ -15,48 +15,52 @@
         <tr><td>@line.Code</td><td>@line.Type</td><td>@line.Quantity.Value</td><td>@line.Total.Amount</td></tr>
     }
     </tbody>
-</table>
+</table></div>
 @if (Model.Status == TransactionStatus.Open)
 {
-    <form asp-action="AddProduct" method="post">
+    <a class="btn btn-outline-primary" asp-controller="Shipping" asp-action="New" asp-route-transactionId="@Model.Id">Add shipping</a>
+    <form asp-action="AddProduct" asp-route-id="@Model.Id" method="post" class="row g-3 mb-3">
         @Html.AntiForgeryToken()
-        <input type="hidden" name="id" value="@Model.Id" />
+        
         <label for="productId">Product</label>
-        <select id="productId" name="productId">
+        <select id="productId" name="productId" class="form-select">
             @foreach (var product in products)
             {
                 <option value="@product.Id">@product.Name</option>
             }
         </select>
         <label for="quantity">Quantity</label>
-        <input id="quantity" type="number" min="1" name="quantity" value="1" />
-        <button type="submit">Add product</button>
+        <input class="form-control" id="quantity" type="number" min="1" name="quantity" value="1" />
+        <button class="btn btn-primary" type="submit">Add product</button>
     </form>
-    <form asp-action="Pay" method="post">
+    <form asp-action="Pay" asp-route-id="@Model.Id" method="post" class="row g-3 mb-3">
         @Html.AntiForgeryToken()
-        <input type="hidden" name="id" value="@Model.Id" />
-        <button type="submit">Pay</button>
+        
+        <button class="btn btn-primary" type="submit">Pay</button>
     </form>
 }
 @if (User.IsInRole("BranchManager") || User.IsInRole("Administrator"))
 {
     if (Model.Status == TransactionStatus.Open || Model.Status == TransactionStatus.Paid)
     {
-        <form asp-action="Void" method="post">
+        <form asp-action="Void" asp-route-id="@Model.Id" method="post" class="row g-3 mb-3">
             @Html.AntiForgeryToken()
-            <input type="hidden" name="transactionId" value="@Model.Id" />
-            <input name="reason" required placeholder="Void reason" />
-            <button type="submit">Void</button>
+            
+            <input class="form-control" name="reason" required placeholder="Void reason" />
+            <button class="btn btn-primary" type="submit">Void</button>
         </form>
     }
     if (Model.Status == TransactionStatus.Paid)
     {
-        <form asp-action="Refund" method="post">
+        <form asp-action="Refund" asp-route-id="@Model.Id" method="post" class="row g-3 mb-3">
             @Html.AntiForgeryToken()
-            <input type="hidden" name="transactionId" value="@Model.Id" />
-            <input name="reason" required placeholder="Refund reason" />
-            <button type="submit">Refund</button>
+            
+            <input class="form-control" name="reason" required placeholder="Refund reason" />
+            <button class="btn btn-primary" type="submit">Refund</button>
         </form>
     }
 }
 <a asp-action="Index">Back</a>
+
+@if(Model.Status==TransactionStatus.Paid && Model.Lines.Any(l=>l.Type==TransactionLineType.PostalService))
+{<a class="btn btn-primary" asp-controller="ShippingLabels" asp-action="Print" asp-route-transactionId="@Model.Id">Print shipping receipt</a>}

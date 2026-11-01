@@ -1,7 +1,6 @@
 using ApexPost.Domain.Entities;
 
 namespace ApexPost.Application.Abstractions.Services;
-
 public interface IBranchManagementService
 {
     Task<Branch> CreateAsync(Branch branch, CancellationToken cancellationToken = default);

@@ -2,9 +2,12 @@ using ApexPost.Domain.Common;
 using ApexPost.Domain.ValueObjects;
 
 namespace ApexPost.Domain.Entities;
-
 public sealed class BranchStock : Entity
 {
+    private BranchStock()
+    {
+    }
+
     public BranchStock(Guid id, Guid branchId, Guid productId, Quantity quantity) : base(id)
     {
         if (branchId == Guid.Empty)
@@ -19,17 +22,19 @@ public sealed class BranchStock : Entity
 
         BranchId = branchId;
         ProductId = productId;
-        Quantity = quantity;
+        _quantity = quantity.Value;
     }
 
     public Guid BranchId { get; }
     public Guid ProductId { get; }
-    public Quantity Quantity { get; private set; }
+
+    private int _quantity;
+    public Quantity Quantity => new(_quantity);
 
     public void Increase(int amount)
     {
         ValidatePositive(amount);
-        Quantity = new Quantity(Quantity.Value + amount);
+        _quantity = checked(_quantity + amount);
     }
 
     public void Decrease(int amount)
@@ -40,7 +45,7 @@ public sealed class BranchStock : Entity
             throw new InvalidOperationException("Branch stock cannot become negative.");
         }
 
-        Quantity = new Quantity(Quantity.Value - amount);
+        _quantity -= amount;
     }
 
     private static void ValidatePositive(int amount)

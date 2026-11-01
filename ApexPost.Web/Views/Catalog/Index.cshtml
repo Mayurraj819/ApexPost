@@ -1,4 +1,4 @@
-@model IReadOnlyList<ApexPost.Domain.Entities.Product>
+@model IReadOnlyList<ApexPost.Application.Contracts.ProductRow>
 @{
  ViewData["Title"] = "Catalogue";
  var manager = User.IsInRole("BranchManager") || User.IsInRole("Administrator");
@@ -16,10 +16,10 @@
 <thead><tr><th>SKU</th><th>Name</th><th>Category</th><th>Price (PHP)</th>@if(manager){<th>Actions</th>}</tr></thead>
 <tbody>
 @foreach (var p in Model) {
-<tr><td><code>@p.Sku.Value</code></td><td>@p.Name</td><td>@p.Category</td><td>@p.UnitPrice.Amount.ToString("N2")</td>
+<tr><td><a asp-action="Details" asp-route-id="@p.Id"><code>@p.Sku.Value</code></a></td><td>@p.Name</td><td>@p.Category</td><td>@p.UnitPrice.Amount.ToString("N2")</td>
 @if(manager){<td><div class="action-bar">
 <a class="btn btn-sm btn-outline-primary" asp-action="Edit" asp-route-id="@p.Id">Edit</a>
-<form asp-action="Delete" method="post" onsubmit="return confirm('Delete this product?');">
+<form asp-action="Delete" method="post" data-confirm="Delete this product?">
 @Html.AntiForgeryToken()<input type="hidden" name="id" value="@p.Id" />
 <button class="btn btn-sm btn-outline-danger">Delete</button></form>
 </div></td>}</tr>
@@ -27,3 +27,5 @@
 </tbody></table></div>
 @if(Model.Count==0){<p class="text-muted">No products found.</p>}
 </div></div>
+
+@if(User.IsInRole("Administrator")){<form asp-action="RevisePrices" method="post" class="card card-body mt-3" data-confirm="Revise all product prices?">@Html.AntiForgeryToken()<label class="form-label">Price multiplier (0.01–10)</label><input name="Factor" type="number" min="0.01" max="10" step="0.01" value="1" class="form-control" required/><button class="btn btn-primary mt-3">Revise prices</button></form>}
