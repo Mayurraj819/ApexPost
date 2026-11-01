@@ -87,3 +87,43 @@ Transient retries are not enabled by default; the explicit transaction wrapper i
 Offline/outbox topics are listed in the assignment taxonomy but have no Parts A–H acceptance criteria. No second/offline database or listener subsystem is added. Trainer clarification is needed before expanding that scope.
 
 See docs/adr/0007–0014 and PERFORMANCE.md for evidence-linked decisions.
+## Foreign keys and delete behaviour
+
+| Parent → Child | Delete behaviour | Reason |
+|---|---|---|
+| Regions → Branches | NO ACTION | A region cannot be deleted while branches reference it. |
+| Branches → Counters | NO ACTION | Prevent deleting a branch that still has counters. |
+| Branches → Staff | NO ACTION | Preserve staff assignments and prevent orphaned records. |
+| Roles → Staff | NO ACTION | A role cannot be deleted while staff use it. |
+| ProductCategories → Products | NO ACTION | Preserve category references for existing products. |
+| Branches → BranchStock | NO ACTION | Prevent deleting a branch that holds inventory records. |
+| Products → BranchStock | NO ACTION | Prevent deleting a product while stock records reference it. |
+| Branches → StockAdjustments | NO ACTION | Preserve the branch reference in stock adjustment history. |
+| Products → StockAdjustments | NO ACTION | Preserve the product reference in stock adjustment history. |
+| Branches → CounterTransactions | NO ACTION | Preserve historical sales for the branch. |
+| Counters → CounterTransactions | NO ACTION | Preserve the counter reference in sales history. |
+| Staff → CounterTransactions | NO ACTION | Preserve the staff reference in sales history. |
+| CounterTransactions → TransactionLines | CASCADE | Lines belong to their parent transaction and are removed if an allowed parent deletion occurs. |
+| Products → TransactionLines | NO ACTION | Prevent deleting products referenced by historical transaction lines. |
+| CounterTransactions → Payments | NO ACTION | Protect payment history from accidental deletion. |
+| CounterTransactions → Shipments | NO ACTION | Preserve the transaction reference for shipments. |
+| ShippingZones → Shipments | NO ACTION | A shipping zone cannot be deleted while shipments reference it. |
+| ShippingZones → ShippingRates | NO ACTION | Prevent deleting a zone that still has configured rates. |
+| Branches → MoneyOrders | NO ACTION | Preserve the issuing branch in money-order history. |
+| Staff → MoneyOrders | NO ACTION | Preserve the processing staff reference in money-order history. |
+| IdentityVerifications → MoneyOrders | NO ACTION | Preserve the identity-verification record referenced by a money order. |
+
+The counter relationship uses a composite foreign key:
+CounterTransactions(CounterId, BranchId) references Counters(Id, BranchId).
+This prevents a transaction from referencing a counter belonging to another branch.
+
+AuditEntries intentionally has no foreign keys to business tables.
+Staff and branch identifiers are stored as snapshots so failed requests and
+requests containing unknown identifiers can still be audited.
+
+Owned Address, OpeningHours and staff IdentityDocument values share their
+owner's table. They do not create separate parent-child table relationships.
+
+Database cascade configuration does not give users permission to delete
+historical transactions. Application rules and database permissions still
+control which deletions are allowed.

@@ -21,11 +21,16 @@ Data is synthetic and skewed; see sql/performance/SeedScale.sql. Runtime and ben
 
 | Workload | Rows | Reads before → after | CPU ms before → after | Main plan change |
 |---|---:|---:|---:|---|
-| Branch stock at/below 3 | 0 | 106 → 5 | 1 → 0 | Covering index seek removes table scan/key lookups as applicable; inspect linked actual plans |
-| Branch/date sale-header search | 74 | 443 → 5 | 1 → 0 | Covering index seek removes table scan/key lookups as applicable; inspect linked actual plans |
-| Zone/service shipment search | 3353 | 1366 → 36 | 6 → 1 | Covering index seek removes table scan/key lookups as applicable; inspect linked actual plans |
-| Branch/date auditor search | 10 | 24 → 4 | 1 → 0 | Covering index seek removes table scan/key lookups as applicable; inspect linked actual plans |
+| Branch stock at/below 3 | 0 | 106 → 5 | 1 → 0 | 	Existing branch/product index seek with clustered-key lookups → covering seek on IX_Stock_Branch_Quantity; clustered-key lookups removed. |
+| Branch/date sale-header search | 74 | 443 → 5 | 1 → 0 | 	Branch-only index seek with clustered-key lookups → covering branch/date seek on IX_Transactions_Branch_Date. |
+| Zone/service shipment search | 3353 | 1366 → 36 | 6 → 1 | Clustered index scan → covering index seek on IX_Shipment_Zone_Level. |
+| Branch/date auditor search | 10 | 24 → 4 | 1 → 0 | Branch-only index seek with clustered-key lookups → covering branch/date seek on IX_MoneyOrder_Branch_Date. |
 
+These descriptions refer to the main SELECT statement in each captured
+actual plan. Branch/zone parameter-selection statements are separate and
+may still contain scans or seeks. A Clustered Index Seek under a nested-loop
+lookup can represent a Key Lookup in SSMS; it does not mean the original
+query was already covered by its nonclustered index.
 The daily-sales workload measures the branch/date transaction-header access used before aggregating report lines; it does not claim to benchmark an entire dashboard/report request. Logical reads include fixed variable-selection statements in the saved batch. Each batch may have multiple plan result sets; the JSON operator list therefore includes setup operators too. Compare the data-access statements, not merely whether “Index Seek” appears anywhere.
 
 ## Index choices and storage
@@ -72,3 +77,69 @@ The tracked transaction aggregate currently loads one Lines collection plus sing
 ## Reproduction and limits
 
 Set APEXPOST_TEST_SQLSERVER to a private master connection and run `dotnet run --project tools/ApexPost.Evidence` from the solution root. It creates/migrates/seeds/scales a random ApexPost_Perf_ database and deletes it afterward. Use actual .sqlplan XML plus raw logs as evidence. Repeat measurements on representative hardware/data before treating these candidates as production tuning.
+
+## Generated SQL captured using ToQueryString()
+
+These SQL samples were captured during the recorded performance run.
+The IDs and timestamps identify that fictional test dataset; they are not
+values that must exist in every local database.
+
+### 1. Low-stock query by branch
+
+Source: evidence/generated-sql/low-stock.sql
+
+```sql
+DECLARE @branch uniqueIdentifier =
+    '4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6';
+
+SELECT [b].[ProductId], [b].[Quantity]
+FROM [BranchStock] AS [b]
+WHERE [b].[BranchId] = @branch
+  AND [b].[Quantity] <= 3;
+```
+
+This query filters stock by branch and threshold in SQL rather than loading
+all stock records into application memory.
+
+### 2. Transaction-header search by branch and date
+
+Source: evidence/generated-sql/sales.sql
+
+```sql
+DECLARE @branch uniqueIdentifier =
+    '4d1e86ae-8b8b-4f1d-9d6f-4d4d7817d0d6';
+
+DECLARE @from datetime2 = '2026-09-30T12:53:27.4969150Z';
+DECLARE @today datetime2 = '2026-10-30T12:53:27.4969150Z';
+
+SELECT [c].[Id], [c].[OccurredAt], [c].[Status]
+FROM [CounterTransactions] AS [c]
+WHERE [c].[BranchId] = @branch
+  AND [c].[OccurredAt] >= @from
+  AND [c].[OccurredAt] < @today;
+```
+
+The half-open date range includes the start and excludes the end.
+It avoids applying YEAR or another function to the date column.
+This sample measures header access, not the complete sales aggregation.
+
+### 3. Shipment search by zone and service level
+
+Source: evidence/generated-sql/shipments.sql
+
+```sql
+DECLARE @zone uniqueIdentifier =
+    '303398eb-fe42-4103-b764-dba2b6e6d453';
+
+SELECT [s].[TransactionId], [s].[Weight]
+FROM [Shipments] AS [s]
+WHERE [s].[ZoneId] = @zone
+  AND [s].[ServiceLevel] = 0;
+```
+
+This query filters shipments by zone and service level and projects only
+the transaction identifier and weight required by this workload.
+
+These read queries use AsNoTracking projections. ToQueryString shows the
+generated SQL; actual execution plans and IO/TIME measurements are separate
+evidence stored under evidence/.
