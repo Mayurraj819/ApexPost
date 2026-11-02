@@ -1,0 +1,42 @@
+[
+  {
+    "file": "ApexPost.Tests/Domain/ValueObjectRuleTests.cs",
+    "sha256": "41b03730cd98cf5103c7ddd99db75c6a6f71f23a4699ddf828228fed0b0debd8",
+    "unchanged": true
+  },
+  {
+    "file": "ApexPost.Tests/Domain/EntityTests.cs",
+    "sha256": "990657d4f85158dc75e24b7fcc0c70c3d7836cebede21683c0902fed9addedcc",
+    "unchanged": true
+  },
+  {
+    "file": "ApexPost.Tests/Domain/TransactionTests.cs",
+    "sha256": "0e4d27893a35b41950932173b81d937d38741c02ec235a1927ed563907cc739c",
+    "unchanged": true
+  },
+  {
+    "file": "ApexPost.Tests/Domain/ValueObjectTests.cs",
+    "sha256": "06fcd04d00e751ad9725c5970bf3eac4848693f89c24045cd68ae8255c8be9a0",
+    "unchanged": true
+  },
+  {
+    "file": "ApexPost.Tests/Domain/BusinessRuleTests.cs",
+    "sha256": "8e15d194a065c6fd7814d540a5fcd76db5613fc1a44d4e4be1245b82515fb824",
+    "unchanged": true
+  },
+  {
+    "file": "ApexPost.Tests/Patch7/DomainRegressionTests.cs",
+    "sha256": "bb8e917c88a786079eb5fa89146b951c361b53267f17e734bf19735ed52f1d5f",
+    "unchanged": true
+  },
+  {
+    "file": "ApexPost.Tests/PatchFinal/FinalMoneyOrderSafetyTests.cs",
+    "sha256": "d04bd3c74998b92882eed8b8941cd62f0ed5fbc25d26740458284a3e0796f50f",
+    "unchanged": true
+  },
+  {
+    "file": "ApexPost.Tests/DomainApplicationTests.cs",
+    "sha256": "90d30e45405afd21c3494966b93f4630569cbe8b6956d69e24f5616f550887db",
+    "unchanged": true
+  }
+]

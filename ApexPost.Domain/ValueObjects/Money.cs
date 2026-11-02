@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
-namespace ApexPost.Domain.ValueObjects;
 
+namespace ApexPost.Domain.ValueObjects;
 public readonly record struct Money
 {
     [JsonConstructor]
@@ -8,19 +8,11 @@ public readonly record struct Money
     {
         if (amount < 0)
         {
-            throw new ArgumentOutOfRangeException(
-                nameof(amount),
-                "Money cannot be negative.");
+            throw new ArgumentOutOfRangeException(nameof(amount), "Money cannot be negative.");
         }
 
-        Currency = string.IsNullOrWhiteSpace(currency)
-            ? "PHP"
-            : currency.Trim().ToUpperInvariant();
-
-        Amount = decimal.Round(
-            amount,
-            2,
-            MidpointRounding.ToEven);
+        Currency = string.IsNullOrWhiteSpace(currency) ? "PHP" : currency.Trim().ToUpperInvariant();
+        Amount = decimal.Round(amount, 2, MidpointRounding.ToEven);
     }
 
     public decimal Amount { get; }

@@ -4,21 +4,19 @@ using ApexPost.Domain.Entities;
 using ApexPost.Domain.ValueObjects;
 
 namespace ApexPost.Application.Services;
-
 public sealed class InventoryService : IInventoryService
 {
     private readonly IBranchStockRepository _stock;
     private readonly IProductRepository _products;
-
-    public InventoryService(IBranchStockRepository stock, IProductRepository products)
+    private readonly IUnitOfWork _unitOfWork;
+    public InventoryService(IBranchStockRepository stock, IProductRepository products, IUnitOfWork unitOfWork)
     {
+        _unitOfWork = unitOfWork;
         _stock = stock;
         _products = products;
     }
 
-    public Task<BranchStock?> GetAsync(Guid branchId, Guid productId, CancellationToken cancellationToken = default) =>
-        _stock.GetByBranchAndProductAsync(branchId, productId, cancellationToken);
-
+    public Task<BranchStock?> GetAsync(Guid branchId, Guid productId, CancellationToken cancellationToken = default) => _stock.GetByBranchAndProductAsync(branchId, productId, cancellationToken);
     public async Task<IReadOnlyList<BranchStock>> ListByBranchAsync(Guid branchId, CancellationToken cancellationToken = default)
     {
         if (branchId == Guid.Empty)
@@ -38,7 +36,7 @@ public sealed class InventoryService : IInventoryService
             throw new ArgumentOutOfRangeException(nameof(delta), "Inventory adjustment cannot be zero.");
         }
 
-        if (await _products.GetByIdAsync(productId, cancellationToken) is null)
+        if (await _products.GetByIdAsync(productId, cancellationToken)is null)
         {
             throw new KeyNotFoundException($"Product '{productId}' was not found.");
         }
@@ -54,6 +52,7 @@ public sealed class InventoryService : IInventoryService
             stock = new BranchStock(Guid.NewGuid(), branchId, productId, new Quantity(0));
             stock.Increase(delta);
             await _stock.AddAsync(stock, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             return stock;
         }
 
@@ -67,6 +66,7 @@ public sealed class InventoryService : IInventoryService
         }
 
         await _stock.SaveAsync(stock, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return stock;
     }
 

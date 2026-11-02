@@ -3,23 +3,25 @@ using ApexPost.Application.Abstractions.Services;
 using ApexPost.Domain.Entities;
 
 namespace ApexPost.Application.Services;
-
 public sealed class StaffManagementService : IStaffManagementService
 {
     private readonly IStaffRepository _staff;
-
-    public StaffManagementService(IStaffRepository staff) => _staff = staff;
+    private readonly IUnitOfWork _unitOfWork;
+    public StaffManagementService(IStaffRepository staff, IUnitOfWork unitOfWork)
+    {
+        _staff = staff;
+        _unitOfWork = unitOfWork;
+    }
 
     public async Task<Staff> CreateAsync(Staff staff, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(staff);
         await _staff.AddAsync(staff, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return staff;
     }
 
-    public Task<Staff?> GetAsync(Guid id, CancellationToken cancellationToken = default) =>
-        _staff.GetByIdAsync(id, cancellationToken);
-
+    public Task<Staff?> GetAsync(Guid id, CancellationToken cancellationToken = default) => _staff.GetByIdAsync(id, cancellationToken);
     public async Task<IReadOnlyList<Staff>> ListByBranchAsync(Guid branchId, CancellationToken cancellationToken = default)
     {
         if (branchId == Guid.Empty)
@@ -31,13 +33,12 @@ public sealed class StaffManagementService : IStaffManagementService
     }
 
     public Task DeactivateAsync(Guid id, CancellationToken cancellationToken = default) => ChangeStateAsync(id, staff => staff.Deactivate(), cancellationToken);
-
     public Task ActivateAsync(Guid id, CancellationToken cancellationToken = default) => ChangeStateAsync(id, staff => staff.Activate(), cancellationToken);
-
     private async Task ChangeStateAsync(Guid id, Action<Staff> change, CancellationToken cancellationToken)
     {
         var staff = await _staff.GetByIdAsync(id, cancellationToken) ?? throw new KeyNotFoundException($"Staff member '{id}' was not found.");
         change(staff);
         await _staff.SaveAsync(staff, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
     }
 }

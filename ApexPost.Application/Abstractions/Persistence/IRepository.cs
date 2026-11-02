@@ -1,6 +1,7 @@
 namespace ApexPost.Application.Abstractions.Persistence;
-
-public interface IRepository<TEntity> where TEntity : class
+/// <summary>Aggregate access. Mutations stage changes; only IUnitOfWork commits.</summary>
+public interface IRepository<TEntity>
+    where TEntity : class
 {
     Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<TEntity>> ListAsync(CancellationToken cancellationToken = default);

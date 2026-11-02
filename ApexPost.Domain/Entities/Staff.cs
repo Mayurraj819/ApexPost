@@ -3,9 +3,15 @@ using ApexPost.Domain.Enums;
 using ApexPost.Domain.ValueObjects;
 
 namespace ApexPost.Domain.Entities;
-
 public sealed class Staff : Entity
 {
+    private Staff()
+    {
+        EmployeeNumber = null !;
+        FullName = null !;
+        Email = null !;
+    }
+
     public Staff(Guid id, Guid branchId, string employeeNumber, string fullName, EmailAddress email, StaffRole role = StaffRole.CounterClerk, IdentityDocument? identityDocument = null) : base(id)
     {
         if (branchId == Guid.Empty)
@@ -31,13 +37,8 @@ public sealed class Staff : Entity
     public bool IsActive { get; private set; }
 
     public void Deactivate() => IsActive = false;
-
     public void Activate() => IsActive = true;
-
     public bool CanProcessAt(Guid branchId) => IsActive && BranchId == branchId;
-
     public bool CanApproveCorrections(Guid branchId) => CanProcessAt(branchId) && Role == StaffRole.BranchManager;
-
-    private static string RequireText(string value, string parameterName) =>
-        string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Value is required.", parameterName) : value.Trim();
+    private static string RequireText(string value, string parameterName) => string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Value is required.", parameterName) : value.Trim();
 }

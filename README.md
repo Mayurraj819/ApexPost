@@ -1,109 +1,74 @@
-# ApexPost Counter Platform
+# ApexPost Counter Platform — Week 3
 
-ApexPost is a .NET 10 MVC counter platform for retail, service, shipping, and money-order workflows. The application uses a layered architecture with JSON-backed repositories, secure ASP.NET Core authentication, and audit-friendly middleware and filters.
+.NET 10 / C# 14 MVC application, SQL Server + EF Core 10, layered Domain/Application/Infrastructure/Web/Tests. JSON runtime persistence has been removed. No database migration runs automatically on application startup.
 
-## Prerequisites
+## Windows setup (solution root, PowerShell or CMD)
 
-- .NET 10 SDK
-- Visual Studio 2026 or newer, or a compatible .NET 10 CLI environment
-- Optional: `dotnet user-secrets` for local configuration values
+Install a .NET 10 SDK and a private SQL Server Developer/Express/LocalDB instance. The example creates **ApexPostDb**, never a shared training database.
 
-## Solution layout
-
-- `ApexPost.Domain` – domain entities, aggregates, value objects, and validation rules
-- `ApexPost.Application` – application services, repository contracts, and report definitions
-- `ApexPost.Infrastructure` – JSON persistence and infrastructure wiring
-- `ApexPost.Web` – MVC UI, authentication, middleware, and web pipeline
-- `ApexPost.Tests` – xUnit unit and WebApplicationFactory integration tests
-
-## Build and run
-
-```bash
+```powershell
+dotnet tool restore
 dotnet restore ApexPost.slnx
-dotnet build ApexPost.slnx -nologo -v minimal
+dotnet build ApexPost.slnx --no-restore -warnaserror
+dotnet user-secrets set "ConnectionStrings:ApexPost" "Server=(localdb)\MSSQLLocalDB;Database=ApexPostDb;Trusted_Connection=True;TrustServerCertificate=True" --project ApexPost.Web
+dotnet user-secrets set "ApexPost:Security:IntegrationApiKeys:0" "REPLACE-WITH-YOUR-LOCAL-KEY" --project ApexPost.Web
+dotnet ef migrations script --idempotent --project ApexPost.Infrastructure --startup-project ApexPost.Web --output sql/schema.sql
+```
+
+Review **InitialCreate**, **AddStoredProcedures**, **AddMeasuredWorkloadIndexes** and sql/schema.sql before applying:
+
+```powershell
+dotnet ef database update --project ApexPost.Infrastructure --startup-project ApexPost.Web
+dotnet run --project ApexPost.Web -- --seed
 dotnet run --project ApexPost.Web
-dotnet test ApexPost.slnx --logger "console;verbosity=minimal"
 ```
 
-## Demo accounts
+The seed command is explicit and transactional: 5 branches, 20 staff, 30 positively priced products, 10 zones, 30 rates, 200 historical paid transactions plus postal lines/shipments and payments. Existing configured fictional staff/branch IDs are preserved. Do not import the invalid Week 2 JSON data. Demo opening hours are interpreted in UTC, preserving existing domain semantics. A branch-local timezone policy requires a separate business decision.
 
-The app accepts either a direct password in configuration or an environment variable reference. The defaults in `ApexPost.Web/appsettings.Development.json` point to the following variable names:
+## Demo login
 
-- `APEXPOST_CLERK_PASSWORD`
-- `APEXPOST_MANAGER_PASSWORD`
-- `APEXPOST_AUDITOR_PASSWORD`
-- `APEXPOST_ADMIN_PASSWORD`
+Development account names are **clerk**, **manager**, **auditor**, **admin**. Supply passwords through environment variables before starting Visual Studio/the shell, or set their Password keys in user-secrets. No working password is committed.
 
-Example local setup using config values:
+| Account | Environment variable | Optional user-secret key |
+|---|---|---|
+| clerk | APEXPOST_CLERK_PASSWORD | ApexPost:DemoAccounts:Accounts:0:Password |
+| manager | APEXPOST_MANAGER_PASSWORD | ApexPost:DemoAccounts:Accounts:1:Password |
+| auditor | APEXPOST_AUDITOR_PASSWORD | ApexPost:DemoAccounts:Accounts:2:Password |
+| admin | APEXPOST_ADMIN_PASSWORD | ApexPost:DemoAccounts:Accounts:3:Password |
 
-```json
-"ApexPost": {
-  "DemoAccounts": {
-    "Accounts": [
-      {
-        "Username": "clerk",
-        "Password": "LocalClerk123!",
-        "PasswordEnvironmentVariable": "APEXPOST_CLERK_PASSWORD"
-      }
-    ]
-  }
-}
+Counter clerks can create/pay sales. Corrections require an active Branch Manager at the sale branch (the domain rule is retained). A claimed Administrator role does not bypass the domain's manager check. Stock/product changes require manager/admin policies. Price revisions require Administrator.
+
+## Tests
+
+```powershell
+dotnet test ApexPost.slnx
 ```
 
-Or use environment variables/user secrets instead of committing secrets to source control:
+SQL tests explicitly skip unless APEXPOST_TEST_SQLSERVER is set. Give it a connection to **master** on a disposable/local test server with create/drop-database permission. The fixture creates ApexPost_Test_<random>, migrates/seeds it, and drops only that database. It refuses a base connection naming ApexPostDb or another database. Never use a shared server.
 
-```bash
-dotnet user-secrets set "ApexPost:DemoAccounts:Accounts:0:PasswordEnvironmentVariable" "APEXPOST_CLERK_PASSWORD"
-dotnet user-secrets set "ApexPost:DemoAccounts:Accounts:1:PasswordEnvironmentVariable" "APEXPOST_MANAGER_PASSWORD"
+```powershell
+$env:APEXPOST_TEST_SQLSERVER = 'Server=(localdb)\MSSQLLocalDB;Database=master;Trusted_Connection=True;TrustServerCertificate=True'
+dotnet test ApexPost.slnx --filter "Category=SqlServer|Category=WebSql"
 ```
 
-Then export the actual values in your local shell or define them in the OS environment before launching the app.
+The environment assignment is PowerShell syntax; in CMD use `set APEXPOST_TEST_SQLSERVER=...`. The SQL tests include real mapping/state round trips, idempotent schema replay, atomic failure rollback, conflicting last-unit checkouts returning HTTP 409, procedures, masked identities, shipping, fixed report query counts, role checks and an audit failure during a successful checkout. Original business-rule tests are preserved.
 
-## Security configuration
+## Reproduce performance evidence
 
-- `ApexPost:Security:IntegrationApiKeys` contains valid API keys for `/integration/*` endpoints.
-- `ApexPost:Security:IntegrationAllowedIpAddresses` controls the IP allowlist for integration traffic.
-- `ApexPost:Security:LoginRateLimitPermitLimit` and `LoginRateLimitWindowSeconds` configure the login throttling window.
-- `ApexPost:Security:MaintenanceMode` enables safe maintenance mode with `503` responses for non-health endpoints.
+From the solution root with the same dedicated master test connection:
 
-Use environment variables or user secrets rather than committing secrets to source control.
-
-## Features implemented
-
-- JSON-based branch, product, inventory, and transaction persistence.
-- Domain rules for branch availability, staff authorization, stock limits, payments, and manager-only correction workflows.
-- Mixed retail/service transaction logic and tax-aware totals.
-- Shipping and parcel weighting rules with pricing and status handling.
-- Money-order validation with identity verification and masked document handling.
-- MVC login, dashboard, catalogue, transaction, shipping, money order, and report pages.
-- MVC filters for validation, performance, and audit recording.
-- Correlation IDs, request logging, structured exception handling, and secure headers.
-- xUnit and WebApplicationFactory coverage for web and domain behavior.
-
-## Example requests
-
-Health check:
-
-```bash
-curl -i https://localhost:5001/health
+```powershell
+dotnet run --project tools/ApexPost.Evidence
 ```
 
-Integration endpoint with API key:
+This tool creates and deletes **ApexPost_Perf_<random>**, generates fictional scale data, captures actual plans and IO/CPU, tests candidate indexes, saves three generated EF SQL samples, records storage/write costs and demonstrates blocking with two SQL sessions. It never targets ApexPostDb. See PERFORMANCE.md and evidence/. The SSMS companion scripts are in sql/evidence/; the recorded run uses ADO.NET sessions, not screenshots of SSMS.
 
-```bash
-curl -i -H "X-API-Key: phase6-test-key" https://localhost:5001/integration/ping
-```
+## Architecture and evidence
 
-Login page:
+- DESIGN.md: dependencies, ER diagram, normalization, SOLID and business decisions.
+- docs/adr/0007–0014: eight new decisions, including package security pin.
+- PERFORMANCE.md and evidence/: measured results, actual .sqlplan files and raw logs.
+- sql/: idempotent schema, three procedures, five reports, atomic sale demonstration and performance scripts.
+- IMPLEMENTATION_STATUS.md: tested coverage and remaining review items.
 
-```bash
-curl -i https://localhost:5001/account/login
-```
-
-## Working data files
-
-Seed and runtime data live under `ApexPost.Web/data` and include the JSON-backed branch, product, transaction, zone, and audit data used by the application.
-
-## Screenshots and sample artifacts
-
-This repository includes functional sample artifacts and output data in the application data directory rather than static mock-only screens. Add screenshots to the project documentation as needed for local demos.
+The runtime identity needs narrow table DML and stored procedure EXECUTE, not db_owner. Apply schema changes with a separate deployment identity. See sql/security/RuntimePermissions.sql. The Pkcs package reference pins an existing SqlClient dependency to a patched version; trainer review of this direct package exception is explicitly recorded in ADR 0014. No third-party mapper, mediator, fake-data generator or container package is introduced.

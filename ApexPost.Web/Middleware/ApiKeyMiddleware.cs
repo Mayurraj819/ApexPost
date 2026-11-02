@@ -5,13 +5,11 @@ using ApexPost.Web.Security;
 using Microsoft.Extensions.Options;
 
 namespace ApexPost.Web.Middleware;
-
 public sealed class ApiKeyMiddleware
 {
     private const string HeaderName = "X-API-Key";
     private readonly RequestDelegate _next;
     private readonly IOptionsMonitor<WebSecurityOptions> _options;
-
     public ApiKeyMiddleware(RequestDelegate next, IOptionsMonitor<WebSecurityOptions> options)
     {
         _next = next;
@@ -22,7 +20,7 @@ public sealed class ApiKeyMiddleware
     {
         var endpoint = context.GetEndpoint();
         var metadata = endpoint?.Metadata;
-        var requiresApiKey = context.Request.Path.StartsWithSegments("/integration") || metadata?.GetMetadata<RequireApiKeyAttribute>() is not null;
+        var requiresApiKey = context.Request.Path.StartsWithSegments("/integration") || metadata?.GetMetadata<RequireApiKeyAttribute>()is not null;
         if (!requiresApiKey)
         {
             await _next(context);

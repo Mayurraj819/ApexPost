@@ -1,7 +1,6 @@
 using ApexPost.Domain.Entities;
 
 namespace ApexPost.Application.Abstractions.Services;
-
 public interface IInventoryService
 {
     Task<BranchStock?> GetAsync(Guid branchId, Guid productId, CancellationToken cancellationToken = default);

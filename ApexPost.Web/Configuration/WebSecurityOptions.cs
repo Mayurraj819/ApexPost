@@ -1,5 +1,4 @@
 namespace ApexPost.Web.Configuration;
-
 public sealed class WebSecurityOptions
 {
     public bool MaintenanceMode { get; init; }

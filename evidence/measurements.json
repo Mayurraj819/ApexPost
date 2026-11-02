@@ -1,0 +1,192 @@
+[
+  {
+    "Name": "baseline-low-stock",
+    "LogicalReads": 106,
+    "CpuMs": 1,
+    "Rows": 0,
+    "PlanFiles": 2,
+    "Operators": [
+      "Compute Scalar",
+      "Nested Loops",
+      "Constant Scan",
+      "Index Seek",
+      "Clustered Index Seek"
+    ]
+  },
+  {
+    "Name": "baseline-daily-sales",
+    "LogicalReads": 443,
+    "CpuMs": 1,
+    "Rows": 74,
+    "PlanFiles": 2,
+    "Operators": [
+      "Compute Scalar",
+      "Nested Loops",
+      "Constant Scan",
+      "Top",
+      "Index Scan",
+      "Index Seek",
+      "Clustered Index Seek"
+    ]
+  },
+  {
+    "Name": "baseline-shipments",
+    "LogicalReads": 1366,
+    "CpuMs": 6,
+    "Rows": 3353,
+    "PlanFiles": 2,
+    "Operators": [
+      "Compute Scalar",
+      "Nested Loops",
+      "Constant Scan",
+      "Index Seek",
+      "Clustered Index Scan"
+    ]
+  },
+  {
+    "Name": "baseline-money-orders",
+    "LogicalReads": 24,
+    "CpuMs": 1,
+    "Rows": 10,
+    "PlanFiles": 2,
+    "Operators": [
+      "Compute Scalar",
+      "Nested Loops",
+      "Constant Scan",
+      "Top",
+      "Index Scan",
+      "Index Seek",
+      "Clustered Index Seek"
+    ]
+  },
+  {
+    "Name": "baseline-write",
+    "LogicalReads": 195,
+    "CpuMs": 0,
+    "Rows": 0,
+    "PlanFiles": 1,
+    "Operators": [
+      "Assert",
+      "Compute Scalar",
+      "Clustered Index Update",
+      "Nested Loops",
+      "Top",
+      "Index Scan",
+      "Index Seek",
+      "Clustered Index Seek"
+    ]
+  },
+  {
+    "Name": "indexed-low-stock",
+    "LogicalReads": 5,
+    "CpuMs": 0,
+    "Rows": 0,
+    "PlanFiles": 2,
+    "Operators": [
+      "Compute Scalar",
+      "Nested Loops",
+      "Constant Scan",
+      "Index Seek"
+    ]
+  },
+  {
+    "Name": "indexed-daily-sales",
+    "LogicalReads": 5,
+    "CpuMs": 0,
+    "Rows": 74,
+    "PlanFiles": 2,
+    "Operators": [
+      "Compute Scalar",
+      "Nested Loops",
+      "Constant Scan",
+      "Top",
+      "Index Scan",
+      "Index Seek"
+    ]
+  },
+  {
+    "Name": "indexed-shipments",
+    "LogicalReads": 36,
+    "CpuMs": 1,
+    "Rows": 3353,
+    "PlanFiles": 2,
+    "Operators": [
+      "Compute Scalar",
+      "Nested Loops",
+      "Constant Scan",
+      "Index Seek"
+    ]
+  },
+  {
+    "Name": "indexed-money-orders",
+    "LogicalReads": 4,
+    "CpuMs": 0,
+    "Rows": 10,
+    "PlanFiles": 2,
+    "Operators": [
+      "Compute Scalar",
+      "Nested Loops",
+      "Constant Scan",
+      "Top",
+      "Index Scan",
+      "Index Seek"
+    ]
+  },
+  {
+    "Name": "indexed-write",
+    "LogicalReads": 368,
+    "CpuMs": 0,
+    "Rows": 0,
+    "PlanFiles": 1,
+    "Operators": [
+      "Assert",
+      "Compute Scalar",
+      "Clustered Index Update",
+      "Table Spool",
+      "Nested Loops",
+      "Top",
+      "Index Scan",
+      "Index Seek"
+    ]
+  },
+  {
+    "Name": "non-sargable",
+    "LogicalReads": 638,
+    "CpuMs": 21,
+    "Rows": 100200,
+    "PlanFiles": 1,
+    "Operators": [
+      "Index Scan"
+    ]
+  },
+  {
+    "Name": "sargable",
+    "LogicalReads": 638,
+    "CpuMs": 18,
+    "Rows": 100200,
+    "PlanFiles": 1,
+    "Operators": [
+      "Index Scan"
+    ]
+  },
+  {
+    "Name": "stale-statistics",
+    "LogicalReads": 627,
+    "CpuMs": 8,
+    "Rows": 28239,
+    "PlanFiles": 1,
+    "Operators": [
+      "Clustered Index Scan"
+    ]
+  },
+  {
+    "Name": "fresh-statistics",
+    "LogicalReads": 627,
+    "CpuMs": 8,
+    "Rows": 28239,
+    "PlanFiles": 1,
+    "Operators": [
+      "Clustered Index Scan"
+    ]
+  }
+]

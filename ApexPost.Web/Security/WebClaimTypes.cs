@@ -1,5 +1,4 @@
 namespace ApexPost.Web.Security;
-
 public static class WebClaimTypes
 {
     public const string StaffId = "apexpost:staff_id";

@@ -1,5 +1,4 @@
 namespace ApexPost.Web.Security;
-
 public sealed class DemoAccountOptions
 {
     public List<DemoAccount> Accounts { get; init; } = [];

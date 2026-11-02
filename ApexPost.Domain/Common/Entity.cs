@@ -1,5 +1,4 @@
 namespace ApexPost.Domain.Common;
-
 public abstract class Entity
 {
     protected Entity(Guid id)
@@ -12,5 +11,9 @@ public abstract class Entity
         Id = id;
     }
 
-    public Guid Id { get; }
+    protected Entity()
+    {
+    }
+
+    public Guid Id { get; private set; }
 }

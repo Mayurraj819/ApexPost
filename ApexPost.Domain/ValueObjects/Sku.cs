@@ -1,5 +1,4 @@
 namespace ApexPost.Domain.ValueObjects;
-
 public sealed record Sku
 {
     public Sku(string value)

@@ -2,8 +2,8 @@
 @{ ViewData["Title"] = Model.Id == Guid.Empty ? "Add product" : "Edit product"; }
 <h1>@ViewData["Title"]</h1>
 <div class="card mt-3"><div class="card-body">
-<form asp-action="Save" method="post" class="row g-3">
-@Html.AntiForgeryToken()<input asp-for="Id" type="hidden" />
+<form asp-action="@(Model.Id == Guid.Empty ? "Create" : "Edit")" asp-route-id="@(Model.Id == Guid.Empty ? null : Model.Id)" method="post" class="row g-3">
+@Html.AntiForgeryToken()
 <div asp-validation-summary="All" class="text-danger"></div>
 <div class="col-md-4"><label asp-for="Sku" class="form-label"></label><input asp-for="Sku" class="form-control" /><span asp-validation-for="Sku" class="text-danger"></span></div>
 <div class="col-md-8"><label asp-for="Name" class="form-label"></label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div>

@@ -1,3 +1,5 @@
+> Superseded for Week 3 by ADR 0007 and ADR 0010. JSON adapters are no longer runtime persistence.
+
 # 0001: Use JSON files for persistence
 
 - Status: Accepted

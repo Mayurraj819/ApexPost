@@ -1,0 +1,72 @@
+[
+  {
+    "TableName": "BranchStock",
+    "IndexName": "IX_BranchStock_BranchId_ProductId",
+    "UsedKB": 2080
+  },
+  {
+    "TableName": "BranchStock",
+    "IndexName": "IX_BranchStock_ProductId",
+    "UsedKB": 2032
+  },
+  {
+    "TableName": "CounterTransactions",
+    "IndexName": "IX_CounterTransactions_BranchId",
+    "UsedKB": 5280
+  },
+  {
+    "TableName": "CounterTransactions",
+    "IndexName": "IX_CounterTransactions_CounterId_BranchId",
+    "UsedKB": 6912
+  },
+  {
+    "TableName": "CounterTransactions",
+    "IndexName": "IX_CounterTransactions_StaffId",
+    "UsedKB": 5272
+  },
+  {
+    "TableName": "MoneyOrders",
+    "IndexName": "IX_MoneyOrders_BranchId",
+    "UsedKB": 536
+  },
+  {
+    "TableName": "MoneyOrders",
+    "IndexName": "IX_MoneyOrders_IdentityVerificationId",
+    "UsedKB": 536
+  },
+  {
+    "TableName": "MoneyOrders",
+    "IndexName": "IX_MoneyOrders_StaffId",
+    "UsedKB": 536
+  },
+  {
+    "TableName": "Shipments",
+    "IndexName": "IX_Shipments_TransactionId",
+    "UsedKB": 2064
+  },
+  {
+    "TableName": "Shipments",
+    "IndexName": "IX_Shipments_ZoneId",
+    "UsedKB": 1976
+  },
+  {
+    "TableName": "BranchStock",
+    "IndexName": "PK_BranchStock",
+    "UsedKB": 5016
+  },
+  {
+    "TableName": "CounterTransactions",
+    "IndexName": "PK_CounterTransactions",
+    "UsedKB": 20392
+  },
+  {
+    "TableName": "MoneyOrders",
+    "IndexName": "PK_MoneyOrders",
+    "UsedKB": 1760
+  },
+  {
+    "TableName": "Shipments",
+    "IndexName": "PK_Shipments",
+    "UsedKB": 10912
+  }
+]

@@ -1,4 +1,4 @@
-@model IReadOnlyList<ApexPost.Domain.Entities.Counter>
+@model IReadOnlyList<ApexPost.Application.Contracts.CounterRow>
 @{ ViewData["Title"] = "New transaction"; }
 <h1>Start a transaction</h1>
 <p class="text-muted">Select a counter and start a new sale. Branch opening hours are enforced.</p>
@@ -12,3 +12,11 @@
 </form>
 @if(Model.Count==0){<div class="alert alert-warning mt-3">No counter is configured for your branch.</div>}
 </div></div>
+
+@{var products=ViewBag.Products as IReadOnlyList<ApexPost.Application.Contracts.ProductRow>??Array.Empty<ApexPost.Application.Contracts.ProductRow>();}
+@if(Model.Count>0&&products.Count>0){<div class="card mt-3"><div class="card-body"><h2>Quick retail checkout</h2><p>Create and pay a new one-line sale atomically.</p>
+<form asp-action="Checkout" method="post" class="row g-3">@Html.AntiForgeryToken()
+<div class="col-md-4"><label class="form-label">Counter</label><select name="CounterId" class="form-select">@foreach(var counter in Model){<option value="@counter.Id">@counter.Name</option>}</select></div>
+<div class="col-md-4"><label class="form-label">Product</label><select name="Lines[0].ProductId" class="form-select">@foreach(var product in products){<option value="@product.Id">@product.Name</option>}</select></div>
+<div class="col-md-4"><label class="form-label">Quantity</label><input name="Lines[0].Quantity" value="1" min="1" max="1000000" type="number" class="form-control" required/></div>
+<button class="btn btn-primary">Create and pay</button></form></div></div>}

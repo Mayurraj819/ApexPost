@@ -2,12 +2,10 @@ using Microsoft.Extensions.Options;
 using ApexPost.Web.Configuration;
 
 namespace ApexPost.Web.Middleware;
-
 public sealed class SecurityHeadersMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly IOptions<WebSecurityOptions> _options;
-
     public SecurityHeadersMiddleware(RequestDelegate next, IOptions<WebSecurityOptions> options)
     {
         _next = next;

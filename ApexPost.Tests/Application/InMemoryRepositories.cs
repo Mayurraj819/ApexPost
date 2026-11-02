@@ -3,14 +3,11 @@ using ApexPost.Application.Contracts;
 using ApexPost.Domain.Entities;
 
 namespace ApexPost.Tests.Application;
-
 internal abstract class InMemoryRepository<TEntity> : IRepository<TEntity> where TEntity : class
 {
     private readonly Dictionary<Guid, TEntity> _items = [];
     private readonly Func<TEntity, Guid> _idSelector;
-
     protected InMemoryRepository(Func<TEntity, Guid> idSelector) => _idSelector = idSelector;
-
     public Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -53,41 +50,57 @@ internal abstract class InMemoryRepository<TEntity> : IRepository<TEntity> where
 
 internal sealed class InMemoryBranchRepository : InMemoryRepository<Branch>, IBranchRepository
 {
-    public InMemoryBranchRepository() : base(item => item.Id) { }
+    public InMemoryBranchRepository() : base(item => item.Id)
+    {
+    }
 }
 
 internal sealed class InMemoryCounterRepository : InMemoryRepository<Counter>, ICounterRepository
 {
-    public InMemoryCounterRepository() : base(item => item.Id) { }
+    public InMemoryCounterRepository() : base(item => item.Id)
+    {
+    }
 }
 
 internal sealed class InMemoryStaffRepository : InMemoryRepository<Staff>, IStaffRepository
 {
-    public InMemoryStaffRepository() : base(item => item.Id) { }
+    public InMemoryStaffRepository() : base(item => item.Id)
+    {
+    }
 }
 
 internal sealed class InMemoryProductRepository : InMemoryRepository<Product>, IProductRepository
 {
-    public InMemoryProductRepository() : base(item => item.Id) { }
+    public InMemoryProductRepository() : base(item => item.Id)
+    {
+    }
+
+    public Task<bool> HasStockAdjustmentHistoryAsync(Guid productId, CancellationToken ct = default) => Task.FromResult(false);
+    public async Task<bool> SkuExistsAsync(ApexPost.Domain.ValueObjects.Sku sku, Guid? excludingId, CancellationToken ct = default) => (await ListAsync(ct)).Any(p => p.Id != excludingId && p.Sku == sku);
 }
 
 internal sealed class InMemoryTransactionRepository : InMemoryRepository<Transaction>, ITransactionRepository
 {
-    public InMemoryTransactionRepository() : base(item => item.Id) { }
+    public InMemoryTransactionRepository() : base(item => item.Id)
+    {
+    }
+
+    public async Task<bool> HasProductHistoryAsync(Guid productId, CancellationToken ct = default) => (await ListAsync(ct)).Any(t => t.Lines.Any(l => l.ProductId == productId));
 }
 
 internal sealed class InMemoryBranchStockRepository : InMemoryRepository<BranchStock>, IBranchStockRepository
 {
-    public InMemoryBranchStockRepository() : base(item => item.Id) { }
+    public InMemoryBranchStockRepository() : base(item => item.Id)
+    {
+    }
 
-    public async Task<BranchStock?> GetByBranchAndProductAsync(Guid branchId, Guid productId, CancellationToken cancellationToken = default) =>
-        (await ListAsync(cancellationToken)).SingleOrDefault(item => item.BranchId == branchId && item.ProductId == productId);
+    public async Task<IReadOnlyList<BranchStock>> ListByProductAsync(Guid productId, CancellationToken ct = default) => (await ListAsync(ct)).Where(s => s.ProductId == productId).ToArray();
+    public async Task<BranchStock?> GetByBranchAndProductAsync(Guid branchId, Guid productId, CancellationToken cancellationToken = default) => (await ListAsync(cancellationToken)).SingleOrDefault(item => item.BranchId == branchId && item.ProductId == productId);
 }
 
 internal sealed class InMemoryMoneyOrderRepository : IMoneyOrderRepository
 {
     private readonly Dictionary<Guid, MoneyOrderResult> _items = [];
-
     public Task AddAsync(MoneyOrderResult moneyOrder, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();

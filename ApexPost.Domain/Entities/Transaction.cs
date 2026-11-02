@@ -3,17 +3,18 @@ using ApexPost.Domain.Enums;
 using ApexPost.Domain.ValueObjects;
 
 namespace ApexPost.Domain.Entities;
-
 public sealed class Transaction : Entity
 {
-    private readonly List<TransactionLine> _lines = [];
+    private Transaction()
+    {
+    }
 
+    private readonly List<TransactionLine> _lines = [];
     public Transaction(Guid id, Guid branchId, Guid counterId, Guid staffId, DateTimeOffset occurredAt) : base(id)
     {
         ValidateId(branchId, nameof(branchId));
         ValidateId(counterId, nameof(counterId));
         ValidateId(staffId, nameof(staffId));
-
         BranchId = branchId;
         CounterId = counterId;
         StaffId = staffId;
@@ -28,16 +29,13 @@ public sealed class Transaction : Entity
     public TransactionStatus Status { get; private set; }
     public string? StatusReason { get; private set; }
     public IReadOnlyCollection<TransactionLine> Lines => _lines.AsReadOnly();
-    public Money Total => _lines.Count == 0
-        ? new Money(0, "PHP")
-        : new Money(_lines.Sum(line => line.Total.Amount), _lines[0].UnitPrice.Currency);
+    public Money Total => _lines.Count == 0 ? new Money(0, "PHP") : new Money(_lines.Sum(line => line.Total.Amount), _lines[0].UnitPrice.Currency);
 
     public static Transaction Start(Branch branch, Counter counter, Staff staff, DateTimeOffset occurredAt)
     {
         ArgumentNullException.ThrowIfNull(branch);
         ArgumentNullException.ThrowIfNull(counter);
         ArgumentNullException.ThrowIfNull(staff);
-
         if (counter.BranchId != branch.Id)
         {
             throw new InvalidOperationException("Counter does not belong to the selected branch.");
@@ -124,7 +122,6 @@ public sealed class Transaction : Entity
     }
 
     private void EnsureOpen() => EnsureStatus(TransactionStatus.Open);
-
     private void EnsureStatus(params TransactionStatus[] allowed)
     {
         if (!allowed.Contains(Status))
@@ -152,8 +149,12 @@ public sealed class Transaction : Entity
 
 public sealed record TransactionLine
 {
-    public TransactionLine(Guid productId, Quantity quantity, Money unitPrice)
-        : this(TransactionLineType.RetailProduct, productId, productId.ToString("N"), quantity, unitPrice, null)
+    private TransactionLine()
+    {
+        Code = null !;
+    }
+
+    public TransactionLine(Guid productId, Quantity quantity, Money unitPrice) : this(TransactionLineType.RetailProduct, productId, productId.ToString("N"), quantity, unitPrice, null)
     {
     }
 
@@ -177,7 +178,7 @@ public sealed record TransactionLine
         Type = type;
         ProductId = productId;
         Code = code.Trim();
-        Quantity = quantity;
+        _quantity = quantity.Value;
         UnitPrice = unitPrice;
         ShippingLevel = shippingLevel;
     }
@@ -185,13 +186,13 @@ public sealed record TransactionLine
     public TransactionLineType Type { get; }
     public Guid? ProductId { get; }
     public string Code { get; }
-    public Quantity Quantity { get; }
+
+    private readonly int _quantity;
+    public Quantity Quantity => new(_quantity);
     public Money UnitPrice { get; }
     public ShippingServiceLevel? ShippingLevel { get; }
     public Money Total => new(UnitPrice.Amount * Quantity.Value, UnitPrice.Currency);
-
-    public object Description { get; set; }
-    public object Id { get; set; }
+    public Guid Id { get; private set; } = Guid.NewGuid();
 
     public static TransactionLine ForProduct(Product product, Quantity quantity)
     {
@@ -199,6 +200,5 @@ public sealed record TransactionLine
         return new TransactionLine(TransactionLineType.RetailProduct, product.Id, product.Sku.Value, quantity, product.UnitPrice, null);
     }
 
-    public static TransactionLine ForService(string serviceCode, TransactionLineType serviceType, Money price, ShippingServiceLevel? shippingLevel = null) =>
-        new(serviceType is TransactionLineType.RetailProduct ? throw new ArgumentException("Service type cannot be retail product.", nameof(serviceType)) : serviceType, null, serviceCode, new Quantity(1), price, shippingLevel);
+    public static TransactionLine ForService(string serviceCode, TransactionLineType serviceType, Money price, ShippingServiceLevel? shippingLevel = null) => new(serviceType is TransactionLineType.RetailProduct ? throw new ArgumentException("Service type cannot be retail product.", nameof(serviceType)) : serviceType, null, serviceCode, new Quantity(1), price, shippingLevel);
 }
