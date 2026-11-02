@@ -1,0 +1,11 @@
+  ApexPost.Domain -> /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Domain/bin/Debug/net10.0/ApexPost.Domain.dll
+  ApexPost.Application -> /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Application/bin/Debug/net10.0/ApexPost.Application.dll
+  ApexPost.Infrastructure -> /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Infrastructure/bin/Debug/net10.0/ApexPost.Infrastructure.dll
+  ApexPost.Web -> /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Web/bin/Debug/net10.0/ApexPost.Web.dll
+  ApexPost.Tests -> /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Tests/bin/Debug/net10.0/ApexPost.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:09.43

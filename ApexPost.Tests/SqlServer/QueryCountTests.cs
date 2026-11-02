@@ -24,7 +24,7 @@ public sealed class QueryCountTests(SqlServerFixture fixture)
     public async Task Reports_execute_four_queries_for_one_or_all_branches()
     {
         var count = new Counter();
-        await using var db = new ApexPostDbContext(new DbContextOptionsBuilder<ApexPostDbContext>().UseSqlServer(fixture.Connection).AddInterceptors(count).Options);
+        await using var db = new ApexPostDbContext(new DbContextOptionsBuilder<ApexPostDbContext>().UseSqlServer(fixture.Connection, sql => sql.EnableRetryOnFailure()).AddInterceptors(count).Options);
         var branch = await db.Set<Branch>().Select(x => x.Id).FirstAsync();
         var queries = new PlatformQueries(db);
         count.Reads = 0;

@@ -24,7 +24,7 @@ public sealed class SqlWebTests(SqlServerFixture fixture)
             {
                 services.AddDbContext<ApexPostDbContext>(o =>
                 {
-                    o.UseSqlServer(connection);
+                    o.UseSqlServer(connection, sql => sql.EnableRetryOnFailure());
                     if (interceptor is not null)
                         o.AddInterceptors(interceptor);
                 });

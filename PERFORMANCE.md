@@ -1,6 +1,6 @@
 # ApexPost performance evidence
 
-Measured on a disposable SQL Server database. These are actual observations, not predicted improvements. All raw IO/TIME output, actual .sqlplan files, index-storage snapshots and three EF-generated SQL samples are committed under evidence/.
+Historical baseline, before the readable-code follow-up: measured on a disposable SQL Server database. These are actual observations, not predicted improvements. See the evidence-freshness note below before treating these as current-schema results. All raw IO/TIME output, actual .sqlplan files, index-storage snapshots and three EF-generated SQL samples are committed under evidence/.
 
 ## Environment
 
@@ -143,3 +143,24 @@ the transaction identifier and weight required by this workload.
 These read queries use AsNoTracking projections. ToQueryString shows the
 generated SQL; actual execution plans and IO/TIME measurements are separate
 evidence stored under evidence/.
+## Follow-up: single query versus split query
+
+The tracked Transaction aggregate has one collection, Lines. It has no sibling collection
+join that produces a cartesian product. Production retains a single query. The SQL Server
+`QueryShapeTests.Single_and_split_load_identical_aggregates_with_bounded_commands` test loads
+the same 20 transactions with AsSingleQuery and AsSplitQuery, compares complete line IDs/types/
+amounts, and measures reader-command counts using an EF interceptor. It outputs transaction,
+line and joined-row counts. Assertions expect one versus two commands; those are test
+expectations, not claimed measurements until the test has run. No timing superiority is claimed.
+
+Run the test with detailed console output and retain that output as evidence. Splitting
+avoids repeated header columns but adds a round trip and can observe changes between queries
+under default isolation. Reconsider if sibling collections or measured header size justify it.
+
+### Evidence freshness after readable codes
+
+The existing plans and numerical results above were captured on the pre-follow-up integer
+schema. Changing the included Status column to varchar widens the transaction index. Existing
+measurements remain historical, not fresh proof of the new schema. Re-run the evidence tool
+against a disposable database after applying the new migration; do not invent replacement
+numbers. The performance seed SQL has been updated to readable codes.

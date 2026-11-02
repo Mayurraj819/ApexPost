@@ -15,7 +15,7 @@ flowchart TD
 
 ## Relational model
 
-There are 18 principal tables: the 17 named in Parts A–H plus Regions for region revenue reporting. Owned Address, OpeningHours and optional staff IdentityDocument share their owner's table; Money amount/currency values are flattened without JSON serialization.
+There are 19 tables: the 17 named in Parts A–H, Regions for region revenue reporting, and OperationReceipts for uncertain-commit verification. Owned Address, OpeningHours and optional staff IdentityDocument share their owner's table; Money amount/currency values are flattened without JSON serialization.
 
 ```mermaid
 erDiagram
@@ -109,14 +109,14 @@ erDiagram
      uniqueidentifier CounterId FK
      uniqueidentifier StaffId FK
      datetime2 OccurredAt
-     int Status
+     varchar Status
      rowversion RowVersion
  }
  TransactionLines {
      uniqueidentifier Id PK
      uniqueidentifier TransactionId FK
      uniqueidentifier ProductId FK
-     int Type
+     varchar Type
      int Quantity
      decimal UnitPriceAmount
  }
@@ -133,6 +133,12 @@ erDiagram
      nvarchar BranchId
      int StatusCode
      datetime2 OccurredAtUtc
+ }
+ OperationReceipts {
+     uniqueidentifier Id PK
+     datetime2 CreatedAtUtc
+     nvarchar CreatedBy
+     datetime2 ModifiedAtUtc
  }
  Regions ||--o{ Branches : contains
  Branches ||--o{ Counters : has
@@ -197,7 +203,7 @@ IdentityVerification has a separate persistence record and explicit mapper. Its 
 
 Cookie authentication and branch/role claims remain; server-authorized route IDs and command lookups choose targets. Request DTOs cannot bind status/audit identity. Framework errors stay 500; domain errors 400, missing resources 404, unique/concurrency conflicts 409, with Problem Details. Local Bootstrap/scripts comply with restrictive CSP. EF command logging uses normal Microsoft.EntityFrameworkCore.Database.Command logging without sensitive data enabled. Configure its Development level in appsettings.Development.json.
 
-Transient retries are not enabled by default; the explicit transaction wrapper invokes the configured provider execution strategy. Enabling retry-on-failure later requires fresh attempt state and unknown-commit reconciliation, not blind replay of stock or external effects. Payment identity is unique per transaction to reject double payment.
+Transient SQL retries are enabled. Replayable SQL transactions use atomic OperationReceipts and commit verification; the wrapper rejects tracked SaveChanges and external effects are forbidden. The seeder stages once and verifies a stable branch identity. Business concurrency conflicts still return 409 without blind replay. Payment identity is unique per transaction. See ADR 0015.
 
 Offline/outbox topics are listed in the assignment taxonomy but have no Parts A–H acceptance criteria. No second/offline database or listener subsystem is added. Trainer clarification is needed before expanding that scope.
 
@@ -242,3 +248,22 @@ owner's table. They do not create separate parent-child table relationships.
 Database cascade configuration does not give users permission to delete
 historical transactions. Application rules and database permissions still
 control which deletions are allowed.
+
+## Post-assessment persistence refinements
+
+`CounterTransactions.Status` and `TransactionLines.Type` now use varchar(24) enum names,
+not ordinal values. Domain enums remain unchanged. `ParcelShipping` is included in the
+allowed line codes. See ADR 0015 for upgrade and rollback considerations.
+
+`OperationReceipts` is an additional infrastructure table, bringing the table count to 19.
+It has a client-generated GUID primary key and shadow CreatedAtUtc, CreatedBy and
+ModifiedAtUtc fields, with no foreign keys or cascade deletes. It is atomically inserted
+with replayable SQL writes to verify uncertain commits; runtime has SELECT/INSERT only.
+
+Products DELETE supports guarded catalogue removal; BranchStock DELETE supports removing
+empty stock rows. CatalogCommands blocks historical/referenced products and non-empty stock;
+NO ACTION foreign keys remain a final integrity boundary. These permissions do not authorize
+history, payment or audit deletion.
+
+The canonical ADR location is `docs/adr`. Its `week2-archive` subfolder preserves superseded
+JSON-era decisions for history; those files do not describe current SQL Server persistence.

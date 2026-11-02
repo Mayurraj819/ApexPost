@@ -237,6 +237,6 @@ public sealed class SqlPersistenceTests(SqlServerFixture fixture)
         for (var replay = 0; replay < 2; replay++)
             foreach (var batch in batches.Where(b => !string.IsNullOrWhiteSpace(b)))
                 await db.Database.ExecuteSqlRawAsync(batch);
-        Assert.Equal(3, (await db.Database.GetAppliedMigrationsAsync()).Count());
+        Assert.Equal(4, (await db.Database.GetAppliedMigrationsAsync()).Count());
     }
 }

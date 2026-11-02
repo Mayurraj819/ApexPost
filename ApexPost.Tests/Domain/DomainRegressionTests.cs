@@ -4,7 +4,7 @@ using ApexPost.Domain.ValueObjects;
 using ApexPost.Application.Services;
 using ApexPost.Application.Contracts;
 
-namespace ApexPost.Tests.Patch7;
+namespace ApexPost.Tests.Domain;
 
 public sealed class DomainRegressionTests
 {

@@ -17,7 +17,7 @@ public sealed class SqlServerFixture : IAsyncLifetime
 {
     public string Connection { get; private set; } = "";
 
-    public ApexPostDbContext Create() => new(new DbContextOptionsBuilder<ApexPostDbContext>().UseSqlServer(Connection).Options);
+    public ApexPostDbContext Create() => new(new DbContextOptionsBuilder<ApexPostDbContext>().UseSqlServer(Connection, sql => sql.EnableRetryOnFailure()).Options);
     public async Task InitializeAsync()
     {
         var value = Environment.GetEnvironmentVariable("APEXPOST_TEST_SQLSERVER");

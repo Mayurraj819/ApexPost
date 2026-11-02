@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# Retired Week 2 runtime artifacts and accidental backup project
+ApexPost.Web/data/
+ApexPost.Webbackup/

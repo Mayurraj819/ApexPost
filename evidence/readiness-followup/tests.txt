@@ -1,0 +1,719 @@
+Test run for /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Tests/bin/Debug/net10.0/ApexPost.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.4+50e68bbb8b (64-bit .NET 10.0.0)
+[xUnit.net 00:00:00.16]   Discovering: ApexPost.Tests
+[xUnit.net 00:00:00.26]   Discovered:  ApexPost.Tests
+[xUnit.net 00:00:00.33]   Starting:    ApexPost.Tests
+  Passed ApexPost.Tests.Domain.ValueObjectTests.Money_RejectsNegativeAmount [23 ms]
+  Passed ApexPost.Tests.Domain.FinalMoneyOrderSafetyTests.Stock_Cannot_Become_Negative [23 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Refund_Requires_Paid_Status [32 ms]
+  Passed ApexPost.Tests.Domain.ValueObjectTests.BranchCode_NormalizesValue [1 ms]
+  Passed ApexPost.Tests.Domain.FinalMoneyOrderSafetyTests.Identity_Masks_Full_Document_Number [2 ms]
+  Passed ApexPost.Tests.Domain.ValueObjectTests.Quantity_RejectsNegativeValue [1 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Stock_Prevents_Negative_Quantity [9 ms]
+  Passed ApexPost.Tests.Application.CommitBoundaryTests.Inventory_success_commits_once [43 ms]
+  Passed ApexPost.Tests.DomainApplicationTests.StockCannotBeReducedBelowZero [< 1 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Paid_Transaction_Rejects_New_Lines [3 ms]
+  Passed ApexPost.Tests.Application.CommitBoundaryTests.Inventory_validation_failure_never_commits [5 ms]
+  Passed ApexPost.Tests.DomainApplicationTests.ShippingPricingRejectsParcelAboveMaximumWeight [13 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Shipping_OneKilogram_Rate(level: Standard, expected: 70) [24 ms]
+  Passed ApexPost.Tests.DomainApplicationTests.ShippingPricingCalculatesWeightTieredRate [12 ms]
+  Passed ApexPost.Tests.Domain.EntityTests.Counter_RejectsNonPositiveNumber [1 ms]
+  Passed ApexPost.Tests.Domain.EntityTests.Branch_StoresValidatedIdentityAndDetails [2 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Shipping_OneKilogram_Rate(level: Express, expected: 120) [5 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Shipping_OneKilogram_Rate(level: Registered, expected: 95) [< 1 ms]
+  Passed ApexPost.Tests.Domain.BusinessRuleTests.InactiveStaff_CannotStartTransaction [1 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Retail_Line_Computes_Total [2 ms]
+  Passed ApexPost.Tests.DomainApplicationTests.IdentityVerificationRejectsDifferentFingerprint [11 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Shipping_Rejects_Overweight [3 ms]
+  Passed ApexPost.Tests.Domain.BusinessRuleTests.RefundRequiresManagerAndPaidTransaction [8 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Stock_Rejects_Nonpositive_Adjustments(n: 0) [2 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Stock_Rejects_Nonpositive_Adjustments(n: -1) [< 1 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Refund_Records_Reason [1 ms]
+  Passed ApexPost.Tests.Domain.BusinessRuleTests.VoidRequiresActiveBranchManagerAndReason [3 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Shipping_Rejects_Blank_Zone [3 ms]
+  Passed ApexPost.Tests.Domain.BusinessRuleTests.BranchStock_CannotBeDecreasedBelowZero [2 ms]
+  Passed ApexPost.Tests.Domain.BusinessRuleTests.TransactionCanContainRetailPostalAndFinancialLines [1 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Start_Rejects_Inactive_Staff [4 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Identity_Number_Is_Masked [1 ms]
+  Passed ApexPost.Tests.Domain.BusinessRuleTests.StaffCannotStartTransactionAtAnotherBranch [3 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Start_Rejects_Closed_Branch [1 ms]
+  Passed ApexPost.Tests.Domain.BusinessRuleTests.ClosedBranch_CannotStartTransaction [1 ms]
+  Passed ApexPost.Tests.Domain.BusinessRuleTests.IdentityDocument_DoesNotExposeFullNumber [< 1 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Start_Rejects_CrossBranch_Counter [1 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Void_Requires_Reason [1 ms]
+  Passed ApexPost.Tests.Domain.ValueObjectRuleTests.OpeningHours_ExcludesClosingTime [1 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Void_Requires_Manager [1 ms]
+  Passed ApexPost.Tests.Domain.ValueObjectRuleTests.Weight_CannotBeNegative [< 1 ms]
+  Passed ApexPost.Tests.Domain.DomainRegressionTests.Start_Rejects_Outside_Hours [< 1 ms]
+  Passed ApexPost.Tests.Web.WebSecurityTests.ApiKeyComparison_IsCorrectAndDoesNotExposeConfiguredValue [< 1 ms]
+  Passed ApexPost.Tests.Application.CommitBoundaryTests.Checkout_commits_stock_sale_payment_once_or_not_at_all(quantity: 0, succeeds: False) [109 ms]
+  Passed ApexPost.Tests.Application.CommitBoundaryTests.Checkout_commits_stock_sale_payment_once_or_not_at_all(quantity: 1, succeeds: True) [8 ms]
+  Passed ApexPost.Tests.Domain.TransactionTests.TransactionLine_RejectsZeroQuantity [3 ms]
+  Passed ApexPost.Tests.Domain.TransactionTests.Transaction_CalculatesTotalFromLines [< 1 ms]
+  Passed ApexPost.Tests.Web.WebSecurityTests.IpAllowlistMiddleware_RejectsUnlistedAddress [46 ms]
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Testing
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Web
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=GET Path=/account/login StatusCode=200 ElapsedMs=389.8264 CorrelationId=f311186c-2d52-44d9-a5de-e72e263d4fa1
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=POST Path=/account/login StatusCode=302 ElapsedMs=82.4911 CorrelationId=a9400eec-8012-467e-afdf-4ed1549f3d19
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=POST Path=/Transactions/Void StatusCode=403 ElapsedMs=31.5383 CorrelationId=db0fa037-8b91-49ea-baae-96818fdbb40a
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Testing
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Web
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=GET Path=/integration/ping StatusCode=403 ElapsedMs=15.1746 CorrelationId=d1068b71-7ca7-45c1-9eae-d12f6b27c2e2
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+  Passed ApexPost.Tests.Web.ProblemDetailsTests.Exceptions_map_to_sanitized_problem_details(status: 409) [202 ms]
+  Passed ApexPost.Tests.Web.ProblemDetailsTests.Exceptions_map_to_sanitized_problem_details(status: 500) [1 ms]
+  Passed ApexPost.Tests.Web.ProblemDetailsTests.Exceptions_map_to_sanitized_problem_details(status: 404) [< 1 ms]
+  Passed ApexPost.Tests.Web.ProblemDetailsTests.Exceptions_map_to_sanitized_problem_details(status: 400) [< 1 ms]
+  Passed ApexPost.Tests.Web.WebSecurityTests.CorrelationMiddleware_PropagatesValidCorrelationId [8 ms]
+  Passed ApexPost.Tests.Web.WebSecurityTests.SecurityHeadersMiddleware_AddsBrowserSecurityHeaders [5 ms]
+  Passed ApexPost.Tests.Web.WebSecurityTests.MaintenanceMiddleware_ExemptsHealthAndRejectsOtherRequests [10 ms]
+  Passed ApexPost.Tests.Web.WebApplicationFactoryTests.ClerkIsForbiddenFromVoiding [1 s]
+  Passed ApexPost.Tests.Web.WebApplicationFactoryTests.BlockedIpReturns403WhenApiKeyIsValid [171 ms]
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Testing
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Web
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=GET Path=/account/login StatusCode=200 ElapsedMs=63.7604 CorrelationId=97a38699-0a78-47ae-8c11-799edb4d3755
+warn: ApexPost.Web.Controllers.AccountController[0]
+      Failed login for invalid-user
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=POST Path=/account/login StatusCode=200 ElapsedMs=32.0639 CorrelationId=979f3256-3bae-49c4-89a1-99aab71473de
+warn: ApexPost.Web.Controllers.AccountController[0]
+      Failed login for invalid-user
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=POST Path=/account/login StatusCode=200 ElapsedMs=21.574 CorrelationId=5c93358a-2776-4955-b238-b9bb93feca85
+fail: ApexPost.Web.Filters.AuditActionFilter[0]
+      Audit persistence failed. Type=ObjectDisposedException Correlation=f311186c-2d52-44d9-a5de-e72e263d4fa1
+fail: ApexPost.Web.Filters.AuditActionFilter[0]
+      Audit persistence failed. Type=ObjectDisposedException Correlation=a9400eec-8012-467e-afdf-4ed1549f3d19
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=POST Path=/account/login StatusCode=429 ElapsedMs=2.8816 CorrelationId=1bdefe1f-496f-4782-a816-0b697ca922d2
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Testing
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Web
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=GET Path=/integration/ping StatusCode=401 ElapsedMs=9.8165 CorrelationId=d6b88620-9f71-479c-8f80-2eda4532dc5f
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Testing
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Web
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=GET Path=/health StatusCode=200 ElapsedMs=13.8331 CorrelationId=df5740ef-653f-4eb8-ab97-9aa5bd43668c
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Testing
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Web
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=GET Path=/ StatusCode=302 ElapsedMs=12.8893 CorrelationId=9743be56-6433-43ea-b4d9-7a8f54265edb
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+  Passed ApexPost.Tests.Web.WebApplicationFactoryTests.LoginRateLimitReturns429 [443 ms]
+  Passed ApexPost.Tests.Persistence.ReadinessContractTests.All_line_codes_roundtrip_as_varchar(type: PostalService) [1 s]
+  Passed ApexPost.Tests.Web.WebApplicationFactoryTests.MissingApiKeyReturns401 [90 ms]
+  Passed ApexPost.Tests.Persistence.ReadinessContractTests.All_line_codes_roundtrip_as_varchar(type: RetailProduct) [132 ms]
+  Passed ApexPost.Tests.Persistence.ReadinessContractTests.All_line_codes_roundtrip_as_varchar(type: FinancialService) [1 ms]
+  Passed ApexPost.Tests.Persistence.ReadinessContractTests.All_line_codes_roundtrip_as_varchar(type: ParcelShipping) [1 ms]
+  Passed ApexPost.Tests.Web.WebApplicationFactoryTests.SecurityHeadersAreReturned [81 ms]
+  Passed ApexPost.Tests.Web.WebApplicationFactoryTests.UnauthenticatedAccessRedirectsToLogin [91 ms]
+fail: Microsoft.EntityFrameworkCore.Update[10000]
+      An exception occurred in the database while saving changes for context type 'ApexPost.Infrastructure.Persistence.ApexPostDbContext'.
+      System.ObjectDisposedException: Cannot access a disposed object.
+      Object name: 'LoggerFactory'.
+         at Microsoft.Extensions.Logging.LoggerFactory.CreateLogger(String categoryName)
+         at Microsoft.EntityFrameworkCore.Diagnostics.Internal.ScopedLoggerFactory.CreateLogger(String categoryName)
+         at Microsoft.EntityFrameworkCore.Diagnostics.Internal.DiagnosticsLogger`1..ctor(ILoggerFactory loggerFactory, ILoggingOptions loggingOptions, DiagnosticSource diagnosticSource, LoggingDefinitions loggingDefinitions, IDbContextLogger contextLogger, IInterceptors interceptors)
+         at InvokeStub_DiagnosticsLogger`1..ctor(Object, Span`1)
+         at System.Reflection.MethodBaseInvoker.InvokeWithManyArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+         at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+         at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkRelationalServicesBuilder.<>c.<TryAddCoreServices>b__3_1(IServiceProvider p)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+         at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkRelationalServicesBuilder.<>c.<TryAddCoreServices>b__3_3(IServiceProvider p)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService(IInfrastructure`1 accessor, Type serviceType)
+         at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService[TService](IInfrastructure`1 accessor)
+         at Microsoft.EntityFrameworkCore.Infrastructure.AccessorExtensions.GetService[TService](IInfrastructure`1 accessor)
+         at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_Dependencies()
+         at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_CurrentTransaction()
+         at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.OnFirstExecution()
+         at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+         at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+      System.ObjectDisposedException: Cannot access a disposed object.
+      Object name: 'LoggerFactory'.
+         at Microsoft.Extensions.Logging.LoggerFactory.CreateLogger(String categoryName)
+         at Microsoft.EntityFrameworkCore.Diagnostics.Internal.ScopedLoggerFactory.CreateLogger(String categoryName)
+         at Microsoft.EntityFrameworkCore.Diagnostics.Internal.DiagnosticsLogger`1..ctor(ILoggerFactory loggerFactory, ILoggingOptions loggingOptions, DiagnosticSource diagnosticSource, LoggingDefinitions loggingDefinitions, IDbContextLogger contextLogger, IInterceptors interceptors)
+         at InvokeStub_DiagnosticsLogger`1..ctor(Object, Span`1)
+         at System.Reflection.MethodBaseInvoker.InvokeWithManyArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+         at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+         at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkRelationalServicesBuilder.<>c.<TryAddCoreServices>b__3_1(IServiceProvider p)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+         at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkRelationalServicesBuilder.<>c.<TryAddCoreServices>b__3_3(IServiceProvider p)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService(IInfrastructure`1 accessor, Type serviceType)
+         at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService[TService](IInfrastructure`1 accessor)
+         at Microsoft.EntityFrameworkCore.Infrastructure.AccessorExtensions.GetService[TService](IInfrastructure`1 accessor)
+         at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_Dependencies()
+         at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_CurrentTransaction()
+         at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.OnFirstExecution()
+         at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+         at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+fail: Microsoft.EntityFrameworkCore.Update[10000]
+      An exception occurred in the database while saving changes for context type 'ApexPost.Infrastructure.Persistence.ApexPostDbContext'.
+      System.ObjectDisposedException: Cannot access a disposed object.
+      Object name: 'LoggerFactory'.
+         at Microsoft.Extensions.Logging.LoggerFactory.CreateLogger(String categoryName)
+         at Microsoft.EntityFrameworkCore.Diagnostics.Internal.ScopedLoggerFactory.CreateLogger(String categoryName)
+         at Microsoft.EntityFrameworkCore.Diagnostics.Internal.DiagnosticsLogger`1..ctor(ILoggerFactory loggerFactory, ILoggingOptions loggingOptions, DiagnosticSource diagnosticSource, LoggingDefinitions loggingDefinitions, IDbContextLogger contextLogger, IInterceptors interceptors)
+         at InvokeStub_DiagnosticsLogger`1..ctor(Object, Span`1)
+         at System.Reflection.MethodBaseInvoker.InvokeWithManyArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+         at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+         at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkRelationalServicesBuilder.<>c.<TryAddCoreServices>b__3_1(IServiceProvider p)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+         at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkRelationalServicesBuilder.<>c.<TryAddCoreServices>b__3_3(IServiceProvider p)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService(IInfrastructure`1 accessor, Type serviceType)
+         at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService[TService](IInfrastructure`1 accessor)
+         at Microsoft.EntityFrameworkCore.Infrastructure.AccessorExtensions.GetService[TService](IInfrastructure`1 accessor)
+         at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_Dependencies()
+         at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_CurrentTransaction()
+         at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.OnFirstExecution()
+         at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+         at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+      System.ObjectDisposedException: Cannot access a disposed object.
+      Object name: 'LoggerFactory'.
+         at Microsoft.Extensions.Logging.LoggerFactory.CreateLogger(String categoryName)
+         at Microsoft.EntityFrameworkCore.Diagnostics.Internal.ScopedLoggerFactory.CreateLogger(String categoryName)
+         at Microsoft.EntityFrameworkCore.Diagnostics.Internal.DiagnosticsLogger`1..ctor(ILoggerFactory loggerFactory, ILoggingOptions loggingOptions, DiagnosticSource diagnosticSource, LoggingDefinitions loggingDefinitions, IDbContextLogger contextLogger, IInterceptors interceptors)
+         at InvokeStub_DiagnosticsLogger`1..ctor(Object, Span`1)
+         at System.Reflection.MethodBaseInvoker.InvokeWithManyArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+         at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+         at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkRelationalServicesBuilder.<>c.<TryAddCoreServices>b__3_1(IServiceProvider p)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+         at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkRelationalServicesBuilder.<>c.<TryAddCoreServices>b__3_3(IServiceProvider p)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService(IInfrastructure`1 accessor, Type serviceType)
+         at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService[TService](IInfrastructure`1 accessor)
+         at Microsoft.EntityFrameworkCore.Infrastructure.AccessorExtensions.GetService[TService](IInfrastructure`1 accessor)
+         at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_Dependencies()
+         at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_CurrentTransaction()
+         at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.OnFirstExecution()
+         at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+         at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+fail: Microsoft.EntityFrameworkCore.Update[10000]
+      An exception occurred in the database while saving changes for context type 'ApexPost.Infrastructure.Persistence.ApexPostDbContext'.
+      System.ObjectDisposedException: Cannot access a disposed object.
+      Object name: 'LoggerFactory'.
+         at Microsoft.Extensions.Logging.LoggerFactory.CreateLogger(String categoryName)
+         at Microsoft.EntityFrameworkCore.Diagnostics.Internal.ScopedLoggerFactory.CreateLogger(String categoryName)
+         at Microsoft.EntityFrameworkCore.Diagnostics.Internal.DiagnosticsLogger`1..ctor(ILoggerFactory loggerFactory, ILoggingOptions loggingOptions, DiagnosticSource diagnosticSource, LoggingDefinitions loggingDefinitions, IDbContextLogger contextLogger, IInterceptors interceptors)
+         at InvokeStub_DiagnosticsLogger`1..ctor(Object, Span`1)
+         at System.Reflection.MethodBaseInvoker.InvokeWithManyArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+         at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+         at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkRelationalServicesBuilder.<>c.<TryAddCoreServices>b__3_1(IServiceProvider p)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+         at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkRelationalServicesBuilder.<>c.<TryAddCoreServices>b__3_3(IServiceProvider p)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService(IInfrastructure`1 accessor, Type serviceType)
+         at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService[TService](IInfrastructure`1 accessor)
+         at Microsoft.EntityFrameworkCore.Infrastructure.AccessorExtensions.GetService[TService](IInfrastructure`1 accessor)
+         at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_Dependencies()
+         at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_CurrentTransaction()
+         at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.OnFirstExecution()
+         at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+         at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+      System.ObjectDisposedException: Cannot access a disposed object.
+      Object name: 'LoggerFactory'.
+         at Microsoft.Extensions.Logging.LoggerFactory.CreateLogger(String categoryName)
+         at Microsoft.EntityFrameworkCore.Diagnostics.Internal.ScopedLoggerFactory.CreateLogger(String categoryName)
+         at Microsoft.EntityFrameworkCore.Diagnostics.Internal.DiagnosticsLogger`1..ctor(ILoggerFactory loggerFactory, ILoggingOptions loggingOptions, DiagnosticSource diagnosticSource, LoggingDefinitions loggingDefinitions, IDbContextLogger contextLogger, IInterceptors interceptors)
+         at InvokeStub_DiagnosticsLogger`1..ctor(Object, Span`1)
+         at System.Reflection.MethodBaseInvoker.InvokeWithManyArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+         at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+         at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkRelationalServicesBuilder.<>c.<TryAddCoreServices>b__3_1(IServiceProvider p)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+         at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+         at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkRelationalServicesBuilder.<>c.<TryAddCoreServices>b__3_3(IServiceProvider p)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+         at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+         at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+         at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService(IInfrastructure`1 accessor, Type serviceType)
+         at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService[TService](IInfrastructure`1 accessor)
+         at Microsoft.EntityFrameworkCore.Infrastructure.AccessorExtensions.GetService[TService](IInfrastructure`1 accessor)
+         at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_Dependencies()
+         at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_CurrentTransaction()
+         at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.OnFirstExecution()
+         at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+         at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+fail: ApexPost.Web.Filters.AuditActionFilter[0]
+      Audit persistence failed. Type=ObjectDisposedException Correlation=979f3256-3bae-49c4-89a1-99aab71473de
+fail: ApexPost.Web.Filters.AuditActionFilter[0]
+      Audit persistence failed. Type=ObjectDisposedException Correlation=97a38699-0a78-47ae-8c11-799edb4d3755
+fail: ApexPost.Web.Filters.AuditActionFilter[0]
+      Audit persistence failed. Type=ObjectDisposedException Correlation=5c93358a-2776-4955-b238-b9bb93feca85
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Testing
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Web
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=GET Path=/health StatusCode=200 ElapsedMs=6.0753 CorrelationId=a0b5b9ec-1f68-4c3a-8f7d-dc1b0c8f0f10
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Testing
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /workspace/scratch/6d756eb258c9/ApexPost-review/ApexPost.Web
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=GET Path=/account/login StatusCode=200 ElapsedMs=51.0813 CorrelationId=64532c03-9b4b-4c15-8f39-671e1f5bbd4a
+info: ApexPost.Web.Middleware.RequestLoggingMiddleware[0]
+      HTTP request completed. Method=POST Path=/account/login StatusCode=302 ElapsedMs=45.783 CorrelationId=5acf80f1-51f5-41e8-bb02-b2ca7019a457
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+fail: ApexPost.Web.Filters.AuditActionFilter[0]
+      Audit persistence failed. Type=ObjectDisposedException Correlation=64532c03-9b4b-4c15-8f39-671e1f5bbd4a
+fail: ApexPost.Web.Filters.AuditActionFilter[0]
+      Audit persistence failed. Type=ObjectDisposedException Correlation=5acf80f1-51f5-41e8-bb02-b2ca7019a457
+  Passed ApexPost.Tests.Web.WebApplicationFactoryTests.CorrelationIdIsReturned [69 ms]
+  Passed ApexPost.Tests.Persistence.ReadinessContractTests.Migration_snapshot_matches_the_runtime_model [383 ms]
+  Passed ApexPost.Tests.Persistence.ReadinessContractTests.Status_codes_roundtrip_as_varchar(status: Voided) [9 ms]
+  Passed ApexPost.Tests.Web.WebApplicationFactoryTests.DirectPasswordInConfigurationCanAuthenticate [196 ms]
+  Passed ApexPost.Tests.Persistence.ReadinessContractTests.Status_codes_roundtrip_as_varchar(status: Open) [1 ms]
+  Passed ApexPost.Tests.Persistence.ReadinessContractTests.Status_codes_roundtrip_as_varchar(status: Refunded) [< 1 ms]
+  Passed ApexPost.Tests.Persistence.ReadinessContractTests.Status_codes_roundtrip_as_varchar(status: Paid) [< 1 ms]
+  Passed ApexPost.Tests.Persistence.ReadinessContractTests.Production_registration_enables_transient_retries [86 ms]
+  Passed ApexPost.Tests.Persistence.ReadinessContractTests.Retry_wrapper_rejects_pending_tracked_writes_before_connecting [120 ms]
+  Passed ApexPost.Tests.Persistence.ModelContractTests.Important_queries_translate_without_connecting_to_a_database [2 s]
+[xUnit.net 00:00:03.15]     ApexPost.Tests.SqlServer.SqlWebTests.Sale_persists_and_reports_match_sql_totals [SKIP]
+[xUnit.net 00:00:03.15]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.15]     ApexPost.Tests.SqlServer.SqlWebTests.Manager_can_void_a_draft_and_reports_have_expected_totals [SKIP]
+[xUnit.net 00:00:03.15]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlWebTests.Two_checkout_requests_for_last_unit_return_one_success_and_one_409 [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlWebTests.Product_and_stock_forms_preserve_validation_and_history [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlWebTests.Clerk_cannot_void_and_not_found_returns_problem_details [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlPersistenceTests.All_read_screens_translate_and_execute [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Failed_sale_rolls_back_stock_header_and_payment [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+  Passed ApexPost.Tests.Persistence.ModelContractTests.Model_has_required_tables_rowversions_and_private_line_collection [9 ms]
+  Passed ApexPost.Tests.Persistence.ModelContractTests.Masked_identity_mapping_never_reconstructs_a_full_number [4 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlWebTests.Sale_persists_and_reports_match_sql_totals [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlWebTests.Manager_can_void_a_draft_and_reports_have_expected_totals [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlWebTests.Two_checkout_requests_for_last_unit_return_one_success_and_one_409 [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlWebTests.Product_and_stock_forms_preserve_validation_and_history [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlWebTests.Clerk_cannot_void_and_not_found_returns_problem_details [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.All_read_screens_translate_and_execute [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Failed_sale_rolls_back_stock_header_and_payment [1 ms]
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Generated_schema_script_can_be_replayed_idempotently [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Unique_constraint_is_translated_to_conflict [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlPersistenceTests.New_checkout_inserts_header_lines_payment_and_stock_in_one_commit [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Shipping_line_and_shipment_are_committed_together_and_can_be_paid [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Three_procedures_execute_and_adjustment_writes_history [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Last_unit_cannot_be_sold_by_two_contexts [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Closed_branch_inactive_staff_and_masked_document_roundtrip [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Set_based_price_revision_updates_audit_without_materializing_products [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Money_order_stores_only_masked_identity_and_preserves_verification_policy [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Generated_schema_script_can_be_replayed_idempotently [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Unique_constraint_is_translated_to_conflict [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.New_checkout_inserts_header_lines_payment_and_stock_in_one_commit [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Shipping_line_and_shipment_are_committed_together_and_can_be_paid [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Three_procedures_execute_and_adjustment_writes_history [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Last_unit_cannot_be_sold_by_two_contexts [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Closed_branch_inactive_staff_and_masked_document_roundtrip [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Set_based_price_revision_updates_audit_without_materializing_products [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Money_order_stores_only_masked_identity_and_preserves_verification_policy [1 ms]
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Repository_stages_until_uow_and_private_state_roundtrips [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.RetrySafetyTests.Precommit_failure_rolls_back_before_replaying_price_revision [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.RetrySafetyTests.Lost_commit_acknowledgement_does_not_adjust_stock_twice [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.QueryShapeTests.Single_and_split_load_identical_aggregates_with_bounded_commands [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.QueryCountTests.Reports_execute_four_queries_for_one_or_all_branches [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.16]     ApexPost.Tests.SqlServer.MigrationUpgradeTests.Existing_ordinal_rows_keep_their_meaning_after_upgrade_and_downgrade [SKIP]
+[xUnit.net 00:00:03.16]       Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).
+[xUnit.net 00:00:03.17]   Finished:    ApexPost.Tests
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Repository_stages_until_uow_and_private_state_roundtrips [1 ms]
+  Skipped ApexPost.Tests.SqlServer.RetrySafetyTests.Precommit_failure_rolls_back_before_replaying_price_revision [1 ms]
+  Skipped ApexPost.Tests.SqlServer.RetrySafetyTests.Lost_commit_acknowledgement_does_not_adjust_stock_twice [1 ms]
+  Skipped ApexPost.Tests.SqlServer.QueryShapeTests.Single_and_split_load_identical_aggregates_with_bounded_commands [1 ms]
+  Skipped ApexPost.Tests.SqlServer.QueryCountTests.Reports_execute_four_queries_for_one_or_all_branches [1 ms]
+  Skipped ApexPost.Tests.SqlServer.MigrationUpgradeTests.Existing_ordinal_rows_keep_their_meaning_after_upgrade_and_downgrade [1 ms]
+
+Test Run Successful.
+Total tests: 99
+     Passed: 77
+    Skipped: 22
+ Total time: 4.0182 Seconds
