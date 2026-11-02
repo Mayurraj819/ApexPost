@@ -19,12 +19,21 @@ Data is synthetic and skewed; see sql/performance/SeedScale.sql. Runtime and ben
 
 ## Four selected workloads
 
-| Workload | Rows | Reads before → after | CPU ms before → after | Main plan change |
-|---|---:|---:|---:|---|
-| Branch stock at/below 3 | 0 | 106 → 5 | 1 → 0 | 	Existing branch/product index seek with clustered-key lookups → covering seek on IX_Stock_Branch_Quantity; clustered-key lookups removed. |
-| Branch/date sale-header search | 74 | 443 → 5 | 1 → 0 | 	Branch-only index seek with clustered-key lookups → covering branch/date seek on IX_Transactions_Branch_Date. |
-| Zone/service shipment search | 3353 | 1366 → 36 | 6 → 1 | Clustered index scan → covering index seek on IX_Shipment_Zone_Level. |
-| Branch/date auditor search | 10 | 24 → 4 | 1 → 0 | Branch-only index seek with clustered-key lookups → covering branch/date seek on IX_MoneyOrder_Branch_Date. |
+| Workload | Reads before | Reads after | CPU before → after (ms) | Rows |
+|---|---:|---:|---:|---:|
+| Low stock | 105 | 5 | 0 → 0 | 3 |
+| Daily sales | 443 | 6 | 0 → 0 | 74 |
+| Shipments | 1,336 | 34 | 16 → 0 | 3,353 |
+| Money orders | 24 | 4 | 0 → 0 | 10 |
+
+The stock-update workload increased from 195 to 358 logical reads after indexing.
+CPU was below measurement granularity in both runs. This demonstrates the
+additional write cost of maintaining the indexes.
+
+The non-SARGable predicate and date-range rewrite both required 680 logical
+reads and returned 100,200 rows using Index Scan. CPU was 94 ms versus 15 ms
+in this run, but a single sample does not establish a repeatable timing
+improvement. The rewrite produced no logical-read reduction.
 
 These descriptions refer to the main SELECT statement in each captured
 actual plan. Branch/zone parameter-selection statements are separate and

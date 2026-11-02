@@ -1,4 +1,4 @@
-DECLARE @zone uniqueIdentifier = '303398eb-fe42-4103-b764-dba2b6e6d453';
+DECLARE @zone uniqueIdentifier = '0e44ea65-fffe-4ebf-97f1-ee6b833f0995';
 
 SELECT [s].[TransactionId], [s].[Weight]
 FROM [Shipments] AS [s]

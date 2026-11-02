@@ -1,9 +1,9 @@
 [
   {
     "Name": "baseline-low-stock",
-    "LogicalReads": 106,
-    "CpuMs": 1,
-    "Rows": 0,
+    "LogicalReads": 105,
+    "CpuMs": 0,
+    "Rows": 3,
     "PlanFiles": 2,
     "Operators": [
       "Compute Scalar",
@@ -16,7 +16,7 @@
   {
     "Name": "baseline-daily-sales",
     "LogicalReads": 443,
-    "CpuMs": 1,
+    "CpuMs": 0,
     "Rows": 74,
     "PlanFiles": 2,
     "Operators": [
@@ -31,8 +31,8 @@
   },
   {
     "Name": "baseline-shipments",
-    "LogicalReads": 1366,
-    "CpuMs": 6,
+    "LogicalReads": 1336,
+    "CpuMs": 16,
     "Rows": 3353,
     "PlanFiles": 2,
     "Operators": [
@@ -46,7 +46,7 @@
   {
     "Name": "baseline-money-orders",
     "LogicalReads": 24,
-    "CpuMs": 1,
+    "CpuMs": 0,
     "Rows": 10,
     "PlanFiles": 2,
     "Operators": [
@@ -80,7 +80,7 @@
     "Name": "indexed-low-stock",
     "LogicalReads": 5,
     "CpuMs": 0,
-    "Rows": 0,
+    "Rows": 3,
     "PlanFiles": 2,
     "Operators": [
       "Compute Scalar",
@@ -91,7 +91,7 @@
   },
   {
     "Name": "indexed-daily-sales",
-    "LogicalReads": 5,
+    "LogicalReads": 6,
     "CpuMs": 0,
     "Rows": 74,
     "PlanFiles": 2,
@@ -106,8 +106,8 @@
   },
   {
     "Name": "indexed-shipments",
-    "LogicalReads": 36,
-    "CpuMs": 1,
+    "LogicalReads": 34,
+    "CpuMs": 0,
     "Rows": 3353,
     "PlanFiles": 2,
     "Operators": [
@@ -134,7 +134,7 @@
   },
   {
     "Name": "indexed-write",
-    "LogicalReads": 368,
+    "LogicalReads": 358,
     "CpuMs": 0,
     "Rows": 0,
     "PlanFiles": 1,
@@ -151,8 +151,8 @@
   },
   {
     "Name": "non-sargable",
-    "LogicalReads": 638,
-    "CpuMs": 21,
+    "LogicalReads": 680,
+    "CpuMs": 94,
     "Rows": 100200,
     "PlanFiles": 1,
     "Operators": [
@@ -161,8 +161,8 @@
   },
   {
     "Name": "sargable",
-    "LogicalReads": 638,
-    "CpuMs": 18,
+    "LogicalReads": 680,
+    "CpuMs": 15,
     "Rows": 100200,
     "PlanFiles": 1,
     "Operators": [
@@ -171,9 +171,9 @@
   },
   {
     "Name": "stale-statistics",
-    "LogicalReads": 627,
-    "CpuMs": 8,
-    "Rows": 28239,
+    "LogicalReads": 623,
+    "CpuMs": 16,
+    "Rows": 28155,
     "PlanFiles": 1,
     "Operators": [
       "Clustered Index Scan"
@@ -181,9 +181,9 @@
   },
   {
     "Name": "fresh-statistics",
-    "LogicalReads": 627,
-    "CpuMs": 8,
-    "Rows": 28239,
+    "LogicalReads": 623,
+    "CpuMs": 16,
+    "Rows": 28155,
     "PlanFiles": 1,
     "Operators": [
       "Clustered Index Scan"

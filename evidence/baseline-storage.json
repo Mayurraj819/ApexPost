@@ -7,7 +7,7 @@
   {
     "TableName": "BranchStock",
     "IndexName": "IX_BranchStock_ProductId",
-    "UsedKB": 2032
+    "UsedKB": 2008
   },
   {
     "TableName": "CounterTransactions",
@@ -17,12 +17,12 @@
   {
     "TableName": "CounterTransactions",
     "IndexName": "IX_CounterTransactions_CounterId_BranchId",
-    "UsedKB": 6912
+    "UsedKB": 6896
   },
   {
     "TableName": "CounterTransactions",
     "IndexName": "IX_CounterTransactions_StaffId",
-    "UsedKB": 5272
+    "UsedKB": 5280
   },
   {
     "TableName": "MoneyOrders",
@@ -42,22 +42,22 @@
   {
     "TableName": "Shipments",
     "IndexName": "IX_Shipments_TransactionId",
-    "UsedKB": 2064
+    "UsedKB": 2088
   },
   {
     "TableName": "Shipments",
     "IndexName": "IX_Shipments_ZoneId",
-    "UsedKB": 1976
+    "UsedKB": 2024
   },
   {
     "TableName": "BranchStock",
     "IndexName": "PK_BranchStock",
-    "UsedKB": 5016
+    "UsedKB": 4984
   },
   {
     "TableName": "CounterTransactions",
     "IndexName": "PK_CounterTransactions",
-    "UsedKB": 20392
+    "UsedKB": 21768
   },
   {
     "TableName": "MoneyOrders",
@@ -67,6 +67,6 @@
   {
     "TableName": "Shipments",
     "IndexName": "PK_Shipments",
-    "UsedKB": 10912
+    "UsedKB": 10672
   }
 ]
