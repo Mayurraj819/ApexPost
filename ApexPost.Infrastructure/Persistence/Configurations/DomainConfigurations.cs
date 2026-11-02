@@ -107,7 +107,7 @@ public sealed class TransactionConfiguration : IEntityTypeConfiguration<Transact
         b.Property(x => x.CounterId);
         b.Property(x => x.StaffId);
         b.Property(x => x.OccurredAt);
-        b.Property(x => x.Status);
+        b.Property(x => x.Status).HasConversion<string>().HasMaxLength(24).IsUnicode(false);
         b.Property(x => x.StatusReason).HasMaxLength(500);
         b.Ignore(x => x.Total);
         b.Property<byte[]>("RowVersion").IsRowVersion().IsRequired();
@@ -116,7 +116,7 @@ public sealed class TransactionConfiguration : IEntityTypeConfiguration<Transact
         b.HasOne<Staff>().WithMany().HasForeignKey(x => x.StaffId).OnDelete(DeleteBehavior.NoAction);
         b.HasMany(x => x.Lines).WithOne().HasForeignKey("TransactionId").OnDelete(DeleteBehavior.Cascade);
         b.Navigation(x => x.Lines).HasField("_lines").UsePropertyAccessMode(PropertyAccessMode.Field);
-        MappingHelpers.Check(b, "CK_Transaction_Status", "[Status] IN (0,1,2,3)");
+        MappingHelpers.Check(b, "CK_Transaction_Status", "[Status] IN ('Open','Paid','Voided','Refunded')");
     }
 }
 
@@ -125,7 +125,7 @@ public sealed class TransactionLineConfiguration : IEntityTypeConfiguration<Tran
     public void Configure(EntityTypeBuilder<TransactionLine> b)
     {
         MappingHelpers.Key(b, "TransactionLines");
-        b.Property(x => x.Type);
+        b.Property(x => x.Type).HasConversion<string>().HasMaxLength(24).IsUnicode(false);
         b.Property(x => x.ProductId);
         b.Property(x => x.Code).HasMaxLength(40).IsUnicode(false);
         b.Ignore(x => x.Quantity);
@@ -135,8 +135,8 @@ public sealed class TransactionLineConfiguration : IEntityTypeConfiguration<Tran
         b.ComplexProperty(x => x.UnitPrice, m => MappingHelpers.Money(m, "UnitPrice"));
         b.HasOne<Product>().WithMany().HasForeignKey(x => x.ProductId).OnDelete(DeleteBehavior.NoAction);
         MappingHelpers.Check(b, "CK_Line_Quantity", "[Quantity] > 0");
-        MappingHelpers.Check(b, "CK_Line_Type", "[Type] IN (0,1,2)");
-        MappingHelpers.Check(b, "CK_Line_Product", "[Type] <> 0 OR [ProductId] IS NOT NULL");
+        MappingHelpers.Check(b, "CK_Line_Type", "[Type] IN ('RetailProduct','PostalService','FinancialService','ParcelShipping')");
+        MappingHelpers.Check(b, "CK_Line_Product", "[Type] <> 'RetailProduct' OR [ProductId] IS NOT NULL");
         MappingHelpers.Check(b, "CK_Line_Price", "[UnitPriceAmount] >= 0");
     }
 }

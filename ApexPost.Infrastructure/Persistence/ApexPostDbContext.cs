@@ -27,8 +27,15 @@ public sealed class ApexPostDbContext(DbContextOptions<ApexPostDbContext> option
         }
     }
 
-    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    internal bool IsReplayableSqlOperation { get; set; }
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
+        SaveChangesAsync(true, cancellationToken);
+
+    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {
+        if (IsReplayableSqlOperation)
+            throw new InvalidOperationException("Tracked SaveChanges is not supported inside the replayable SQL callback. Use the tracked-write transaction pattern documented in ADR 0015.");
         var now = DateTime.UtcNow;
         foreach (var entry in ChangeTracker.Entries().Where(e => !e.Metadata.IsOwned()))
         {
@@ -46,6 +53,6 @@ public sealed class ApexPostDbContext(DbContextOptions<ApexPostDbContext> option
             }
         }
 
-        return base.SaveChangesAsync(cancellationToken);
+        return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
 }

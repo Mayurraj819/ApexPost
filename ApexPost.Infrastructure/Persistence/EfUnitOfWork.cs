@@ -24,21 +24,29 @@ public sealed class EfUnitOfWork(ApexPostDbContext db) : IUnitOfWork
 
     public async Task ExecuteInTransactionAsync(Func<CancellationToken, Task> operation, CancellationToken cancellationToken = default)
     {
-        // A command supplies stable operation IDs. Do not use this wrapper to blindly replay external side effects.
+        // This callback is replayed as a whole. Current callers issue SQL/ExecuteUpdate only.
+        // Reject tracked writes: replaying domain mutations and accepted EF state is unsafe.
+        if (db.ChangeTracker.HasChanges() || db.Database.CurrentTransaction is not null)
+            throw new InvalidOperationException("Finish tracked writes before starting a replayable SQL operation.");
+        var operationId = Guid.NewGuid();
         var strategy = db.Database.CreateExecutionStrategy();
-        await strategy.ExecuteAsync(async () =>
+        db.IsReplayableSqlOperation = true;
+        try
         {
-            await using var transaction = await db.Database.BeginTransactionAsync(cancellationToken);
-            try
-            {
-                await operation(cancellationToken);
-                await transaction.CommitAsync(cancellationToken);
-            }
-            catch
-            {
-                await transaction.RollbackAsync(CancellationToken.None);
-                throw;
-            }
-        });
+            await strategy.ExecuteInTransactionAsync(
+                async token =>
+                {
+                    await db.Database.ExecuteSqlAsync(
+                        $"INSERT dbo.OperationReceipts (Id) VALUES ({operationId})", token);
+                    await operation(token);
+                },
+                token => db.Set<ApexPost.Infrastructure.Persistence.Entities.OperationReceipt>()
+                    .AsNoTracking().AnyAsync(x => x.Id == operationId, token),
+                cancellationToken);
+        }
+        finally
+        {
+            db.IsReplayableSqlOperation = false;
+        }
     }
 }

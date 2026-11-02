@@ -766,3 +766,257 @@ END;
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    DROP INDEX IX_Transactions_Branch_Date ON dbo.CounterTransactions;
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    ALTER TABLE [TransactionLines] DROP CONSTRAINT [CK_Line_Product];
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    ALTER TABLE [TransactionLines] DROP CONSTRAINT [CK_Line_Type];
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    ALTER TABLE [CounterTransactions] DROP CONSTRAINT [CK_Transaction_Status];
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    DECLARE @var nvarchar(max);
+    SELECT @var = QUOTENAME([d].[name])
+    FROM [sys].[default_constraints] [d]
+    INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+    WHERE ([d].[parent_object_id] = OBJECT_ID(N'[TransactionLines]') AND [c].[name] = N'Type');
+    IF @var IS NOT NULL EXEC(N'ALTER TABLE [TransactionLines] DROP CONSTRAINT ' + @var + ';');
+    ALTER TABLE [TransactionLines] ALTER COLUMN [Type] varchar(24) NOT NULL;
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    DECLARE @var1 nvarchar(max);
+    SELECT @var1 = QUOTENAME([d].[name])
+    FROM [sys].[default_constraints] [d]
+    INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+    WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CounterTransactions]') AND [c].[name] = N'Status');
+    IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [CounterTransactions] DROP CONSTRAINT ' + @var1 + ';');
+    ALTER TABLE [CounterTransactions] ALTER COLUMN [Status] varchar(24) NOT NULL;
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    UPDATE dbo.CounterTransactions SET Status = CASE Status WHEN '0' THEN 'Open' WHEN '1' THEN 'Paid' WHEN '2' THEN 'Voided' WHEN '3' THEN 'Refunded' ELSE Status END;
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    UPDATE dbo.TransactionLines SET Type = CASE Type WHEN '0' THEN 'RetailProduct' WHEN '1' THEN 'PostalService' WHEN '2' THEN 'FinancialService' WHEN '3' THEN 'ParcelShipping' ELSE Type END;
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    CREATE INDEX IX_Transactions_Branch_Date ON dbo.CounterTransactions(BranchId,OccurredAt) INCLUDE(Status);
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    CREATE TABLE [OperationReceipts] (
+        [Id] uniqueidentifier NOT NULL,
+        [CreatedAtUtc] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME()),
+        [CreatedBy] nvarchar(100) NOT NULL DEFAULT N'system',
+        [ModifiedAtUtc] datetime2 NULL,
+        CONSTRAINT [PK_OperationReceipts] PRIMARY KEY ([Id])
+    );
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    EXEC(N'ALTER TABLE [TransactionLines] ADD CONSTRAINT [CK_Line_Product] CHECK ([Type] <> ''RetailProduct'' OR [ProductId] IS NOT NULL)');
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    EXEC(N'ALTER TABLE [TransactionLines] ADD CONSTRAINT [CK_Line_Type] CHECK ([Type] IN (''RetailProduct'',''PostalService'',''FinancialService'',''ParcelShipping''))');
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    EXEC(N'ALTER TABLE [CounterTransactions] ADD CONSTRAINT [CK_Transaction_Status] CHECK ([Status] IN (''Open'',''Paid'',''Voided'',''Refunded''))');
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    EXEC(N'CREATE OR ALTER PROCEDURE dbo.usp_DailyBranchSales
+        @BranchCode varchar(40),
+        @Date date
+    AS
+    BEGIN
+        SET NOCOUNT ON;
+        IF @Date IS NULL OR NULLIF(LTRIM(RTRIM(@BranchCode)), '''') IS NULL
+            THROW 50001, ''Branch code and date are required.'', 1;
+
+        DECLARE @BranchId uniqueidentifier = (SELECT Id FROM dbo.Branches WHERE Code = @BranchCode);
+        IF @BranchId IS NULL
+            THROW 50002, ''Branch was not found.'', 1;
+
+        -- Half-open UTC range supports the branch/date index; currency stays in the grouping.
+        SELECT t.BranchId, CAST(t.OccurredAt AS date) AS [Day],
+            SUM(CASE WHEN l.Type = ''RetailProduct'' THEN l.Quantity * l.UnitPriceAmount ELSE 0 END) AS Retail,
+            SUM(CASE WHEN l.Type <> ''RetailProduct'' THEN l.Quantity * l.UnitPriceAmount ELSE 0 END) AS Services,
+            l.UnitPriceCurrency AS Currency
+        FROM dbo.CounterTransactions AS t
+        INNER JOIN dbo.TransactionLines AS l ON l.TransactionId = t.Id
+        WHERE t.BranchId = @BranchId AND t.Status = ''Paid''
+            AND t.OccurredAt >= @Date AND t.OccurredAt < DATEADD(day, 1, @Date)
+        GROUP BY t.BranchId, CAST(t.OccurredAt AS date), l.UnitPriceCurrency;
+    END;
+    ');
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    EXEC(N'CREATE OR ALTER PROCEDURE dbo.usp_AdjustStock
+        @BranchCode varchar(40),
+        @Sku varchar(40),
+        @Delta int,
+        @Reason nvarchar(500),
+        @ChangedBy nvarchar(100)
+    AS
+    BEGIN
+        SET NOCOUNT ON;
+        SET XACT_ABORT ON;
+        IF @Delta IS NULL OR @Delta = 0
+            THROW 50004, ''Stock adjustment must be nonzero.'', 1;
+        IF NULLIF(LTRIM(RTRIM(@Reason)), '''') IS NULL OR NULLIF(LTRIM(RTRIM(@ChangedBy)), '''') IS NULL
+            THROW 50005, ''Reason and actor are required.'', 1;
+
+        DECLARE @BranchId uniqueidentifier = (SELECT Id FROM dbo.Branches WHERE Code = @BranchCode);
+        DECLARE @ProductId uniqueidentifier = (SELECT Id FROM dbo.Products WHERE Sku = @Sku);
+        IF @BranchId IS NULL OR @ProductId IS NULL
+            THROW 50006, ''Branch or SKU was not found.'', 1;
+
+        -- Own a standalone transaction; preserve an existing caller''s transaction with a savepoint.
+        DECLARE @OwnTransaction bit = CASE WHEN @@TRANCOUNT = 0 THEN 1 ELSE 0 END;
+        BEGIN TRY
+            IF @OwnTransaction = 1
+                BEGIN TRANSACTION;
+            ELSE
+                SAVE TRANSACTION AdjustStockSavepoint;
+
+            -- Check bounds atomically in the UPDATE, using bigint to avoid intermediate overflow.
+            UPDATE dbo.BranchStock
+            SET Quantity = Quantity + @Delta, ModifiedAtUtc = SYSUTCDATETIME()
+            WHERE BranchId = @BranchId AND ProductId = @ProductId
+                AND CAST(Quantity AS bigint) + @Delta BETWEEN 0 AND 1000000;
+            IF @@ROWCOUNT <> 1
+                THROW 50007, ''Stock is missing or adjustment exceeds permitted quantity.'', 1;
+
+            INSERT dbo.StockAdjustments (Id, BranchId, ProductId, Delta, Reason, ChangedBy, CreatedAtUtc, CreatedBy)
+            VALUES (NEWID(), @BranchId, @ProductId, @Delta, @Reason, @ChangedBy, SYSUTCDATETIME(), @ChangedBy);
+            IF @OwnTransaction = 1
+                COMMIT TRANSACTION;
+        END TRY
+        BEGIN CATCH
+            IF @OwnTransaction = 1 AND XACT_STATE() <> 0
+                ROLLBACK TRANSACTION;
+            ELSE IF @OwnTransaction = 0 AND XACT_STATE() = 1
+                ROLLBACK TRANSACTION AdjustStockSavepoint;
+            THROW;
+        END CATCH;
+    END;
+    ');
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    EXEC(N'CREATE OR ALTER PROCEDURE dbo.usp_LowStockReport
+        @BranchCode varchar(40) = NULL,
+        @Threshold int = 3
+    AS
+    BEGIN
+        SET NOCOUNT ON;
+        IF @Threshold IS NULL OR @Threshold < 0
+            THROW 50003, ''Threshold must be nonnegative.'', 1;
+        IF @BranchCode IS NOT NULL AND NOT EXISTS (SELECT 1 FROM dbo.Branches WHERE Code = @BranchCode)
+            THROW 50002, ''Branch was not found.'', 1;
+
+        -- A branch-specific call and an all-branch call have different selectivity.
+        -- RECOMPILE specializes these predicates at the cost of compilation per call.
+        -- Alternatives: cached optional predicates, separate query variants, or PSP where eligible.
+        -- Re-measure before changing this policy; ADR 0009 records the tradeoff.
+        SELECT s.BranchId, s.ProductId, p.Name AS Product, s.Quantity
+        FROM dbo.BranchStock AS s
+        INNER JOIN dbo.Branches AS b ON b.Id = s.BranchId
+        INNER JOIN dbo.Products AS p ON p.Id = s.ProductId
+        WHERE (@BranchCode IS NULL OR b.Code = @BranchCode) AND s.Quantity <= @Threshold
+        ORDER BY s.Quantity, s.BranchId, s.ProductId
+        OPTION (RECOMPILE);
+    END;
+    ');
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261102174635_ReadableCodesAndRetryReceipts'
+)
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20261102174635_ReadableCodesAndRetryReceipts', N'10.0.13');
+END;
+
+COMMIT;
+GO

@@ -13,7 +13,6 @@ public sealed class ApexPostSeeder(ApexPostDbContext db)
         if (await db.Set<Branch>().AnyAsync(ct))
             return;
         // Explicit command, never run implicitly on every web request. Fictional fixtures only.
-        await using var tx = await db.Database.BeginTransactionAsync(ct);
         var regions = Enumerable.Range(1, 3).Select(i => new RegionRecord { Id = Guid.NewGuid(), Code = $"R{i}", Name = $"Region {i}" }).ToArray();
         db.AddRange(regions);
         db.AddRange(Enum.GetValues<StaffRole>().Select(r => new RoleRecord { Id = r, Name = r.ToString() }));
@@ -148,7 +147,12 @@ public sealed class ApexPostSeeder(ApexPostDbContext db)
             }
         }
 
-        await db.SaveChangesAsync(ct);
-        await tx.CommitAsync(ct);
+        // Stage once; preserve Added state until the transaction is known to have committed.
+        var strategy = db.Database.CreateExecutionStrategy();
+        await strategy.ExecuteInTransactionAsync(
+            token => db.SaveChangesAsync(acceptAllChangesOnSuccess: false, token),
+            token => db.Set<Branch>().AsNoTracking().AnyAsync(b => b.Id == branchIds[0], token),
+            ct);
+        db.ChangeTracker.AcceptAllChanges();
     }
 }

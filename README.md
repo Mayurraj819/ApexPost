@@ -15,7 +15,7 @@ dotnet user-secrets set "ApexPost:Security:IntegrationApiKeys:0" "REPLACE-WITH-Y
 dotnet ef migrations script --idempotent --project ApexPost.Infrastructure --startup-project ApexPost.Web --output sql/schema.sql
 ```
 
-Review **InitialCreate**, **AddStoredProcedures**, **AddMeasuredWorkloadIndexes** and sql/schema.sql before applying:
+Review **InitialCreate**, **AddStoredProcedures**, **AddMeasuredWorkloadIndexes**, **ReadableCodesAndRetryReceipts** and sql/schema.sql before applying:
 
 ```powershell
 dotnet ef database update --project ApexPost.Infrastructure --startup-project ApexPost.Web
@@ -72,3 +72,11 @@ This tool creates and deletes **ApexPost_Perf_<random>**, generates fictional sc
 - IMPLEMENTATION_STATUS.md: tested coverage and remaining review items.
 
 The runtime identity needs narrow table DML and stored procedure EXECUTE, not db_owner. Apply schema changes with a separate deployment identity. See sql/security/RuntimePermissions.sql. The Pkcs package reference pins an existing SqlClient dependency to a patched version; trainer review of this direct package exception is explicitly recorded in ADR 0014. No third-party mapper, mediator, fake-data generator or container package is introduced.
+
+## Post-assessment changes
+
+See [verification instructions](docs/READINESS_VERIFICATION.md) before applying this follow-up.
+The varchar-code migration preserves existing numeric data and updates procedures. Back up
+ApexPostDb first, and prove the upgrade on a disposable database. Reapply the reviewed runtime
+permissions script using the deployment identity so the application can write operation receipts.
+The runtime identity must not run migrations or seed data.

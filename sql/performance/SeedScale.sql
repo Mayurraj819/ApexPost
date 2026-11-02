@@ -13,12 +13,12 @@ SELECT ROW_NUMBER()OVER(ORDER BY b.Code) rn,b.Id BranchId,c.Id CounterId,s.Id St
 CROSS APPLY(SELECT TOP(1)Id FROM dbo.Counters c WHERE c.BranchId=b.Id ORDER BY c.Number)c
 CROSS APPLY(SELECT TOP(1)Id FROM dbo.Staff s WHERE s.BranchId=b.Id ORDER BY s.EmployeeNumber)s;
 SELECT n.n,NEWID() Id,a.BranchId,a.CounterId,a.StaffId,DATEADD(minute,-CAST(n.n%129600 AS int),SYSUTCDATETIME()) OccurredAt INTO #Sales FROM #N n INNER JOIN #Actors a ON a.rn=((n.n-1)%1000)+1;
-INSERT dbo.CounterTransactions(Id,BranchId,CounterId,StaffId,OccurredAt,Status)SELECT Id,BranchId,CounterId,StaffId,OccurredAt,1 FROM #Sales;
+INSERT dbo.CounterTransactions(Id,BranchId,CounterId,StaffId,OccurredAt,Status)SELECT Id,BranchId,CounterId,StaffId,OccurredAt,'Paid' FROM #Sales;
 DECLARE @ProductId uniqueidentifier=(SELECT TOP(1)Id FROM dbo.Products ORDER BY Sku),@ZoneId uniqueidentifier=(SELECT TOP(1)Id FROM dbo.ShippingZones ORDER BY Code);
 INSERT dbo.TransactionLines(Id,TransactionId,Type,ProductId,Code,Quantity,UnitPriceAmount,UnitPriceCurrency)
-SELECT NEWID(),Id,0,@ProductId,'PERF-RETAIL',1,20,'PHP' FROM #Sales;
+SELECT NEWID(),Id,'RetailProduct',@ProductId,'PERF-RETAIL',1,20,'PHP' FROM #Sales;
 INSERT dbo.TransactionLines(Id,TransactionId,Type,Code,Quantity,UnitPriceAmount,UnitPriceCurrency,ShippingLevel)
-SELECT NEWID(),Id,1,'POST-STD',1,70,'PHP',0 FROM #Sales WHERE n%3=0;
+SELECT NEWID(),Id,'PostalService','POST-STD',1,70,'PHP',0 FROM #Sales WHERE n%3=0;
 INSERT dbo.Payments(Id,TransactionId,PaidAmount,PaidCurrency,PaidAtUtc) SELECT Id,Id,CASE WHEN n%3=0 THEN 90 ELSE 20 END,'PHP',OccurredAt FROM #Sales;
 INSERT dbo.Shipments(Id,TransactionId,ZoneId,ServiceLevel,Weight,RecipientName,Address_Street,Address_City,Address_PostalCode,ChargeAmount,ChargeCurrency)
 SELECT NEWID(),Id,(SELECT z.Id FROM (SELECT Id,ROW_NUMBER()OVER(ORDER BY Code) rn FROM dbo.ShippingZones)z WHERE z.rn=(n%10)+1),0,1000,'Demo recipient','Fictional street','Demo city','1000',70,'PHP' FROM #Sales WHERE n%3=0;

@@ -1,6 +1,6 @@
 using ApexPost.Domain.ValueObjects;
 
-namespace ApexPost.Tests.PatchFinal;
+namespace ApexPost.Tests.Domain;
 
 public sealed class FinalMoneyOrderSafetyTests
 {

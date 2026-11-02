@@ -12,7 +12,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, string connectionString)
     {
-        services.AddDbContext<ApexPostDbContext>(o => o.UseSqlServer(connectionString));
+        services.AddDbContext<ApexPostDbContext>(o => o.UseSqlServer(connectionString, sql => sql.EnableRetryOnFailure(3, TimeSpan.FromSeconds(5), null)));
         services.AddScoped<IUnitOfWork, EfUnitOfWork>();
         services.AddScoped<IBranchRepository, EfBranchRepository>();
         services.AddScoped<ICounterRepository, EfCounterRepository>();
