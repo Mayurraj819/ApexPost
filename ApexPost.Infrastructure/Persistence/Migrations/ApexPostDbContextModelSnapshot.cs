@@ -23,6 +23,84 @@ namespace ApexPost.Infrastructure.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ApexPost.Domain.Delivery.TrackedShipment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("SYSUTCDATETIME()");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("system");
+
+                    b.Property<DateTime?>("ModifiedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RecipientName")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.Property<string>("RecipientPhone")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(25)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("TrackingNumber")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(12)");
+
+                    b.Property<decimal>("WeightKg")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrackingNumber")
+                        .IsUnique();
+
+                    b.HasIndex("Status", "City");
+
+                    b.ToTable("TrackedShipments", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_TrackedShipment_Status", "[Status] IN ('Created','PickedUp','InTransit','OutForDelivery','Delivered','Failed')");
+
+                            t.HasCheckConstraint("CK_TrackedShipment_Weight", "[WeightKg] BETWEEN 0.1 AND 70");
+                        });
+                });
+
             modelBuilder.Entity("ApexPost.Domain.Entities.Branch", b =>
                 {
                     b.Property<Guid>("Id")
@@ -487,6 +565,65 @@ namespace ApexPost.Infrastructure.Persistence.Migrations
                             t.HasCheckConstraint("CK_Line_Quantity", "[Quantity] > 0");
 
                             t.HasCheckConstraint("CK_Line_Type", "[Type] IN ('RetailProduct','PostalService','FinancialService','ParcelShipping')");
+                        });
+                });
+
+            modelBuilder.Entity("ApexPost.Infrastructure.Delivery.CourierScanRecord", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(42)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(42)");
+
+                    b.Property<string>("CourierId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("SYSUTCDATETIME()");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("system");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime?>("ModifiedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("ScanType")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime>("ScannedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ShipmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ShipmentId", "ScannedAtUtc");
+
+                    b.ToTable("CourierScans", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_CourierScan_Type", "[ScanType] IN ('Pickup','InTransit','Delivered','Failed')");
                         });
                 });
 
@@ -1174,6 +1311,15 @@ namespace ApexPost.Infrastructure.Persistence.Migrations
                         .WithMany("Lines")
                         .HasForeignKey("TransactionId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ApexPost.Infrastructure.Delivery.CourierScanRecord", b =>
+                {
+                    b.HasOne("ApexPost.Domain.Delivery.TrackedShipment", null)
+                        .WithMany()
+                        .HasForeignKey("ShipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ApexPost.Infrastructure.Persistence.Entities.MoneyOrderRecord", b =>

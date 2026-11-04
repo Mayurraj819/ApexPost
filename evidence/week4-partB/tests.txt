@@ -1,0 +1,83 @@
+  ApexPost.Domain -> /tmp/apex-partB-package/ApexPost.Domain/bin/Debug/net10.0/ApexPost.Domain.dll
+  ApexPost.Application -> /tmp/apex-partB-package/ApexPost.Application/bin/Debug/net10.0/ApexPost.Application.dll
+  ApexPost.Infrastructure -> /tmp/apex-partB-package/ApexPost.Infrastructure/bin/Debug/net10.0/ApexPost.Infrastructure.dll
+  ApexPost.Api -> /tmp/apex-partB-package/ApexPost.Api/bin/Debug/net10.0/ApexPost.Api.dll
+  ApexPost.Api.Tests -> /tmp/apex-partB-package/ApexPost.Api.Tests/bin/Debug/net10.0/ApexPost.Api.Tests.dll
+Test run for /tmp/apex-partB-package/ApexPost.Api.Tests/bin/Debug/net10.0/ApexPost.Api.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.4+50e68bbb8b (64-bit .NET 10.0.0)
+[xUnit.net 00:00:00.08]   Discovering: ApexPost.Api.Tests
+[xUnit.net 00:00:00.13]   Discovered:  ApexPost.Api.Tests
+[xUnit.net 00:00:00.16]   Starting:    ApexPost.Api.Tests
+[xUnit.net 00:00:00.20]     ApexPost.Api.Tests.SqlDeliveryTests.Persistent_crud_workflow_dedup_and_concurrent_uploads [SKIP]
+[xUnit.net 00:00:00.20]       Set APEXPOST_TEST_SQLSERVER to a private master connection with create/drop database rights.
+  Skipped ApexPost.Api.Tests.SqlDeliveryTests.Persistent_crud_workflow_dedup_and_concurrent_uploads [1 ms]
+  Passed ApexPost.Api.Tests.WorkflowTests.Only_created_can_be_deleted [9 ms]
+  Passed ApexPost.Api.Tests.WorkflowTests.Only_declared_transitions_are_allowed(initial: OutForDelivery, next: Delivered) [3 ms]
+  Passed ApexPost.Api.Tests.WorkflowTests.Only_declared_transitions_are_allowed(initial: InTransit, next: OutForDelivery) [< 1 ms]
+  Passed ApexPost.Api.Tests.WorkflowTests.Only_declared_transitions_are_allowed(initial: OutForDelivery, next: Failed) [< 1 ms]
+  Passed ApexPost.Api.Tests.WorkflowTests.Only_declared_transitions_are_allowed(initial: PickedUp, next: InTransit) [< 1 ms]
+  Passed ApexPost.Api.Tests.WorkflowTests.Only_declared_transitions_are_allowed(initial: Created, next: PickedUp) [< 1 ms]
+  Passed ApexPost.Api.Tests.WorkflowTests.Domain_also_validates_api_inputs(tracking: "APX-123", weight: 1) [< 1 ms]
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /tmp/apex-partB-package/ApexPost.Api
+fail: ApexPost.Api.Errors.ApiExceptionHandler[0]
+      Unhandled API failure. TraceId=0HNPQKA3CG0CR
+      System.Exception: INTERNAL-SECRET-DETAIL
+         at ApexPost.Api.Tests.MemoryService.Get(String t) in /tmp/apex-partB-package/ApexPost.Api.Tests/TransportTests.cs:line 37
+         at ApexPost.Api.Tests.MemoryService.GetAsync(String t, CancellationToken ct) in /tmp/apex-partB-package/ApexPost.Api.Tests/TransportTests.cs:line 47
+         at ApexPost.Api.Controllers.ShipmentsLegacyController.Get(String trackingNumber, CancellationToken ct) in /tmp/apex-partB-package/ApexPost.Api/Controllers/ShipmentsLegacyController.cs:line 30
+         at lambda_method56(Closure, Object)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /tmp/apex-partB-package/ApexPost.Api
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /tmp/apex-partB-package/ApexPost.Api
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:00.93]   Finished:    ApexPost.Api.Tests
+  Passed ApexPost.Api.Tests.WorkflowTests.Domain_also_validates_api_inputs(tracking: "APX-12345678", weight: 0) [< 1 ms]
+  Passed ApexPost.Api.Tests.WorkflowTests.Domain_also_validates_api_inputs(tracking: "APX-12345678", weight: 71) [< 1 ms]
+  Passed ApexPost.Api.Tests.WorkflowTests.Created_cannot_skip_workflow_or_repeat_itself(status: Created) [2 ms]
+  Passed ApexPost.Api.Tests.WorkflowTests.Created_cannot_skip_workflow_or_repeat_itself(status: Delivered) [< 1 ms]
+  Passed ApexPost.Api.Tests.WorkflowTests.Created_cannot_skip_workflow_or_repeat_itself(status: Failed) [< 1 ms]
+  Passed ApexPost.Api.Tests.WorkflowTests.Created_cannot_skip_workflow_or_repeat_itself(status: InTransit) [< 1 ms]
+  Passed ApexPost.Api.Tests.TransportTests.Production_errors_hide_details_and_documents [424 ms]
+  Passed ApexPost.Api.Tests.TransportTests.Crud_status_and_location_are_correct(root: "/api/shipments") [158 ms]
+  Passed ApexPost.Api.Tests.TransportTests.Validation_wrong_media_and_scan_contracts(version: "v1") [142 ms]
+
+Test Run Successful.
+Total tests: 17
+     Passed: 16
+    Skipped: 1
+ Total time: 1.4394 Seconds
