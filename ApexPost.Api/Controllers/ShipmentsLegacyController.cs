@@ -2,11 +2,14 @@ using System.ComponentModel.DataAnnotations;
 using ApexPost.Api.Contracts;
 using ApexPost.Application.Delivery;
 using ApexPost.Domain.Delivery;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApexPost.Api.Controllers;
 /// <summary>HTTP endpoints for shipment tracking and courier scans.</summary>
 [ApiController, Route("api/shipments"), Tags("Shipments")]
+[ApiVersion("1.0", Deprecated = true)]
+[ApiExplorerSettings(IgnoreApi = true)]
 [Produces("application/json")]
 [ProducesResponseType<ValidationProblemDetails>(400)]
 [ProducesResponseType<ProblemDetails>(404)]

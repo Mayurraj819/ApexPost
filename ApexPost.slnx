@@ -2,6 +2,8 @@
   <Project Path="ApexPost.Api.Tests/ApexPost.Api.Tests.csproj" />
   <Project Path="ApexPost.Api/ApexPost.Api.csproj" />
   <Project Path="ApexPost.Application/ApexPost.Application.csproj" />
+  <Project Path="ApexPost.Client.Console/ApexPost.Client.Console.csproj" />
+  <Project Path="ApexPost.Client/ApexPost.Client.csproj" />
   <Project Path="ApexPost.Courier.Console/ApexPost.Courier.Console.csproj" />
   <Project Path="ApexPost.Courier.Offline/ApexPost.Courier.Offline.csproj" />
   <Project Path="ApexPost.Domain/ApexPost.Domain.csproj" />

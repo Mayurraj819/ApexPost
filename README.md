@@ -82,16 +82,59 @@ permissions script using the deployment identity so the application can write op
 The runtime identity must not run migrations or seed data.
 
 
-## Week 4 Part B REST API
+## Week 4 Parts B and C — API and generated client
 
-ApexPost.Api exposes /api/shipments using the existing SQL Server infrastructure and new
-additive tracking tables. See API-NOTES.md. The Week 3 counter shipment model is preserved.
+The Week 3 MVC app and Part A offline console still run independently. The new API reuses
+Infrastructure registration and its SQL Server DbContext. See API-NOTES.md for the additive
+tracking schema and why the counter-sale shipment model is preserved.
 
-Configure ConnectionStrings:ApexPost with `dotnet user-secrets set` targeting ApexPost.Api,
-then review/apply migrations using --project ApexPost.Infrastructure --startup-project ApexPost.Api.
-Run `dotnet run --project ApexPost.Api --launch-profile https`. ApexPost.Api.http contains
-success/failure requests. The API does not add automatic startup migrations or use EnsureCreated.
+Run from the solution root (Visual Studio Developer PowerShell):
 
-Build with `dotnet build ApexPost.slnx -warnaserror`; test with `dotnet test ApexPost.slnx`.
-Set APEXPOST_TEST_SQLSERVER to a private master connection to enable disposable SQL tests.
-OpenAPI, URL versioning, contracts and the generated SDK arrive in the separate Part C patch.
+```powershell
+dotnet tool restore
+dotnet restore ApexPost.slnx
+dotnet build ApexPost.slnx -warnaserror
+dotnet test ApexPost.slnx --no-build
+dotnet user-secrets set "ConnectionStrings:ApexPost" "Server=(localdb)\MSSQLLocalDB;Database=ApexPostDb;Trusted_Connection=True;TrustServerCertificate=True" --project ApexPost.Api
+dotnet ef database update --project ApexPost.Infrastructure --startup-project ApexPost.Api
+dotnet run --project ApexPost.Api --launch-profile https
+```
+
+Back up your existing private ApexPostDb before migration; do not run migrations with a runtime
+login. Run `sql/security/Week4ApiPermissions.sql` with your deployment identity if using the
+restricted ApexPostRuntime role. Connection strings are not committed to appsettings.json.
+
+Open https://localhost:7268/swagger in Development. Try every endpoint with fictional data;
+ApexPost.Api.http gives success and failure examples for both versions. Save screenshots under
+evidence/week4-partBC. The API does not seed fake counter sales to satisfy tracking POSTs.
+
+**OpenAPI** is the language-neutral API contract (paths, schemas, responses and operation IDs).
+**Microsoft.AspNetCore.OpenApi** is .NET's built-in generator, configured with AddOpenApi and
+MapOpenApi plus document/operation transformers. **Swagger UI** is the browser interface that
+renders that contract and sends Try it out requests. Only the SwaggerUI package is installed;
+there is no AddSwaggerGen or second schema generator. Documents/UI are mapped in Development
+only; hiding documentation does not authorize requests. Part D adds authentication.
+
+Exports are committed in contracts/v1.json and contracts/v2.json. See VERSIONING.md for breaking
+changes, deprecation and the proposed sunset. To regenerate while the API runs:
+
+```powershell
+.\tools\Refresh-ApiContracts.ps1
+dotnet run --project ApexPost.Client.Console
+```
+
+The consumer defaults to https://localhost:7268; override APEXPOST_API_BASE_URL for another
+private environment. It registers the generated client through AddHttpClient, creates/fetches a
+shipment, uploads two scans, and catches the generated typed exception for a missing shipment.
+Keep APX-00000000 absent for that deliberate 404 demonstration. Generated files remain untouched;
+custom serialization lives in a partial class. NSwag is pinned in .config/dotnet-tools.json.
+
+SQL tests create/drop separate ApexPost_Test_* databases, never ApexPostDb:
+
+```powershell
+$env:APEXPOST_TEST_SQLSERVER = "Server=(localdb)\MSSQLLocalDB;Database=master;Trusted_Connection=True;TrustServerCertificate=True"
+dotnet test ApexPost.slnx --no-build
+```
+
+Zero skipped SQL tests is required for a complete persistence verification. Inspect the new
+migration before applying it. No EnsureCreated or automatic startup migration is introduced.

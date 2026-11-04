@@ -1,7 +1,9 @@
 # ApexPost API notes — Parts B and C
 
-All Part B routes use /api/shipments and the same SQL Server tracking service.
-Versioning, Swagger and generated SDK checks arrive with Part C. Authentication arrives in Part D.
+All routes operate on the same SQL Server tracking service. In Part B the prefix is
+`/api/shipments`; Part C retains that v1 alias and adds `/api/v1/shipments` and `/api/v2/shipments`.
+Use the Development-only Swagger UI at `/swagger`. Authentication is implemented in Part D,
+not claimed by this Part B/C package.
 
 | Method and relative route | Success | Failure examples | Description |
 |---|---|---|---|

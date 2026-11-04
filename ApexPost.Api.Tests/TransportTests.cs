@@ -123,8 +123,8 @@ public sealed class TransportTests
     };
     [Theory]
     [InlineData("/api/shipments")]
-    
-    
+    [InlineData("/api/v1/shipments")]
+    [InlineData("/api/v2/shipments")]
     public async Task Crud_status_and_location_are_correct(string root)
     {
         await using var factory = new ApiFactory();
@@ -145,12 +145,12 @@ public sealed class TransportTests
 
     [Theory]
     [InlineData("v1")]
-    
+    [InlineData("v2")]
     public async Task Validation_wrong_media_and_scan_contracts(string version)
     {
         await using var f = new ApiFactory();
         using var c = f.CreateClient(new() { BaseAddress = new Uri("https://localhost") });
-        var root = "/api/shipments";
+        var root = $"/api/{version}/shipments";
         var invalid = await c.PostAsJsonAsync(root, new { });
         Assert.Equal(HttpStatusCode.BadRequest, invalid.StatusCode);
         Assert.Contains("errors", await invalid.Content.ReadAsStringAsync());
@@ -194,7 +194,7 @@ public sealed class TransportTests
     {
         await using var f = new ApiFactory("Production", true);
         using var c = f.CreateClient(new() { BaseAddress = new Uri("https://localhost") });
-        var error = await c.GetAsync("/api/shipments/APX-12345678");
+        var error = await c.GetAsync("/api/v2/shipments/APX-12345678");
         Assert.Equal(HttpStatusCode.InternalServerError, error.StatusCode);
         Assert.DoesNotContain("INTERNAL-SECRET", await error.Content.ReadAsStringAsync());
         Assert.Equal("application/problem+json", error.Content.Headers.ContentType?.MediaType);
@@ -202,4 +202,33 @@ public sealed class TransportTests
         Assert.Equal(HttpStatusCode.NotFound, (await c.GetAsync("/swagger/index.html")).StatusCode);
     }
 
+    [Fact]
+    public async Task Openapi_has_separate_documents_stable_names_and_deprecation_headers()
+    {
+        await using var f = new ApiFactory();
+        using var c = f.CreateClient(new() { BaseAddress = new Uri("https://localhost") });
+        foreach (var v in new[]
+        {
+            "v1",
+            "v2"
+        }
+
+        )
+        {
+            var document = await c.GetFromJsonAsync<JsonElement>($"/openapi/{v}.json");
+            Assert.Equal("ApexPost Logistics API", document.GetProperty("info").GetProperty("title").GetString());
+            var contractPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../../contracts", v + ".json"));
+            Assert.True(JsonElement.DeepEquals(JsonDocument.Parse(await File.ReadAllTextAsync(contractPath)).RootElement, document), "Committed contract differs from runtime OpenAPI; regenerate it.");
+            var paths = document.GetProperty("paths");
+            Assert.Equal(4, paths.EnumerateObject().Count());
+            if (v == "v1")
+                Assert.True(paths.GetProperty("/api/v1/shipments/{trackingNumber}").GetProperty("get").GetProperty("deprecated").GetBoolean());
+            Assert.Equal("GetShipment" + v.ToUpperInvariant(), paths.GetProperty($"/api/{v}/shipments/{{trackingNumber}}").GetProperty("get").GetProperty("operationId").GetString());
+        }
+
+        var result = await c.GetAsync("/api/v1/shipments");
+        Assert.True(result.Headers.Contains("api-deprecated-versions"));
+        Assert.True(result.Headers.Contains("api-supported-versions"));
+        Assert.Equal(HttpStatusCode.OK, (await c.GetAsync("/swagger/index.html")).StatusCode);
+    }
 }

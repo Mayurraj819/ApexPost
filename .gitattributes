@@ -61,3 +61,6 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+# Preserve pinned generator output; suppress template-only whitespace diagnostics.
+ApexPost.Client/Generated/*.g.cs linguist-generated=true -whitespace

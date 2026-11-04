@@ -3,7 +3,7 @@
 # Run creates before reads/updates. On rerun, duplicate creates intentionally return 409.
 
 ### v1 CREATE success: 201 with Location
-POST {{baseUrl}}/api/shipments
+POST {{baseUrl}}/api/v1/shipments
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ### v1 CREATE duplicate failure: 409 ProblemDetails
-POST {{baseUrl}}/api/shipments
+POST {{baseUrl}}/api/v1/shipments
 Content-Type: application/json
 
 {
@@ -29,19 +29,19 @@ Content-Type: application/json
 }
 
 ### v1 LIST success: 200
-GET {{baseUrl}}/api/shipments?page=1&pageSize=20&city=Pune
+GET {{baseUrl}}/api/v1/shipments?page=1&pageSize=20&city=Pune
 
 ### v1 LIST invalid page size: 400
-GET {{baseUrl}}/api/shipments?pageSize=51
+GET {{baseUrl}}/api/v1/shipments?pageSize=51
 
 ### v1 GET success: 200
-GET {{baseUrl}}/api/shipments/APX-11111111
+GET {{baseUrl}}/api/v1/shipments/APX-11111111
 
 ### v1 GET unknown shipment: 404
-GET {{baseUrl}}/api/shipments/APX-00000000
+GET {{baseUrl}}/api/v1/shipments/APX-00000000
 
 ### v1 PUT success: 200
-PUT {{baseUrl}}/api/shipments/APX-11111111
+PUT {{baseUrl}}/api/v1/shipments/APX-11111111
 Content-Type: application/json
 
 {
@@ -54,7 +54,7 @@ Content-Type: application/json
 }
 
 ### v1 PUT unknown shipment: 404
-PUT {{baseUrl}}/api/shipments/APX-00000000
+PUT {{baseUrl}}/api/v1/shipments/APX-00000000
 Content-Type: application/json
 
 {
@@ -67,7 +67,7 @@ Content-Type: application/json
 }
 
 ### v1 PATCH success: 200
-PATCH {{baseUrl}}/api/shipments/APX-11111111/status
+PATCH {{baseUrl}}/api/v1/shipments/APX-11111111/status
 Content-Type: application/json
 
 {
@@ -75,7 +75,7 @@ Content-Type: application/json
 }
 
 ### v1 PATCH invalid transition: 409
-PATCH {{baseUrl}}/api/shipments/APX-11111111/status
+PATCH {{baseUrl}}/api/v1/shipments/APX-11111111/status
 Content-Type: application/json
 
 {
@@ -83,7 +83,7 @@ Content-Type: application/json
 }
 
 ### v1 UPLOAD success: 200 accepted=1; rerun gives duplicatesSkipped=1
-POST {{baseUrl}}/api/shipments/APX-11111111/scans
+POST {{baseUrl}}/api/v1/shipments/APX-11111111/scans
 Content-Type: application/json
 
 [
@@ -99,7 +99,7 @@ Content-Type: application/json
 ]
 
 ### v1 UPLOAD custom validation failure: 400
-POST {{baseUrl}}/api/shipments/APX-11111111/scans
+POST {{baseUrl}}/api/v1/shipments/APX-11111111/scans
 Content-Type: application/json
 
 [
@@ -115,13 +115,13 @@ Content-Type: application/json
 ]
 
 ### v1 SCAN HISTORY success: 200
-GET {{baseUrl}}/api/shipments/APX-11111111/scans
+GET {{baseUrl}}/api/v1/shipments/APX-11111111/scans
 
 ### v1 SCAN HISTORY unknown shipment: 404
-GET {{baseUrl}}/api/shipments/APX-00000000/scans
+GET {{baseUrl}}/api/v1/shipments/APX-00000000/scans
 
 ### v1 Create a second shipment for DELETE demonstration: 201
-POST {{baseUrl}}/api/shipments
+POST {{baseUrl}}/api/v1/shipments
 Content-Type: application/json
 
 {
@@ -134,19 +134,19 @@ Content-Type: application/json
 }
 
 ### v1 DELETE Created shipment success: 204
-DELETE {{baseUrl}}/api/shipments/APX-11111199
+DELETE {{baseUrl}}/api/v1/shipments/APX-11111199
 
 ### v1 DELETE PickedUp shipment failure: 409
-DELETE {{baseUrl}}/api/shipments/APX-11111111
+DELETE {{baseUrl}}/api/v1/shipments/APX-11111111
 
 ### v1 Wrong media type: 415 ProblemDetails
-POST {{baseUrl}}/api/shipments
+POST {{baseUrl}}/api/v1/shipments
 Content-Type: text/plain
 
 not-json
 
 ### v2 CREATE success: 201 with Location
-POST {{baseUrl}}/api/shipments
+POST {{baseUrl}}/api/v2/shipments
 Content-Type: application/json
 
 {
@@ -159,7 +159,7 @@ Content-Type: application/json
 }
 
 ### v2 CREATE duplicate failure: 409 ProblemDetails
-POST {{baseUrl}}/api/shipments
+POST {{baseUrl}}/api/v2/shipments
 Content-Type: application/json
 
 {
@@ -172,19 +172,19 @@ Content-Type: application/json
 }
 
 ### v2 LIST success: 200
-GET {{baseUrl}}/api/shipments?page=1&pageSize=20&city=Pune
+GET {{baseUrl}}/api/v2/shipments?page=1&pageSize=20&city=Pune
 
 ### v2 LIST invalid page size: 400
-GET {{baseUrl}}/api/shipments?pageSize=51
+GET {{baseUrl}}/api/v2/shipments?pageSize=51
 
 ### v2 GET success: 200
-GET {{baseUrl}}/api/shipments/APX-22222222
+GET {{baseUrl}}/api/v2/shipments/APX-22222222
 
 ### v2 GET unknown shipment: 404
-GET {{baseUrl}}/api/shipments/APX-00000000
+GET {{baseUrl}}/api/v2/shipments/APX-00000000
 
 ### v2 PUT success: 200
-PUT {{baseUrl}}/api/shipments/APX-22222222
+PUT {{baseUrl}}/api/v2/shipments/APX-22222222
 Content-Type: application/json
 
 {
@@ -197,7 +197,7 @@ Content-Type: application/json
 }
 
 ### v2 PUT unknown shipment: 404
-PUT {{baseUrl}}/api/shipments/APX-00000000
+PUT {{baseUrl}}/api/v2/shipments/APX-00000000
 Content-Type: application/json
 
 {
@@ -210,7 +210,7 @@ Content-Type: application/json
 }
 
 ### v2 PATCH success: 200
-PATCH {{baseUrl}}/api/shipments/APX-22222222/status
+PATCH {{baseUrl}}/api/v2/shipments/APX-22222222/status
 Content-Type: application/json
 
 {
@@ -218,7 +218,7 @@ Content-Type: application/json
 }
 
 ### v2 PATCH invalid transition: 409
-PATCH {{baseUrl}}/api/shipments/APX-22222222/status
+PATCH {{baseUrl}}/api/v2/shipments/APX-22222222/status
 Content-Type: application/json
 
 {
@@ -226,7 +226,7 @@ Content-Type: application/json
 }
 
 ### v2 UPLOAD success: 200 accepted=1; rerun gives duplicatesSkipped=1
-POST {{baseUrl}}/api/shipments/APX-22222222/scans
+POST {{baseUrl}}/api/v2/shipments/APX-22222222/scans
 Content-Type: application/json
 
 [
@@ -242,7 +242,7 @@ Content-Type: application/json
 ]
 
 ### v2 UPLOAD custom validation failure: 400
-POST {{baseUrl}}/api/shipments/APX-22222222/scans
+POST {{baseUrl}}/api/v2/shipments/APX-22222222/scans
 Content-Type: application/json
 
 [
@@ -258,13 +258,13 @@ Content-Type: application/json
 ]
 
 ### v2 SCAN HISTORY success: 200
-GET {{baseUrl}}/api/shipments/APX-22222222/scans
+GET {{baseUrl}}/api/v2/shipments/APX-22222222/scans
 
 ### v2 SCAN HISTORY unknown shipment: 404
-GET {{baseUrl}}/api/shipments/APX-00000000/scans
+GET {{baseUrl}}/api/v2/shipments/APX-00000000/scans
 
 ### v2 Create a second shipment for DELETE demonstration: 201
-POST {{baseUrl}}/api/shipments
+POST {{baseUrl}}/api/v2/shipments
 Content-Type: application/json
 
 {
@@ -277,13 +277,13 @@ Content-Type: application/json
 }
 
 ### v2 DELETE Created shipment success: 204
-DELETE {{baseUrl}}/api/shipments/APX-22222299
+DELETE {{baseUrl}}/api/v2/shipments/APX-22222299
 
 ### v2 DELETE PickedUp shipment failure: 409
-DELETE {{baseUrl}}/api/shipments/APX-22222222
+DELETE {{baseUrl}}/api/v2/shipments/APX-22222222
 
 ### v2 Wrong media type: 415 ProblemDetails
-POST {{baseUrl}}/api/shipments
+POST {{baseUrl}}/api/v2/shipments
 Content-Type: text/plain
 
 not-json
