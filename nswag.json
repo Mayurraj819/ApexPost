@@ -1,0 +1,22 @@
+{
+  "runtime": "Net100",
+  "documentGenerator": {
+    "fromDocument": { "url": "contracts/v2.json" }
+  },
+  "codeGenerators": {
+    "openApiToCSharpClient": {
+      "className": "ApexPostClient",
+      "namespace": "ApexPost.Client",
+      "jsonLibrary": "SystemTextJson",
+      "generateClientInterfaces": true,
+      "injectHttpClient": true,
+      "disposeHttpClient": false,
+      "useBaseUrl": false,
+      "generateBaseUrlProperty": false,
+      "generateOptionalParameters": true,
+      "generateNullableReferenceTypes": true,
+      "operationGenerationMode": "SingleClientFromOperationId",
+      "output": "ApexPost.Client/Generated/ApexPostClient.g.cs"
+    }
+  }
+}
