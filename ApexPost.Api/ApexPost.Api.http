@@ -1,0 +1,289 @@
+@baseUrl = https://localhost:7268
+
+# Run creates before reads/updates. On rerun, duplicate creates intentionally return 409.
+
+### v1 CREATE success: 201 with Location
+POST {{baseUrl}}/api/shipments
+Content-Type: application/json
+
+{
+  "trackingNumber": "APX-11111111",
+  "weightKg": 1.25,
+  "recipientName": "Fictional recipient",
+  "recipientPhone": "+919876543210",
+  "address": "12 Demo Street",
+  "city": "Pune"
+}
+
+### v1 CREATE duplicate failure: 409 ProblemDetails
+POST {{baseUrl}}/api/shipments
+Content-Type: application/json
+
+{
+  "trackingNumber": "APX-11111111",
+  "weightKg": 1.25,
+  "recipientName": "Fictional recipient",
+  "recipientPhone": "+919876543210",
+  "address": "12 Demo Street",
+  "city": "Pune"
+}
+
+### v1 LIST success: 200
+GET {{baseUrl}}/api/shipments?page=1&pageSize=20&city=Pune
+
+### v1 LIST invalid page size: 400
+GET {{baseUrl}}/api/shipments?pageSize=51
+
+### v1 GET success: 200
+GET {{baseUrl}}/api/shipments/APX-11111111
+
+### v1 GET unknown shipment: 404
+GET {{baseUrl}}/api/shipments/APX-00000000
+
+### v1 PUT success: 200
+PUT {{baseUrl}}/api/shipments/APX-11111111
+Content-Type: application/json
+
+{
+  "trackingNumber": "APX-11111111",
+  "weightKg": 1.25,
+  "recipientName": "Fictional recipient",
+  "recipientPhone": "+919876543210",
+  "address": "12 Demo Street",
+  "city": "Pune"
+}
+
+### v1 PUT unknown shipment: 404
+PUT {{baseUrl}}/api/shipments/APX-00000000
+Content-Type: application/json
+
+{
+  "trackingNumber": "APX-11111111",
+  "weightKg": 1.25,
+  "recipientName": "Fictional recipient",
+  "recipientPhone": "+919876543210",
+  "address": "12 Demo Street",
+  "city": "Pune"
+}
+
+### v1 PATCH success: 200
+PATCH {{baseUrl}}/api/shipments/APX-11111111/status
+Content-Type: application/json
+
+{
+  "status": "PickedUp"
+}
+
+### v1 PATCH invalid transition: 409
+PATCH {{baseUrl}}/api/shipments/APX-11111111/status
+Content-Type: application/json
+
+{
+  "status": "Delivered"
+}
+
+### v1 UPLOAD success: 200 accepted=1; rerun gives duplicatesSkipped=1
+POST {{baseUrl}}/api/shipments/APX-11111111/scans
+Content-Type: application/json
+
+[
+  {
+    "id": "scan::11111111-1111-4111-8111-111111111111",
+    "trackingNumber": "APX-11111111",
+    "scanType": "Pickup",
+    "courierId": "COURIER-01",
+    "location": "Demo depot",
+    "scannedAtUtc": "2020-01-01T10:00:00+00:00",
+    "notes": "Fictional data"
+  }
+]
+
+### v1 UPLOAD custom validation failure: 400
+POST {{baseUrl}}/api/shipments/APX-11111111/scans
+Content-Type: application/json
+
+[
+  {
+    "id": "scan::33333333-1111-4111-8111-111111111111",
+    "trackingNumber": "APX-11111111",
+    "scanType": "Pickup",
+    "courierId": "COURIER-01",
+    "location": "Demo depot",
+    "scannedAtUtc": "2999-01-01T10:00:00+00:00",
+    "notes": "Fictional data"
+  }
+]
+
+### v1 SCAN HISTORY success: 200
+GET {{baseUrl}}/api/shipments/APX-11111111/scans
+
+### v1 SCAN HISTORY unknown shipment: 404
+GET {{baseUrl}}/api/shipments/APX-00000000/scans
+
+### v1 Create a second shipment for DELETE demonstration: 201
+POST {{baseUrl}}/api/shipments
+Content-Type: application/json
+
+{
+  "trackingNumber": "APX-11111199",
+  "weightKg": 1.25,
+  "recipientName": "Fictional recipient",
+  "recipientPhone": "+919876543210",
+  "address": "12 Demo Street",
+  "city": "Pune"
+}
+
+### v1 DELETE Created shipment success: 204
+DELETE {{baseUrl}}/api/shipments/APX-11111199
+
+### v1 DELETE PickedUp shipment failure: 409
+DELETE {{baseUrl}}/api/shipments/APX-11111111
+
+### v1 Wrong media type: 415 ProblemDetails
+POST {{baseUrl}}/api/shipments
+Content-Type: text/plain
+
+not-json
+
+### v2 CREATE success: 201 with Location
+POST {{baseUrl}}/api/shipments
+Content-Type: application/json
+
+{
+  "trackingNumber": "APX-22222222",
+  "weightKg": 1.25,
+  "recipientName": "Fictional recipient",
+  "recipientPhone": "+919876543210",
+  "address": "12 Demo Street",
+  "city": "Pune"
+}
+
+### v2 CREATE duplicate failure: 409 ProblemDetails
+POST {{baseUrl}}/api/shipments
+Content-Type: application/json
+
+{
+  "trackingNumber": "APX-22222222",
+  "weightKg": 1.25,
+  "recipientName": "Fictional recipient",
+  "recipientPhone": "+919876543210",
+  "address": "12 Demo Street",
+  "city": "Pune"
+}
+
+### v2 LIST success: 200
+GET {{baseUrl}}/api/shipments?page=1&pageSize=20&city=Pune
+
+### v2 LIST invalid page size: 400
+GET {{baseUrl}}/api/shipments?pageSize=51
+
+### v2 GET success: 200
+GET {{baseUrl}}/api/shipments/APX-22222222
+
+### v2 GET unknown shipment: 404
+GET {{baseUrl}}/api/shipments/APX-00000000
+
+### v2 PUT success: 200
+PUT {{baseUrl}}/api/shipments/APX-22222222
+Content-Type: application/json
+
+{
+  "trackingNumber": "APX-22222222",
+  "weightKg": 1.25,
+  "recipientName": "Fictional recipient",
+  "recipientPhone": "+919876543210",
+  "address": "12 Demo Street",
+  "city": "Pune"
+}
+
+### v2 PUT unknown shipment: 404
+PUT {{baseUrl}}/api/shipments/APX-00000000
+Content-Type: application/json
+
+{
+  "trackingNumber": "APX-22222222",
+  "weightKg": 1.25,
+  "recipientName": "Fictional recipient",
+  "recipientPhone": "+919876543210",
+  "address": "12 Demo Street",
+  "city": "Pune"
+}
+
+### v2 PATCH success: 200
+PATCH {{baseUrl}}/api/shipments/APX-22222222/status
+Content-Type: application/json
+
+{
+  "status": "PickedUp"
+}
+
+### v2 PATCH invalid transition: 409
+PATCH {{baseUrl}}/api/shipments/APX-22222222/status
+Content-Type: application/json
+
+{
+  "status": "Delivered"
+}
+
+### v2 UPLOAD success: 200 accepted=1; rerun gives duplicatesSkipped=1
+POST {{baseUrl}}/api/shipments/APX-22222222/scans
+Content-Type: application/json
+
+[
+  {
+    "id": "scan::22222222-1111-4111-8111-111111111111",
+    "trackingNumber": "APX-22222222",
+    "scanType": "Pickup",
+    "courierId": "COURIER-01",
+    "location": "Demo depot",
+    "scannedAtUtc": "2020-01-01T10:00:00+00:00",
+    "notes": "Fictional data"
+  }
+]
+
+### v2 UPLOAD custom validation failure: 400
+POST {{baseUrl}}/api/shipments/APX-22222222/scans
+Content-Type: application/json
+
+[
+  {
+    "id": "scan::33333333-1111-4111-8111-111111111111",
+    "trackingNumber": "APX-22222222",
+    "scanType": "Pickup",
+    "courierId": "COURIER-01",
+    "location": "Demo depot",
+    "scannedAtUtc": "2999-01-01T10:00:00+00:00",
+    "notes": "Fictional data"
+  }
+]
+
+### v2 SCAN HISTORY success: 200
+GET {{baseUrl}}/api/shipments/APX-22222222/scans
+
+### v2 SCAN HISTORY unknown shipment: 404
+GET {{baseUrl}}/api/shipments/APX-00000000/scans
+
+### v2 Create a second shipment for DELETE demonstration: 201
+POST {{baseUrl}}/api/shipments
+Content-Type: application/json
+
+{
+  "trackingNumber": "APX-22222299",
+  "weightKg": 1.25,
+  "recipientName": "Fictional recipient",
+  "recipientPhone": "+919876543210",
+  "address": "12 Demo Street",
+  "city": "Pune"
+}
+
+### v2 DELETE Created shipment success: 204
+DELETE {{baseUrl}}/api/shipments/APX-22222299
+
+### v2 DELETE PickedUp shipment failure: 409
+DELETE {{baseUrl}}/api/shipments/APX-22222222
+
+### v2 Wrong media type: 415 ProblemDetails
+POST {{baseUrl}}/api/shipments
+Content-Type: text/plain
+
+not-json

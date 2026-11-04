@@ -80,3 +80,18 @@ The varchar-code migration preserves existing numeric data and updates procedure
 ApexPostDb first, and prove the upgrade on a disposable database. Reapply the reviewed runtime
 permissions script using the deployment identity so the application can write operation receipts.
 The runtime identity must not run migrations or seed data.
+
+
+## Week 4 Part B REST API
+
+ApexPost.Api exposes /api/shipments using the existing SQL Server infrastructure and new
+additive tracking tables. See API-NOTES.md. The Week 3 counter shipment model is preserved.
+
+Configure ConnectionStrings:ApexPost with `dotnet user-secrets set` targeting ApexPost.Api,
+then review/apply migrations using --project ApexPost.Infrastructure --startup-project ApexPost.Api.
+Run `dotnet run --project ApexPost.Api --launch-profile https`. ApexPost.Api.http contains
+success/failure requests. The API does not add automatic startup migrations or use EnsureCreated.
+
+Build with `dotnet build ApexPost.slnx -warnaserror`; test with `dotnet test ApexPost.slnx`.
+Set APEXPOST_TEST_SQLSERVER to a private master connection to enable disposable SQL tests.
+OpenAPI, URL versioning, contracts and the generated SDK arrive in the separate Part C patch.
