@@ -16,3 +16,11 @@ No SQL Server test connection was available here. SQL persistence, migration exe
 concurrent database deduplication and restricted-role permissions still require the user's
 private SQL Server. A skipped test is not a pass. Real Swagger Try it out/screenshots and
 branch PR/merge actions remain user verification/publication steps. No remote push was made.
+## Subsequent remote LocalDB verification
+
+- All 121 tests passed, with zero failures or skips.
+- The database migration completed successfully.
+- Swagger v1/v2 and the 201, 400 and 409 responses were checked.
+- The generated client created/fetched a shipment, uploaded two scans
+  and handled the expected typed 404 exception.
+- Screenshots are committed in this folder.
