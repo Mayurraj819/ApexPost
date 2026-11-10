@@ -1,0 +1,71 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  ApexPost.Domain -> <checkout>/ApexPost.Domain/bin/Debug/net10.0/ApexPost.Domain.dll
+  ApexPost.Application -> <checkout>/ApexPost.Application/bin/Debug/net10.0/ApexPost.Application.dll
+  ApexPost.Infrastructure -> <checkout>/ApexPost.Infrastructure/bin/Debug/net10.0/ApexPost.Infrastructure.dll
+  ApexPost.Api -> <checkout>/ApexPost.Api/bin/Debug/net10.0/ApexPost.Api.dll
+  ApexPost.Client -> <checkout>/ApexPost.Client/bin/Debug/net10.0/ApexPost.Client.dll
+  ApexPost.Api.Tests -> <checkout>/ApexPost.Api.Tests/bin/Debug/net10.0/ApexPost.Api.Tests.dll
+Test run for <checkout>/ApexPost.Api.Tests/bin/Debug/net10.0/ApexPost.Api.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.28]     ApexPost.Api.Tests.SqlDeliveryTests.Persistent_crud_workflow_dedup_and_concurrent_uploads [SKIP]
+  Skipped ApexPost.Api.Tests.SqlDeliveryTests.Persistent_crud_workflow_dedup_and_concurrent_uploads [1 ms]
+
+Passed!  - Failed:     0, Passed:    29, Skipped:     1, Total:    30, Duration: 1 s - ApexPost.Api.Tests.dll (net10.0)
+  ApexPost.Courier.Offline -> <checkout>/ApexPost.Courier.Offline/bin/Debug/net10.0/ApexPost.Courier.Offline.dll
+  ApexPost.Courier.Integration -> <checkout>/ApexPost.Courier.Integration/bin/Debug/net10.0/ApexPost.Courier.Integration.dll
+  ApexPost.Courier.Integration.Tests -> <checkout>/ApexPost.Courier.Integration.Tests/bin/Debug/net10.0/ApexPost.Courier.Integration.Tests.dll
+Test run for <checkout>/ApexPost.Courier.Integration.Tests/bin/Debug/net10.0/ApexPost.Courier.Integration.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    19, Skipped:     0, Total:    19, Duration: 4 s - ApexPost.Courier.Integration.Tests.dll (net10.0)
+  ApexPost.Web -> <checkout>/ApexPost.Web/bin/Debug/net10.0/ApexPost.Web.dll
+  ApexPost.Tests -> <checkout>/ApexPost.Tests/bin/Debug/net10.0/ApexPost.Tests.dll
+Test run for <checkout>/ApexPost.Tests/bin/Debug/net10.0/ApexPost.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:02.16]     ApexPost.Tests.SqlServer.SqlWebTests.Sale_persists_and_reports_match_sql_totals [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlWebTests.Manager_can_void_a_draft_and_reports_have_expected_totals [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlWebTests.Two_checkout_requests_for_last_unit_return_one_success_and_one_409 [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlWebTests.Product_and_stock_forms_preserve_validation_and_history [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlWebTests.Clerk_cannot_void_and_not_found_returns_problem_details [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlPersistenceTests.All_read_screens_translate_and_execute [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Failed_sale_rolls_back_stock_header_and_payment [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Generated_schema_script_can_be_replayed_idempotently [SKIP]
+  Skipped ApexPost.Tests.SqlServer.SqlWebTests.Sale_persists_and_reports_match_sql_totals [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlWebTests.Manager_can_void_a_draft_and_reports_have_expected_totals [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlWebTests.Two_checkout_requests_for_last_unit_return_one_success_and_one_409 [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlWebTests.Product_and_stock_forms_preserve_validation_and_history [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlWebTests.Clerk_cannot_void_and_not_found_returns_problem_details [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.All_read_screens_translate_and_execute [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Failed_sale_rolls_back_stock_header_and_payment [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Generated_schema_script_can_be_replayed_idempotently [1 ms]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Unique_constraint_is_translated_to_conflict [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlPersistenceTests.New_checkout_inserts_header_lines_payment_and_stock_in_one_commit [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Shipping_line_and_shipment_are_committed_together_and_can_be_paid [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Three_procedures_execute_and_adjustment_writes_history [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Last_unit_cannot_be_sold_by_two_contexts [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Closed_branch_inactive_staff_and_masked_document_roundtrip [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Set_based_price_revision_updates_audit_without_materializing_products [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Money_order_stores_only_masked_identity_and_preserves_verification_policy [SKIP]
+[xUnit.net 00:00:02.17]     ApexPost.Tests.SqlServer.SqlPersistenceTests.Repository_stages_until_uow_and_private_state_roundtrips [SKIP]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Unique_constraint_is_translated_to_conflict [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.New_checkout_inserts_header_lines_payment_and_stock_in_one_commit [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Shipping_line_and_shipment_are_committed_together_and_can_be_paid [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Three_procedures_execute_and_adjustment_writes_history [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Last_unit_cannot_be_sold_by_two_contexts [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Closed_branch_inactive_staff_and_masked_document_roundtrip [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Set_based_price_revision_updates_audit_without_materializing_products [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Money_order_stores_only_masked_identity_and_preserves_verification_policy [1 ms]
+  Skipped ApexPost.Tests.SqlServer.SqlPersistenceTests.Repository_stages_until_uow_and_private_state_roundtrips [1 ms]
+[xUnit.net 00:00:02.18]     ApexPost.Tests.SqlServer.RetrySafetyTests.Precommit_failure_rolls_back_before_replaying_price_revision [SKIP]
+[xUnit.net 00:00:02.18]     ApexPost.Tests.SqlServer.RetrySafetyTests.Lost_commit_acknowledgement_does_not_adjust_stock_twice [SKIP]
+[xUnit.net 00:00:02.18]     ApexPost.Tests.SqlServer.QueryShapeTests.Single_and_split_load_identical_aggregates_with_bounded_commands [SKIP]
+[xUnit.net 00:00:02.18]     ApexPost.Tests.SqlServer.QueryCountTests.Reports_execute_four_queries_for_one_or_all_branches [SKIP]
+[xUnit.net 00:00:02.18]     ApexPost.Tests.SqlServer.MigrationUpgradeTests.Existing_ordinal_rows_keep_their_meaning_after_upgrade_and_downgrade [SKIP]
+  Skipped ApexPost.Tests.SqlServer.RetrySafetyTests.Precommit_failure_rolls_back_before_replaying_price_revision [1 ms]
+  Skipped ApexPost.Tests.SqlServer.RetrySafetyTests.Lost_commit_acknowledgement_does_not_adjust_stock_twice [1 ms]
+  Skipped ApexPost.Tests.SqlServer.QueryShapeTests.Single_and_split_load_identical_aggregates_with_bounded_commands [1 ms]
+  Skipped ApexPost.Tests.SqlServer.QueryCountTests.Reports_execute_four_queries_for_one_or_all_branches [1 ms]
+  Skipped ApexPost.Tests.SqlServer.MigrationUpgradeTests.Existing_ordinal_rows_keep_their_meaning_after_upgrade_and_downgrade [1 ms]
+
+Passed!  - Failed:     0, Passed:    77, Skipped:    22, Total:    99, Duration: 1 s - ApexPost.Tests.dll (net10.0)

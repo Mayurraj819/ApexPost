@@ -138,3 +138,7 @@ dotnet test ApexPost.slnx --no-build
 
 Zero skipped SQL tests is required for a complete persistence verification. Inspect the new
 migration before applying it. No EnsureCreated or automatic startup migration is introduced.
+
+## Week 4 Part D
+
+See [PARTD-START-HERE.md](PARTD-START-HERE.md) for API security and MAUI setup. Earlier API requests now require a bearer token. Use ApexPost.Mobile.slnx for the native app; ApexPost.slnx is the portable server/test solution.

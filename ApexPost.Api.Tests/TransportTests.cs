@@ -11,15 +11,20 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace ApexPost.Api.Tests;
-public sealed class ApiFactory(string environment = "Development", bool explode = false) : WebApplicationFactory<ApiProgram>
+public sealed class ApiFactory(string environment = "Development", bool explode = false, bool authenticate = true) : WebApplicationFactory<ApiProgram>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment(environment);
+        builder.UseSetting("Jwt:Issuer",SecurityTokens.Issuer);
+        builder.UseSetting("Jwt:Audience",SecurityTokens.Audience);
+        builder.UseSetting("Jwt:SigningKey",Convert.ToBase64String(SecurityTokens.Key));
+        builder.UseSetting("Partners:ApiKeys:0",SecurityTokens.PartnerKey);
         builder.UseSetting("ConnectionStrings:ApexPost", "Server=localhost;Database=Api_Transport_NoConnection;Integrated Security=true;TrustServerCertificate=true");
         builder.ConfigureAppConfiguration((_, c) => c.AddInMemoryCollection(new Dictionary<string, string?> { ["ConnectionStrings:ApexPost"] = "Server=localhost;Database=Api_Transport_NoConnection;Integrated Security=true;TrustServerCertificate=true" }));
         builder.ConfigureServices(s =>
         {
+            if(authenticate) s.AddAuthentication(o=>{o.DefaultAuthenticateScheme="TransportTest";o.DefaultChallengeScheme="TransportTest";o.DefaultForbidScheme="TransportTest";}).AddScheme<Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions,TransportAuthentication>("TransportTest",_=>{});
             s.RemoveAll<IShipmentApiService>();
             s.AddSingleton<IShipmentApiService>(new MemoryService(explode));
         });
@@ -220,7 +225,7 @@ public sealed class TransportTests
             var contractPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../../contracts", v + ".json"));
             Assert.True(JsonElement.DeepEquals(JsonDocument.Parse(await File.ReadAllTextAsync(contractPath)).RootElement, document), "Committed contract differs from runtime OpenAPI; regenerate it.");
             var paths = document.GetProperty("paths");
-            Assert.Equal(4, paths.EnumerateObject().Count());
+            Assert.Equal(v=="v1"?4:5, paths.EnumerateObject().Count());
             if (v == "v1")
                 Assert.True(paths.GetProperty("/api/v1/shipments/{trackingNumber}").GetProperty("get").GetProperty("deprecated").GetBoolean());
             Assert.Equal("GetShipment" + v.ToUpperInvariant(), paths.GetProperty($"/api/{v}/shipments/{{trackingNumber}}").GetProperty("get").GetProperty("operationId").GetString());

@@ -1,3 +1,5 @@
+using ApexPost.Api.Security;
+using Microsoft.AspNetCore.Authorization;
 using System.ComponentModel.DataAnnotations;
 using ApexPost.Api.Contracts;
 using ApexPost.Application.Delivery;
@@ -7,6 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApexPost.Api.Controllers;
 /// <summary>HTTP endpoints for shipment tracking and courier scans.</summary>
+[Authorize]
+[ProducesResponseType<ProblemDetails>(401)]
+[ProducesResponseType<ProblemDetails>(403)]
 [ApiController, Route("api/v{version:apiVersion}/shipments"), Tags("Shipments")]
 [ApiVersion("2.0")]
 [Produces("application/json")]
@@ -44,10 +49,12 @@ public sealed class ShipmentsV2Controller(IShipmentApiService service) : Control
     [ProducesResponseType<ShipmentV2>(200)]
     public async Task<ActionResult<ShipmentV2>> Replace(string trackingNumber, UpdateShipmentRequest request, CancellationToken ct) => Ok(ResponseMapping.V2(await service.ReplaceAsync(trackingNumber, request.ToDetails(), ct)));
     /// <summary>Advance a shipment through its allowed status transitions.</summary>
+    [Authorize(Roles="Courier")]
     [HttpPatch("{trackingNumber:length(12)}/status", Name = "ChangeShipmentStatusV2"), Consumes("application/json"), EndpointSummary("Advance a shipment through its allowed status transitions")]
     [ProducesResponseType<ShipmentV2>(200)]
     public async Task<ActionResult<ShipmentV2>> ChangeStatus(string trackingNumber, UpdateStatusRequest request, CancellationToken ct) => Ok(ResponseMapping.V2(await service.ChangeStatusAsync(trackingNumber, Enum.Parse<DeliveryStatus>(request.Status), ct)));
     /// <summary>Delete a Created shipment.</summary>
+    [Authorize(Roles="Admin")]
     [HttpDelete("{trackingNumber:length(12)}", Name = "DeleteShipmentV2"), EndpointSummary("Delete a Created shipment")]
     [ProducesResponseType(204)]
     public async Task<IActionResult> Delete(string trackingNumber, CancellationToken ct)
@@ -57,6 +64,8 @@ public sealed class ShipmentsV2Controller(IShipmentApiService service) : Control
     }
 
     /// <summary>Upload scans idempotently using their Part A IDs.</summary>
+    [Authorize(Roles="Courier")]
+    [ServiceFilter(typeof(CourierOwnershipFilter))]
     [HttpPost("{trackingNumber:length(12)}/scans", Name = "UploadShipmentScansV2"), Tags("Scans"), Consumes("application/json"), EndpointSummary("Upload scans idempotently using their Part A IDs")]
     [ProducesResponseType<ScanUploadResponse>(200)]
     public async Task<ActionResult<ScanUploadResponse>> Upload(string trackingNumber, [FromBody, ValidScanBatch] List<ScanUploadRequest> scans, CancellationToken ct) => Ok(ResponseMapping.Upload(await service.UploadAsync(trackingNumber, scans.Select(s => s.ToInput()).ToArray(), ct)));

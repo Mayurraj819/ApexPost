@@ -1,3 +1,4 @@
+using ApexPost.Api.Security;
 using ApexPost.Api.Errors;
 using ApexPost.Api.OpenApi;
 using ApexPost.Infrastructure;
@@ -12,6 +13,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ApexPost.Application.Abstractions.Services.ICurrentActor, ApexPost.Api.Services.ApiCurrentActor>();
 builder.Services.AddProblemDetails(options => options.CustomizeProblemDetails = context => context.ProblemDetails.Extensions["traceId"] = context.HttpContext.TraceIdentifier);
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
+builder.Services.AddCourierSecurity(builder.Configuration);
 builder.Services.AddApiVersioning(options =>
 {
     options.DefaultApiVersion = new ApiVersion(1, 0);
@@ -65,6 +67,10 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseAuthentication();
+app.UseAuthorization();
+if(app.Environment.IsDevelopment())
+    app.MapPost("/dev/token",(DevTokenRequest request,HttpContext context,DevelopmentTokens tokens)=>tokens.Issue(request,context)).AllowAnonymous().ExcludeFromDescription();
 app.MapControllers();
 app.Run();
 /// <summary>API application entry point for integration tests.</summary>

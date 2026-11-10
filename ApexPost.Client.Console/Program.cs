@@ -2,8 +2,10 @@ using ApexPost.Client;
 using Microsoft.Extensions.DependencyInjection;
 
 var baseUrl = Environment.GetEnvironmentVariable("APEXPOST_API_BASE_URL") ?? "https://localhost:7268/";
+var token=Environment.GetEnvironmentVariable("APEXPOST_ACCESS_TOKEN");
+if(string.IsNullOrWhiteSpace(token)){Console.Error.WriteLine("Set APEXPOST_ACCESS_TOKEN to a development Courier JWT; see PARTD-START-HERE.md.");return;}
 var services = new ServiceCollection();
-services.AddHttpClient<IApexPostClient, ApexPostClient>(http => http.BaseAddress = new Uri(baseUrl));
+services.AddHttpClient<IApexPostClient, ApexPostClient>(http => {http.BaseAddress=new Uri(baseUrl);http.DefaultRequestHeaders.Authorization=new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer",token);});
 await using var provider = services.BuildServiceProvider();
 var client = provider.GetRequiredService<IApexPostClient>();
 var tracking = args.FirstOrDefault() ?? $"APX-{Random.Shared.Next(10000000, 99999999)}";

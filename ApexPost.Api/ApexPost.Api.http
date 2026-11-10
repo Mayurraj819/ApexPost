@@ -4,6 +4,7 @@
 
 ### v1 CREATE success: 201 with Location
 POST {{baseUrl}}/api/v1/shipments
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -17,6 +18,7 @@ Content-Type: application/json
 
 ### v1 CREATE duplicate failure: 409 ProblemDetails
 POST {{baseUrl}}/api/v1/shipments
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -30,18 +32,23 @@ Content-Type: application/json
 
 ### v1 LIST success: 200
 GET {{baseUrl}}/api/v1/shipments?page=1&pageSize=20&city=Pune
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 
 ### v1 LIST invalid page size: 400
 GET {{baseUrl}}/api/v1/shipments?pageSize=51
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 
 ### v1 GET success: 200
 GET {{baseUrl}}/api/v1/shipments/APX-11111111
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 
 ### v1 GET unknown shipment: 404
 GET {{baseUrl}}/api/v1/shipments/APX-00000000
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 
 ### v1 PUT success: 200
 PUT {{baseUrl}}/api/v1/shipments/APX-11111111
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -55,6 +62,7 @@ Content-Type: application/json
 
 ### v1 PUT unknown shipment: 404
 PUT {{baseUrl}}/api/v1/shipments/APX-00000000
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -68,6 +76,7 @@ Content-Type: application/json
 
 ### v1 PATCH success: 200
 PATCH {{baseUrl}}/api/v1/shipments/APX-11111111/status
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -76,6 +85,7 @@ Content-Type: application/json
 
 ### v1 PATCH invalid transition: 409
 PATCH {{baseUrl}}/api/v1/shipments/APX-11111111/status
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -84,6 +94,7 @@ Content-Type: application/json
 
 ### v1 UPLOAD success: 200 accepted=1; rerun gives duplicatesSkipped=1
 POST {{baseUrl}}/api/v1/shipments/APX-11111111/scans
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 [
@@ -100,6 +111,7 @@ Content-Type: application/json
 
 ### v1 UPLOAD custom validation failure: 400
 POST {{baseUrl}}/api/v1/shipments/APX-11111111/scans
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 [
@@ -116,12 +128,15 @@ Content-Type: application/json
 
 ### v1 SCAN HISTORY success: 200
 GET {{baseUrl}}/api/v1/shipments/APX-11111111/scans
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 
 ### v1 SCAN HISTORY unknown shipment: 404
 GET {{baseUrl}}/api/v1/shipments/APX-00000000/scans
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 
 ### v1 Create a second shipment for DELETE demonstration: 201
 POST {{baseUrl}}/api/v1/shipments
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -135,18 +150,22 @@ Content-Type: application/json
 
 ### v1 DELETE Created shipment success: 204
 DELETE {{baseUrl}}/api/v1/shipments/APX-11111199
+Authorization: Bearer {{$processEnv APEXPOST_ADMIN_TOKEN}}
 
 ### v1 DELETE PickedUp shipment failure: 409
 DELETE {{baseUrl}}/api/v1/shipments/APX-11111111
+Authorization: Bearer {{$processEnv APEXPOST_ADMIN_TOKEN}}
 
 ### v1 Wrong media type: 415 ProblemDetails
 POST {{baseUrl}}/api/v1/shipments
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: text/plain
 
 not-json
 
 ### v2 CREATE success: 201 with Location
 POST {{baseUrl}}/api/v2/shipments
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -160,6 +179,7 @@ Content-Type: application/json
 
 ### v2 CREATE duplicate failure: 409 ProblemDetails
 POST {{baseUrl}}/api/v2/shipments
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -173,18 +193,23 @@ Content-Type: application/json
 
 ### v2 LIST success: 200
 GET {{baseUrl}}/api/v2/shipments?page=1&pageSize=20&city=Pune
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 
 ### v2 LIST invalid page size: 400
 GET {{baseUrl}}/api/v2/shipments?pageSize=51
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 
 ### v2 GET success: 200
 GET {{baseUrl}}/api/v2/shipments/APX-22222222
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 
 ### v2 GET unknown shipment: 404
 GET {{baseUrl}}/api/v2/shipments/APX-00000000
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 
 ### v2 PUT success: 200
 PUT {{baseUrl}}/api/v2/shipments/APX-22222222
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -198,6 +223,7 @@ Content-Type: application/json
 
 ### v2 PUT unknown shipment: 404
 PUT {{baseUrl}}/api/v2/shipments/APX-00000000
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -211,6 +237,7 @@ Content-Type: application/json
 
 ### v2 PATCH success: 200
 PATCH {{baseUrl}}/api/v2/shipments/APX-22222222/status
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -219,6 +246,7 @@ Content-Type: application/json
 
 ### v2 PATCH invalid transition: 409
 PATCH {{baseUrl}}/api/v2/shipments/APX-22222222/status
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -227,6 +255,7 @@ Content-Type: application/json
 
 ### v2 UPLOAD success: 200 accepted=1; rerun gives duplicatesSkipped=1
 POST {{baseUrl}}/api/v2/shipments/APX-22222222/scans
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 [
@@ -243,6 +272,7 @@ Content-Type: application/json
 
 ### v2 UPLOAD custom validation failure: 400
 POST {{baseUrl}}/api/v2/shipments/APX-22222222/scans
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 [
@@ -259,12 +289,15 @@ Content-Type: application/json
 
 ### v2 SCAN HISTORY success: 200
 GET {{baseUrl}}/api/v2/shipments/APX-22222222/scans
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 
 ### v2 SCAN HISTORY unknown shipment: 404
 GET {{baseUrl}}/api/v2/shipments/APX-00000000/scans
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 
 ### v2 Create a second shipment for DELETE demonstration: 201
 POST {{baseUrl}}/api/v2/shipments
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
@@ -278,12 +311,57 @@ Content-Type: application/json
 
 ### v2 DELETE Created shipment success: 204
 DELETE {{baseUrl}}/api/v2/shipments/APX-22222299
+Authorization: Bearer {{$processEnv APEXPOST_ADMIN_TOKEN}}
 
 ### v2 DELETE PickedUp shipment failure: 409
 DELETE {{baseUrl}}/api/v2/shipments/APX-22222222
+Authorization: Bearer {{$processEnv APEXPOST_ADMIN_TOKEN}}
 
 ### v2 Wrong media type: 415 ProblemDetails
 POST {{baseUrl}}/api/v2/shipments
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
 Content-Type: text/plain
 
 not-json
+
+# D credentials are process environment values; launch Visual Studio from that private environment.
+# Prefer Swagger Authorize for clipboard scripts. Never commit actual credentials.
+### Missing token: 401
+GET {{baseUrl}}/api/v2/shipments
+
+### Invalid token: 401
+GET {{baseUrl}}/api/v2/shipments
+Authorization: Bearer intentionally-invalid
+
+### Valid Courier: 200
+GET {{baseUrl}}/api/v2/shipments
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
+
+### Courier cannot DELETE: 403
+DELETE {{baseUrl}}/api/v2/shipments/APX-12345678
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
+
+### Admin cannot PATCH: 403
+PATCH {{baseUrl}}/api/v2/shipments/APX-12345678/status
+Authorization: Bearer {{$processEnv APEXPOST_ADMIN_TOKEN}}
+Content-Type: application/json
+
+{"status":"PickedUp"}
+
+### Wrong courier: 403
+POST {{baseUrl}}/api/v2/shipments/APX-12345678/scans
+Authorization: Bearer {{$processEnv APEXPOST_ACCESS_TOKEN}}
+Content-Type: application/json
+
+[{"id":"scan::aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa","trackingNumber":"APX-12345678","scanType":"Pickup","courierId":"OTHER","location":"Demo","scannedAtUtc":"2020-01-01T10:00:00Z","notes":"Fictional"}]
+
+### Missing key: 401
+GET {{baseUrl}}/api/v2/partner/shipments/APX-12345678
+
+### Invalid key: 401
+GET {{baseUrl}}/api/v2/partner/shipments/APX-12345678
+X-Api-Key: intentionally-invalid
+
+### Configured key: 200 (create shipment first)
+GET {{baseUrl}}/api/v2/partner/shipments/APX-12345678
+X-Api-Key: {{$processEnv APEXPOST_PARTNER_KEY}}
