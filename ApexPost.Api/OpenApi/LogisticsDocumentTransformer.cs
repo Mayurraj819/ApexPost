@@ -20,6 +20,29 @@ public sealed class LogisticsDocumentTransformer : IOpenApiDocumentTransformer
             }
         };
         document.Servers = [];
+        document.Components ??= new OpenApiComponents();
+        document.Components.SecuritySchemes ??= new Dictionary<string, IOpenApiSecurityScheme>();
+        document.Components.SecuritySchemes["Bearer"] = new OpenApiSecurityScheme
+        {
+            Type = SecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT",
+            Description = "Paste a development JWT. Never commit tokens."
+        };
+        document.Components.SecuritySchemes["PartnerKey"] = new OpenApiSecurityScheme
+        {
+            Type = SecuritySchemeType.ApiKey,
+            Name = "X-Api-Key",
+            In = ParameterLocation.Header
+        };
+        foreach (var path in document.Paths)
+            foreach (var operation in path.Value.Operations?.Values.AsEnumerable() ?? [])
+                operation.Security = [new OpenApiSecurityRequirement
+                {
+                    [new OpenApiSecuritySchemeReference(path.Key.Contains("/partner/") ? "PartnerKey" : "Bearer", document)] = []
+                }
+
+                ];
         return Task.CompletedTask;
     }
 }

@@ -1,0 +1,19 @@
+  ApexPost.Domain -> <checkout>/ApexPost.Domain/bin/Debug/net10.0/ApexPost.Domain.dll
+  ApexPost.Application -> <checkout>/ApexPost.Application/bin/Debug/net10.0/ApexPost.Application.dll
+  ApexPost.Infrastructure -> <checkout>/ApexPost.Infrastructure/bin/Debug/net10.0/ApexPost.Infrastructure.dll
+  ApexPost.Api -> <checkout>/ApexPost.Api/bin/Debug/net10.0/ApexPost.Api.dll
+  ApexPost.Client -> <checkout>/ApexPost.Client/bin/Debug/net10.0/ApexPost.Client.dll
+  ApexPost.Api.Tests -> <checkout>/ApexPost.Api.Tests/bin/Debug/net10.0/ApexPost.Api.Tests.dll
+  ApexPost.Client.Console -> <checkout>/ApexPost.Client.Console/bin/Debug/net10.0/ApexPost.Client.Console.dll
+  ApexPost.Courier.Offline -> <checkout>/ApexPost.Courier.Offline/bin/Debug/net10.0/ApexPost.Courier.Offline.dll
+  ApexPost.Courier.Console -> <checkout>/ApexPost.Courier.Console/bin/Debug/net10.0/ApexPost.Courier.Console.dll
+  ApexPost.Courier.Integration -> <checkout>/ApexPost.Courier.Integration/bin/Debug/net10.0/ApexPost.Courier.Integration.dll
+  ApexPost.Courier.Integration.Tests -> <checkout>/ApexPost.Courier.Integration.Tests/bin/Debug/net10.0/ApexPost.Courier.Integration.Tests.dll
+  ApexPost.Web -> <checkout>/ApexPost.Web/bin/Debug/net10.0/ApexPost.Web.dll
+  ApexPost.Tests -> <checkout>/ApexPost.Tests/bin/Debug/net10.0/ApexPost.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:06.35

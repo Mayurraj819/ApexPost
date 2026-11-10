@@ -1,0 +1,11 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  ApexPost.Courier.Offline -> <checkout>/ApexPost.Courier.Offline/bin/Debug/net10.0/ApexPost.Courier.Offline.dll
+  ApexPost.Courier.Integration -> <checkout>/ApexPost.Courier.Integration/bin/Debug/net10.0/ApexPost.Courier.Integration.dll
+  check -> <temporary-source-check>/bin/Debug/net10.0/check.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:10.32
