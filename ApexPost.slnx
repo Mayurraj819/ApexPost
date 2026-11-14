@@ -12,4 +12,7 @@
   <Project Path="ApexPost.Tests/ApexPost.Tests.csproj" />
   <Project Path="ApexPost.Courier.Integration/ApexPost.Courier.Integration.csproj" />
   <Project Path="ApexPost.Courier.Integration.Tests/ApexPost.Courier.Integration.Tests.csproj" />
+  <Project Path="ApexPost.UnitTests/ApexPost.UnitTests.csproj" />
+  <Project Path="ApexPost.IntegrationTests/ApexPost.IntegrationTests.csproj" />
+  <Project Path="ApexPost.Specs/ApexPost.Specs.csproj" />
 </Solution>
