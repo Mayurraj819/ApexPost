@@ -46,6 +46,11 @@ public sealed class TrackedShipment
 
     public void ReplaceDetails(decimal weightKg, string name, string phone, string address, string city)
     {
+        if (Status == DeliveryStatus.Delivered)
+        {
+            throw new DeliveryConflictException(
+                "A delivered shipment's details cannot be replaced.");
+        }
         if (weightKg < 0.1m || weightKg > 70m)
             throw new ArgumentException("Weight must be between 0.1 and 70 kg.");
         foreach (var value in new[]
