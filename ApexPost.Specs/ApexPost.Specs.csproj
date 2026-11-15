@@ -23,4 +23,10 @@
     <ProjectReference Include="../ApexPost.Api/ApexPost.Api.csproj" />
     <ProjectReference Include="../ApexPost.Courier.Offline/ApexPost.Courier.Offline.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- Reuse test infrastructure as source, without a reference to another test assembly. -->
+    <Compile Include="../ApexPost.IntegrationTests/Infrastructure/SqlTestDatabase.cs" Link="Infrastructure/Shared/SqlTestDatabase.cs" />
+    <Compile Include="../ApexPost.IntegrationTests/Infrastructure/SqlApiFactory.cs" Link="Infrastructure/Shared/SqlApiFactory.cs" />
+    <None Update="reqnroll.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

@@ -175,3 +175,18 @@ Pending, intentionally not written as a success claim before tests exist. At com
 - Reqnroll xUnit: https://docs.reqnroll.net/latest/integrations/xunit.html
 - Reqnroll context injection: https://docs.reqnroll.net/latest/automation/context-injection.html
 - Reqnroll hooks: https://docs.reqnroll.net/latest/automation/hooks.html
+
+
+## Week 5 BDD implemented feature levels
+
+| Feature | Level | Reason |
+| --- | --- | --- |
+| ShipmentCreation (5 cases) | API + real SQL Server | Acceptance of valid details, duplicate tracking and weight validation must agree with persisted state. |
+| ScanUpload (3 cases) | API + real SQL Server | New, replayed and conflicting scan IDs must preserve actual database history. |
+
+These features use injected scenario state, tagged async hooks and the existing
+SQL/auth helpers as linked source. They do not test native outbox execution, MAUI,
+JWT cryptography or the typed client's retries. See docs/week5/BDD-STRATEGY.md for
+commands, isolation and limitations. Linux compilation and binding-only dry run
+were checked; actual Windows/SQL execution must be recorded in evidence/week5/bdd.txt.
+This update does not replace the final full-suite result or reflection.
