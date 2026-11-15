@@ -25,4 +25,8 @@
     <ProjectReference Include="..\ApexPost.Web\ApexPost.Web.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Reuse automatic disposable SQL setup as source; no reference to another test assembly. -->
+    <Compile Include="../ApexPost.IntegrationTests/Infrastructure/SqlTestDatabase.cs" Link="Infrastructure/Shared/SqlTestDatabase.cs" />
+  </ItemGroup>
 </Project>

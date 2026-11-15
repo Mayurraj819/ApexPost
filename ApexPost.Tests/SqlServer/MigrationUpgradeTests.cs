@@ -9,12 +9,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ApexPost.Tests.SqlServer;
 
 [Collection("SqlServer"), Trait("Category", "SqlServer")]
-public sealed class MigrationUpgradeTests(SqlServerFixture fixture)
+public sealed class MigrationUpgradeTests : SqlServerTestBase
 {
     [SqlServerFact]
     public async Task Existing_ordinal_rows_keep_their_meaning_after_upgrade_and_downgrade()
     {
-        // Separate database: never downgrade the shared fixture or development database.
+        // Separate database: never downgrade the seeded per-test fixture or development database.
         var builder = new SqlConnectionStringBuilder(fixture.Connection)
         { InitialCatalog = "ApexPost_Test_Upgrade_" + Guid.NewGuid().ToString("N") };
         await using var db = new ApexPostDbContext(new DbContextOptionsBuilder<ApexPostDbContext>()

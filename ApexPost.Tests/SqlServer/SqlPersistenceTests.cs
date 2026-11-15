@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApexPost.Tests.SqlServer;
 [Collection("SqlServer"), Trait("Category", "SqlServer")]
-public sealed class SqlPersistenceTests(SqlServerFixture fixture)
+public sealed class SqlPersistenceTests : SqlServerTestBase
 {
     [SqlServerFact]
     public async Task Repository_stages_until_uow_and_private_state_roundtrips()

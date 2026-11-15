@@ -1,48 +1,56 @@
 using ApexPost.Infrastructure.Persistence;
 using ApexPost.Infrastructure.Seeding;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+using ApexPost.IntegrationTests.Infrastructure;
 
 namespace ApexPost.Tests.SqlServer;
-public sealed class SqlServerFactAttribute : FactAttribute
-{
-    public SqlServerFactAttribute()
-    {
-        if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("APEXPOST_TEST_SQLSERVER")))
-            Skip = "Set APEXPOST_TEST_SQLSERVER to a SQL Server connection with database-create rights (Initial Catalog=master).";
-    }
-}
+
+// Retained attribute name preserves existing test/category discovery. No silent SQL skips.
+public sealed class SqlServerFactAttribute : FactAttribute;
 
 public sealed class SqlServerFixture : IAsyncLifetime
 {
-    public string Connection { get; private set; } = "";
+    private SqlTestDatabase? _database;
+    public string Connection => Database.ConnectionString;
+    private SqlTestDatabase Database => _database
+        ?? throw new InvalidOperationException("The per-test SQL database has not been initialized.");
 
-    public ApexPostDbContext Create() => new(new DbContextOptionsBuilder<ApexPostDbContext>().UseSqlServer(Connection, sql => sql.EnableRetryOnFailure()).Options);
+    public ApexPostDbContext Create() => Database.CreateContext();
+
     public async Task InitializeAsync()
     {
-        var value = Environment.GetEnvironmentVariable("APEXPOST_TEST_SQLSERVER");
-        if (string.IsNullOrWhiteSpace(value))
-            return;
-        var builder = new SqlConnectionStringBuilder(value);
-        if (!string.IsNullOrEmpty(builder.InitialCatalog) && !builder.InitialCatalog.Equals("master", StringComparison.OrdinalIgnoreCase))
-            throw new InvalidOperationException("Test base connection must target master, never ApexPostDb or a shared database.");
-        builder.InitialCatalog = "ApexPost_Test_" + Guid.NewGuid().ToString("N");
-        Connection = builder.ConnectionString;
-        await using var db = Create();
-        await db.Database.MigrateAsync();
-        await new ApexPostSeeder(db).SeedAsync();
+        _database = await SqlTestDatabase.CreateAsync();
+        try
+        {
+            await using var db = Create();
+            await new ApexPostSeeder(db).SeedAsync();
+        }
+        catch
+        {
+            try { await DisposeAsync(); }
+            catch { /* Preserve the seed/setup failure if cleanup also fails. */ }
+            throw;
+        }
     }
 
     public async Task DisposeAsync()
     {
-        if (string.IsNullOrEmpty(Connection))
-            return;
-        if (!new SqlConnectionStringBuilder(Connection).InitialCatalog.StartsWith("ApexPost_Test_", StringComparison.Ordinal))
-            throw new InvalidOperationException("Refusing to delete non-test database.");
-        await using var db = Create();
-        await db.Database.EnsureDeletedAsync();
+        if (_database is { } database)
+        {
+            _database = null;
+            await database.DisposeAsync();
+        }
     }
 }
 
+// xUnit creates a fresh test-class instance per case. The inherited lifetime therefore
+// creates/seeds/drops one database per case, including when its assertions fail.
+public abstract class SqlServerTestBase : IAsyncLifetime
+{
+    protected readonly SqlServerFixture fixture = new();
+    public Task InitializeAsync() => fixture.InitializeAsync();
+    public Task DisposeAsync() => fixture.DisposeAsync();
+}
+
+// Serialize legacy SQL cases for bounded LocalDB resource usage, not shared data.
 [CollectionDefinition("SqlServer", DisableParallelization = true)]
-public sealed class SqlServerCollection : ICollectionFixture<SqlServerFixture>;
+public sealed class SqlServerCollection;
