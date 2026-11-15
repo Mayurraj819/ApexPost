@@ -1,8 +1,8 @@
 # ApexPost Week 5 testing strategy
 
-Status: strategy-first plan; implementation and final reflection are pending.
+Status: implementation and recorded Windows execution reviewed at `adc53976`; 197 passed, 0 failed, 0 skipped, zero build warnings/errors. Legacy determinism limitations and the uncompleted merge are explicitly recorded below.
 
-Reviewed baseline: `master` commit `5610e6a97c70d2bd337dbce772f028f72a9c7793` (Week 4 Part D merge). Working branch: `week5-testing`. This document must be committed before new Week 5 test or production changes. The previously supplied grouping image is a planning aid; this document defines the implementation decisions.
+Reviewed baseline: `master` commit `5610e6a97c70d2bd337dbce772f028f72a9c7793` (Week 4 Part D merge). Working branch: `week5-testing`. The initial strategy was committed first at `8d142b3`, before foundation, RED, GREEN and REFACTOR changes. This revision reconciles that plan with the implemented work; the original plan remains in Git history. The previously supplied grouping image is a planning aid; this document defines the implementation decisions.
 
 ## 1. Goal and scope
 
@@ -16,14 +16,14 @@ In scope: domain/application services, validation, SQL and Couchbase repositorie
 |---|---|---|
 | Critical | Duplicate scan replay or changed-content reuse corrupts delivery history | Pure sync acknowledgement unit tests, real SQL uniqueness/transaction/concurrency integration, scan-sync acceptance |
 | Critical | Stock, sale/payment or receipt writes partially commit | Retained commit-boundary unit checks plus SQL rollback/lost-acknowledgement integration |
-| Critical | JWT roles or courierId ownership permit unauthorized writes | Real signed-JWT HTTP tests with controlled time; explicit 401/403 and no-write assertions |
+| Critical | JWT roles or courierId ownership permit unauthorized writes | Real signed-JWT HTTP tests; explicit 401/403 and no-write assertions. Legacy JWT time control remains a limitation in section 7. |
 | High | Illegal shipment transitions or edits of completed delivery data damage history | Transition/boundary unit matrices; new Delivered-details rule via genuine TDD; HTTP 409 check |
 | High | Duplicate tracking numbers or invalid weight/phone enter storage | DTO/domain unit boundaries, real SQL unique constraint, creation acceptance scenarios |
 | High | HTTP retries repeat unsafe writes or lose pending scans during an outage | Fake-handler typed-client tests, exact attempt counts, cancellation/circuit tests, unchanged local Pending assertions |
 | High | Couchbase serialization, filters or indexes return incorrect local state after restart | Real temporary Couchbase CRUD, reopen/round-trip, SQL++ ordering/filter/group counts, listener lifecycle checks |
 | High | Malformed/null JSON or inconsistent per-ID acknowledgements mark unaccepted scans Synced | Source-generated JSON client unit tests and explicit complete-ID validation |
 | Medium | API version/SDK drift silently breaks consumers | Retain runtime-vs-committed OpenAPI comparisons and generated-client contract tests |
-| Medium | Nondeterministic clocks, shared fixtures or process configuration hide failures | Fixed UTC fixtures, injected time, per-test databases/hosts and no global mutable test state |
+| Medium | Nondeterministic clocks, shared fixtures or process configuration hide failures | Fixed inputs in new tests and per-case SQL/native state; remaining legacy clock/configuration coupling is disclosed in section 7. |
 
 ## 3. Framework and test pyramid
 
@@ -44,49 +44,49 @@ Keep the existing projects as documented equivalents rather than rename all hist
 - `ApexPost.Tests`: existing mixed legacy regressions; add accurate category traits and isolate infrastructure fixtures.
 - `ApexPost.Api.Tests`: existing HTTP/security/contract and SQL service regressions.
 - `ApexPost.Courier.Integration.Tests`: existing no-network client/pipeline tests. Despite the name, many are unit/component tests using MemoryScans and Stub; the directory name does not prove persistence.
-- Add `ApexPost.UnitTests`: focused new rule/validation/outbox/service/Moq tests, with Domain, Application, Validation and Courier folders.
-- Add `ApexPost.IntegrationTests`: actual Couchbase and SQL/API integration, isolated fixture infrastructure and lifecycle tests.
-- Add `ApexPost.Specs`: Reqnroll feature files, scenario context, bindings and hooks.
+- `ApexPost.UnitTests`: four focused classes for the new rule, shipment boundaries, Moq outbox behavior and typed-client contracts (22 cases).
+- `ApexPost.IntegrationTests`: actual Couchbase and SQL/API integration, isolated fixture infrastructure and lifecycle tests.
+- `ApexPost.Specs`: Reqnroll feature files, scenario context, bindings and hooks.
 
-Add the new projects to `ApexPost.slnx`, which excludes the MAUI app; leave `ApexPost.Mobile.slnx` outside this backend test workflow. Do not copy the same test into two projects. Move tests only with a documented source-to-destination mapping and remove the original in the same reviewed change. Keep generated client files untouched.
+All three new projects are included in `ApexPost.slnx`, which excludes the MAUI app; `ApexPost.Mobile.slnx` remains outside this backend test workflow. Do not copy the same test into two projects. Move tests only with a documented source-to-destination mapping and remove the original in the same reviewed change. Keep generated client files untouched.
 
 Every new/refined test uses Arrange, Act, Assert sections and `Method_Scenario_ExpectedResult` naming. For exception tests, the captured action is the Act and Assert.Throws/ThrowsAsync verifies the outcome; also verify unchanged state/no persistence where relevant. Use Theory/InlineData for at least tracking formats and decimal weight boundaries (0.09, 0.1, 70, 70.01), plus transition combinations. Assert types, contents and status/headers, not merely non-null results or absence of an exception.
 
 ## 5. Existing-test review (one row per test class)
 
-There are **27 test-bearing classes** at the reviewed baseline. Decisions below are prospective: **Modified** means retain the behavior and perform the described improvement; it does not claim the code is already changed. **Kept** still receives naming/AAA consistency review if touched. No existing tests have been removed or replaced in this strategy-only change. Any later deletion/consolidation must update this table with the exact replacement and reason before deletion.
+There were **27 test-bearing classes** at the reviewed baseline. The table now records actual decisions at adc53976. **Kept** means the existing class was retained; an improvement mentioned as a limitation has not been implemented. **Modified** means its test code/lifecycle changed while behavior assertions were retained. No baseline test class was removed or replaced. The strategy-first prospective decisions remain visible in the initial Git revision.
 
 | File | Test class | Decision | Reason / required change |
 |---|---|---|---|
-| `ApexPost.Tests/Application/ApplicationServiceTests.cs` | `ApplicationServiceTests` | Modified | Keep all service behaviors; explicit AAA and focused names. Retain useful fakes; add separate Moq tests to prove calls, arguments and no-write failure paths. |
+| `ApexPost.Tests/Application/ApplicationServiceTests.cs` | `ApplicationServiceTests` | Kept | Retain existing application-service behavior/fakes. New Moq outbox checks are separate; no broad rename or rewrite was performed. |
 | `ApexPost.Tests/Application/CommitBoundaryTests.cs` | `CommitBoundaryTests` | Kept | Exact-one-commit success and zero-commit failure assertions protect transactional orchestration. SpyUnitOfWork is a test double, not proof of SQL rollback. |
 | `ApexPost.Tests/Domain/BusinessRuleTests.cs` | `BusinessRuleTests` | Kept | Protects closed/inactive/cross-branch restrictions, manager actions and identity safety, including state after rejected operations. |
-| `ApexPost.Tests/Domain/DomainRegressionTests.cs` | `DomainRegressionTests` | Modified | Retain unique counter/hours, paid-line and refund cases. Standardize AAA/names and document overlapping stock/identity cases before any later consolidation. |
+| `ApexPost.Tests/Domain/DomainRegressionTests.cs` | `DomainRegressionTests` | Kept | Retain domain regressions for branch/counter/staff restrictions, paid lines and refunds; no deletion or cosmetic rewrite. |
 | `ApexPost.Tests/Domain/EntityTests.cs` | `EntityTests` | Kept | Branch normalization and invalid counter numbers are cheap domain regressions. |
-| `ApexPost.Tests/Domain/FinalMoneyOrderSafetyTests.cs` | `FinalMoneyOrderSafetyTests` | Modified | Identity masking and stock checks overlap other classes. Retain initially; turn these into focused money-order safety cases or consolidate only with a recorded test-to-test mapping. |
-| `ApexPost.Tests/Domain/TransactionTests.cs` | `TransactionTests` | Modified | Keep total/currency and zero-quantity exceptions; replace UtcNow fixture value with a fixed UTC instant. |
+| `ApexPost.Tests/Domain/FinalMoneyOrderSafetyTests.cs` | `FinalMoneyOrderSafetyTests` | Kept | Retain masking and money-order safety checks despite overlap; no consolidation without a replacement mapping. |
+| `ApexPost.Tests/Domain/TransactionTests.cs` | `TransactionTests` | Kept | Retain total/currency and zero-quantity rules; existing UtcNow fixture input is a recorded legacy limitation. |
 | `ApexPost.Tests/Domain/ValueObjectRuleTests.cs` | `ValueObjectRuleTests` | Kept | Opening-hours closing boundary and negative weight remain useful isolated rules. |
 | `ApexPost.Tests/Domain/ValueObjectTests.cs` | `ValueObjectTests` | Kept | Keep normalized branch codes and invalid Money/Quantity inputs; add new boundary matrices without duplicating these checks. |
-| `ApexPost.Tests/DomainApplicationTests.cs` | `DomainApplicationTests` | Modified | Retain fingerprint mismatch and tiered shipping-price behaviors; separate domain/service concerns and identify overlapping stock/overweight checks. |
-| `ApexPost.Tests/Persistence/ModelContractTests.cs` | `ModelContractTests` | Modified | Retain metadata/converter and SQL-translation checks; label them component contracts, not database integration. Use fixed report dates; execution still needs SQL tests. |
+| `ApexPost.Tests/DomainApplicationTests.cs` | `DomainApplicationTests` | Kept | Retain stock, identity fingerprint and tiered shipping behavior; do not relabel broad legacy checks as new Week 5 work. |
+| `ApexPost.Tests/Persistence/ModelContractTests.cs` | `ModelContractTests` | Kept | Retain model/converter/SQL-translation contracts; no database execution is proven by these no-connection checks. |
 | `ApexPost.Tests/Persistence/ReadinessContractTests.cs` | `ReadinessContractTests` | Kept | Snapshot parity, configured retries, readable converters and dirty-tracker guard are valuable no-connection component contracts. |
-| `ApexPost.Tests/SqlServer/MigrationUpgradeTests.cs` | `MigrationUpgradeTests` | Modified | Keep upgrade/downgrade preservation; fixed dates and a dedicated automatically created database per case. |
-| `ApexPost.Tests/SqlServer/QueryCountTests.cs` | `QueryCountTests` | Modified | Keep bounded report command counts; use fixed seeded report windows and isolated data rather than UtcNow/shared mutations. |
-| `ApexPost.Tests/SqlServer/QueryShapeTests.cs` | `QueryShapeTests` | Modified | Retain single/split aggregate equivalence and command bounds; isolate each case through the new database lifecycle. |
-| `ApexPost.Tests/SqlServer/RetrySafetyTests.cs` | `RetrySafetyTests` | Modified | Retain lost-acknowledgement and precommit rollback checks; automatic isolated database fixture, with deliberately injected failures rather than real outages. |
-| `ApexPost.Tests/SqlServer/SqlPersistenceTests.cs` | `SqlPersistenceTests` | Modified | Keep SQL-specific persistence, procedures, stock races, receipts, privacy and schema replay; fixed data/windows, per-test databases and no environment-dependent silent skips. |
-| `ApexPost.Tests/SqlServer/SqlWebTests.cs` | `SqlWebTests` | Modified | Retain legacy server-side MVC/SQL regressions separately; no browser automation added. Remove timing-based audit polling where an observable completion seam can be used; isolate data. |
+| `ApexPost.Tests/SqlServer/MigrationUpgradeTests.cs` | `MigrationUpgradeTests` | Modified | Inherits per-case SQL lifecycle; separate downgrade database retained. Existing server/client current-date use remains a limitation. |
+| `ApexPost.Tests/SqlServer/QueryCountTests.cs` | `QueryCountTests` | Modified | Each case has fresh seed state; exact bounded report command counts retained. Legacy report windows still depend on current time. |
+| `ApexPost.Tests/SqlServer/QueryShapeTests.cs` | `QueryShapeTests` | Modified | Only output helper is constructor-injected; inherits per-case SQL setup. Single/split equality and command-count assertions retained. |
+| `ApexPost.Tests/SqlServer/RetrySafetyTests.cs` | `RetrySafetyTests` | Modified | Per-case database replaces shared state; injected lost-acknowledgement/rollback failures and all business assertions retained. |
+| `ApexPost.Tests/SqlServer/SqlPersistenceTests.cs` | `SqlPersistenceTests` | Modified | Per-case migrated/seeded database and no silent SQL skip; persistence, procedures, constraints, privacy and schema replay assertions retained. Some date inputs remain current-time based. |
+| `ApexPost.Tests/SqlServer/SqlWebTests.cs` | `SqlWebTests` | Modified | Per-case SQL state; server-side MVC/security/audit assertions retained without browser automation. Timing-based audit polling remains a limitation. |
 | `ApexPost.Tests/Web/ProblemDetailsTests.cs` | `ProblemDetailsTests` | Kept | Existing middleware exception-to-status/sanitization matrix is useful isolated behavior. |
-| `ApexPost.Tests/Web/WebApplicationFactoryTests.cs` | `WebApplicationFactoryTests` | Modified | Keep legacy HTTP middleware/security regressions; replace process-wide password environment mutation with per-host configuration and use an isolated rate-limit clock/config. |
+| `ApexPost.Tests/Web/WebApplicationFactoryTests.cs` | `WebApplicationFactoryTests` | Kept | Keep middleware/security regressions. Process-wide demo-password configuration mutation remains a legacy isolation limitation. |
 | `ApexPost.Tests/Web/WebSecurityTests.cs` | `WebSecurityTests` | Kept | Direct middleware/security tests exercise meaningful behavior without browser or production dependencies. |
-| `ApexPost.Api.Tests/GeneratedClientTests.cs` | `GeneratedClientTests` | Modified | Keep generated-client serialization, duplicate upload and typed 404 checks; use fixed scan timestamps. Existing MemoryService means this is a contract test, not SQL persistence proof. |
-| `ApexPost.Api.Tests/SecurityTests.cs` | `SecurityTests` | Modified | Keep real JWT issuer/audience/signature/lifetime and role/ownership tests; control time and isolate token configuration. Do not replace these with the permissive transport test handler. |
-| `ApexPost.Api.Tests/TransportTests.cs` | `TransportTests` | Modified | Keep binding, status/Location, ProblemDetails and OpenAPI snapshot checks; fixed times and clearer arrangements. MemoryService/test authentication remain explicit doubles; add a separate real-database API test. |
-| `ApexPost.Api.Tests/WorkflowTests.cs` | `WorkflowTests` | Modified | Keep permitted/forbidden transition matrices and Created-only deletion; improve tracking/decimal-weight boundaries and clear AAA. Existing backward-transition behavior is not a new TDD feature. |
-| `ApexPost.Api.Tests/SqlDeliveryTests.cs` | `SqlDeliveryTests` | Modified | Retain real SQL service workflow, scan replay/content collision and concurrency; split broad cases, use fixed scan times, automatic database lifecycle and no configuration-based skip. |
-| `ApexPost.Courier.Integration.Tests/CourierTests.cs` | `CourierTests` | Modified | Retain real HTTP resilience pipeline with fake handlers, batch ownership and per-ID outcomes. Split client/sync/resilience classes, replace wall-clock circuit waits with controllable time/scheduling, fixed timestamps, exact exception assertions and explicit AAA. |
+| `ApexPost.Api.Tests/GeneratedClientTests.cs` | `GeneratedClientTests` | Kept | Keep generated-client wire contracts and typed failures; MemoryService is not SQL evidence. Legacy current-time scan data remains. |
+| `ApexPost.Api.Tests/SecurityTests.cs` | `SecurityTests` | Kept | Retain actual signed-JWT issuer/audience/signature/expiry/role tests. Do not replace them with permissive test auth; lifetime clock remains uncontrolled. |
+| `ApexPost.Api.Tests/TransportTests.cs` | `TransportTests` | Kept | Retain binding, HTTP status/Location, ProblemDetails and OpenAPI checks with explicit MemoryService/test-auth doubles. New real API/SQL tests are separate. |
+| `ApexPost.Api.Tests/WorkflowTests.cs` | `WorkflowTests` | Kept | Keep original permitted/forbidden transitions and Created-only deletion; new precise tracking/weight boundaries live in ShipmentBoundaryTests. |
+| `ApexPost.Api.Tests/SqlDeliveryTests.cs` | `SqlDeliveryTests` | Modified | Automatic disposable SQL helper, explicit SQL category and fixed scan timestamp; original CRUD, replay, collision and concurrency assertions retained. |
+| `ApexPost.Courier.Integration.Tests/CourierTests.cs` | `CourierTests` | Kept | Keep registered fake-HTTP resilience, batch ownership and per-ID outcomes. New direct-client tests add wire-field and ProblemDetails assertions; legacy real timer waits remain. |
 
-Helpers/fixtures are not test classes: SqlServerFixture/SqlServerCollection and custom Fact attributes govern SQL setup; ApiFactory/MemoryService and TransportAuthentication provide HTTP doubles; SecurityTokens supplies JWT material; MemoryScans/Stub/TestTokens and SpyUnitOfWork/in-memory repositories are isolation helpers. Review these alongside their consuming rows. In particular, silent SQL skips and a shared seeded database must not become the Week 5 full-suite acceptance mechanism.
+Helpers/fixtures are not test classes: SqlServerFixture/SqlServerCollection and custom Fact attributes govern SQL setup; ApiFactory/MemoryService and TransportAuthentication provide HTTP doubles; SecurityTokens supplies JWT material; MemoryScans/Stub/TestTokens and SpyUnitOfWork/in-memory repositories are isolation helpers. Review these alongside their consuming rows. The previous silent SQL skips and shared seeded collection database were replaced by the per-test lifecycle in adc53976. See docs/week5/SQL-SETUP-CLEANUP.md. Remaining clock/configuration limitations are not described as completed fixes.
 
 ## 6. Data access and isolation
 
@@ -104,89 +104,224 @@ Use Moq on real existing interfaces such as IScanRepository/IShipmentUploader fo
 
 Use fake HttpMessageHandler instances for 200 JSON, 404 ProblemDetails, 500, validation errors, malformed/null/unknown JSON, timeout and cancellation. Assert error details/status and unchanged Pending state; no unit handler may delegate to real network transport. Retain exact retry counts for HTTP 408/5xx/network faults and exclude other 4xx/unsafe writes. In-process TestServer requests are integration tests, not external HTTP.
 
-## 7. Determinism and automatic setup
+## 7. Determinism, automatic setup and remaining limitations
 
-Reference environment: the user's Windows .NET 10 machine with SQL Server LocalDB and the Couchbase Lite native runtime. Installed SDK/database engine are prerequisites; no manual database creation, seed, launched API, Swagger token, user secret or environment-variable ceremony should be needed for each test run.
+The reference Windows environment has the .NET 10 SDK, LocalDB and the Couchbase
+native runtime. These installed engines are prerequisites, not manual per-test data
+setup. All SQL tests now use the existing automatic helper: default LocalDB, or an
+explicit private-server master connection; generated database names, real migrations,
+seed where required and validated ownership before deletion. Missing SQL fails with
+setup information rather than skipping. The full post-cleanup run has zero skips.
 
-Planned fixture work: discover/start the local test SQL instance automatically on Windows, create a uniquely named `ApexPost_Test_*` database, apply migrations and fixed seed data, then clean up. A deliberately supplied private test connection can be supported on other operating systems/CI. Never default to ApexPostDb or a production connection. Validate deletion targets before cleanup. Give each independent test/scenario its own mutable database (or a proven reset boundary); a race test intentionally uses multiple contexts in the same one-test database. Do not share mutated seed state across unrelated tests.
+Each legacy SQL case inherits an instance IAsyncLifetime wrapper; collection
+serialization limits resource usage but does not share a mutable database. New API
+and BDD cases also own one database per case/scenario. A migration test uses a second
+disposable database for downgrade. Race tests intentionally use multiple contexts
+inside their own test database. Native Couchbase cases own temporary directories
+and dispose before deletion. The native listener uses a completion signal with a
+bounded guard, not a sleep as its assertion.
 
-If the required engine/native dependency is unavailable, the full integration run must fail with actionable setup information rather than silently claim success with skipped cases. A clearly labeled fast/unit-only run may still work without SQL. Existing skip attributes remain at the baseline and must be changed during fixture implementation; this document does not claim automatic setup is already delivered.
+New domain/client/outbox tests use fixed fictional inputs, explicit cancellation
+signals and no external network. The scan business timestamps are fixed in the past
+for the November 2026 assignment. Storage names can be random for isolation without
+making expected business outcomes random.
 
-Use fixed UTC instants for input/seed/report windows. Inject TimeProvider or another explicit controllable seam where production behavior depends on current time; control the JWT lifetime-validation clock without bypassing the validation being tested. Replace wall-clock circuit-recovery waits and sleep-based assertions with controllable pipeline time/scheduling or observable completion signals. Cancellation tests use explicit signals/tokens rather than depending on the host reaching a duration first. Real database races use barriers, not an assumed execution order. Bounded timeout guards may prevent hangs but are not the business assertion. Generate unique storage names for isolation; do not make expected business results random.
+**Strict determinism is not fully implemented across retained legacy tests.** The
+following are known limitations, not implied fixes or new feature coverage:
 
-Couchbase tests use a fresh temporary directory, deterministic document IDs/timestamps, disposal before deletion and actual reopen checks. Listener tests signal completion through TaskCompletionSource and a bounded guard, not Thread.Sleep. No singleton/shared static scenario state. Remove process-wide environment mutation from legacy tests. Fake/injected JWT keys are test-only data, not real secrets; never use or print production credentials.
+- CourierTests uses a real delay for circuit recovery and real attempt-timeout timers.
+- SqlWebTests polls for asynchronous audit completion; elapsed time can affect it.
+- Some old domain/SQL/report/transport fixtures and seeding use current UTC time;
+  signed-JWT lifetime tests do not inject a controllable validation clock.
+- WebApplicationFactoryTests mutates process-wide demo-account environment settings.
+- OutboxServiceTests retains one redundant Setup after the cancellation action. It
+  cannot affect that already completed action, but should be removed for clarity.
 
-## 8. New coverage and the real API database boundary
+Next improvements are explicit TimeProvider/scheduler seams for timing behavior,
+completion signals for auditing, fixed seed/report windows and per-host rather than
+process-wide configuration. These need code changes and their own rerun. A 197-pass
+run demonstrates observed correctness on this environment; it cannot prove the
+absence of timing/order/configuration coupling across all execution environments.
 
-Add real Couchbase tests for create/read/update/delete, Pending-at-create, mapper enums/UTC/null notes, malformed stored values, query filtering/order/group counts, indexes, persistence after reopen and listener cleanup. This addresses the Week 4 Part A automated-coverage gap; 19 MemoryScans client tests do not cover these behaviors.
+## 8. Implemented coverage and test boundaries
 
-Add an API integration test using WebApplicationFactory<ApiProgram>, test authentication with an explicit Courier role/courierId, the actual ShipmentApiService and a disposable SQL database. Exercise create (201 + Location), fetch, scan upload/replay, then assert persisted rows with a separate DbContext. Do not replace the service with MemoryService in this test. Retain separate actual signed-JWT tests so fake authentication cannot conceal role/lifetime defects. Cover a forbidden request with no database mutation.
+The 148 baseline cases remain. Week 5 adds **49 executable cases**:
 
-## 9. TDD feature and commit evidence
+| New class / feature | Cases | Actual boundary |
+| --- | ---: | --- |
+| DeliveredShipmentTests | 1 | Domain unit; new Delivered-details guard |
+| OutboxServiceTests | 6 | Moq repository/uploader; summary, persisted fields, failures, cancellation and empty queue |
+| ShipmentBoundaryTests | 11 | Tracking digit/format edge cases and inclusive/just-outside weight limits; rejected update preserves details |
+| ApexApiClientContractTests | 4 | Fake HTTP; 200 upload wire fields/acknowledgement, 404/500 problem fields, explicit cancellation |
+| CouchbaseRepositoryTests | 15 | Real native CRUD, mapper values, reopen, filters/order/group counts, indexes and listener lifecycle |
+| ShipmentApiDatabaseTests | 4 | Real API, production service/UoW/EF/SQL with fake credential verification; persisted state and authorization |
+| ShipmentCreation.feature | 5 | Real API/SQL; creation/Location, duplicate preservation and three invalid-weight examples |
+| ScanUpload.feature | 3 | Real API/SQL; first upload, exact replay and changed-content rejection |
+| **Added total** | **49** | **22 unit + 19 native/API integration + 8 acceptance cases** |
 
-New rule: **a Delivered shipment's editable details cannot be replaced**. `TrackedShipment.ReplaceDetails` at the baseline validates input values but has no Delivered-state guard. Its existing ChangeStatus restrictions already reject Delivered-to-InTransit; therefore that example is NOT eligible as a new feature.
+The new-work distribution is approximately **45% unit, 39% integration, 16% BDD**,
+rather than the original 70/25/5 planning target. The identified native-persistence
+and real-API gaps justified more expensive integration coverage; eight focused BDD
+cases were retained for readable acceptance criteria. The ratio is disclosed rather
+than changing labels or adding low-value tests to hit a quota. Project names do not
+establish the level: the three legacy projects remain mixed unit/component/integration
+coverage; whole-suite percentages are not inferred from project names.
 
-1. First commit this strategy. Establish a separately committed test-project/fixture foundation if required.
-2. **RED:** add a compiling test using the existing TrackedShipment API. Advance a shipment through the valid statuses to Delivered, call ReplaceDetails with otherwise valid new details, and expect DeliveryConflictException plus unchanged stored details. Run it and record the actual assertion failure before implementation; commit with a `RED:` prefix.
-3. **GREEN:** add only the minimal Delivered-state business guard. Ensure the constructor/Created edits still work and the existing lifecycle remains intact. Run the test and regressions; record the actual result; commit `GREEN:`.
-4. **REFACTOR:** improve testability/readability or separate the lifecycle guard from value validation without changing behavior. Run the same suite and commit `REFACTOR:`. Explain the concrete benefit, not a cosmetic claim.
-5. Add focused API PUT/409 coverage for the rule. Document requirement, failing test, minimal change, refactor and actual SHAs/output in TDD-LOG.md. Do not manufacture earlier failures, backdate commits, or squash the three evidence commits on merge.
+The API database factory preserves actual ShipmentApiService, unit of work,
+configuration, mappings and SQL provider. A fresh DbContext verifies saved rows.
+Its test-only auth handler permits a fictional identity, while real authorization
+and ownership checks remain. Actual signed-JWT tests are retained separately.
+Fake HTTP handlers never delegate to real network transport. Moq does not prove
+native persistence, and metadata/ToQueryString checks do not prove SQL execution.
 
-No TDD tests or production implementation are included with this initial document.
+## 9. TDD evidence
 
-## 10. BDD with Reqnroll
+The new rule is **a Delivered shipment's editable details cannot be replaced**.
+The baseline already rejected backward status transitions, so that was not claimed
+as a new feature. Strategy commit 8d142b3 preceded the test work.
 
-Both planned features run at the **API acceptance level**, using production ShipmentApiService, in-process TestServer, scenario-specific disposable SQL data and controlled test authentication. This checks the business-to-HTTP boundary while remaining backend-only. Low-level failure matrices belong in unit/integration tests, not dozens of repeated Gherkin scenarios.
+| Stage | Commit | Observed result |
+| --- | --- | --- |
+| RED | bb70931 | One assertion failure: no DeliveryConflictException was thrown |
+| GREEN | d11b3d8 | Minimal guard at the start of ReplaceDetails; targeted test passed |
+| REFACTOR | 2262c0b | Extracted delivered-shipment setup helper; assertions/behavior preserved; test passed |
 
-- `ShipmentCreation.feature`: valid fictional creation; duplicate tracking rejected; invalid weight. A Background establishes an authenticated courier/test context. A Scenario Outline with Examples covers business-visible valid/invalid weights.
-- `ScanSync.feature`: pending local scans acknowledged by the API; replay skipped; same scan ID with changed content rejected. Use the real temporary Couchbase repository where the scenario claims durable offline state; do not equate an in-memory list with offline persistence. Unit tests cover detailed batching and transport failure branches.
+The domain API already supported the test without a new interface or production
+rewrite. Later API/SQL PUT coverage verifies 409 and unchanged persisted
+details. See TDD-LOG.md and evidence/week5/tdd. Separate commits remain in the pushed
+branch and must be preserved during merge; documentation does not manufacture a
+second TDD cycle or claim new testability work that did not occur.
 
-Inject a scenario-state object into bindings/hooks; no static fields or ScenarioContext.Current. BeforeScenario creates the host/database/context, AfterScenario disposes handlers/hosts/native databases and cleans storage even after failure. Steps describe business intent, delegate operations through shared helpers, and assert status, reason and persisted state. Use Reqnroll xUnit integration; there is no baseline SpecFlow work to migrate.
+## 10. Implemented BDD with Reqnroll
 
-## 11. GitHub Copilot drafting and review
+Both features run at **API acceptance level**, using production services, in-process
+TestServer, scenario-specific SQL data and test authentication. ShipmentCreation
+contains a Background and a Scenario Outline with three invalid-weight examples.
+ScanUpload covers new uploads, replay and conflicting content under the same ID.
+It intentionally describes server acceptance, not execution of a real local outbox.
+Native durability is proven in the separate Couchbase integration tests; no memory
+list is represented as durable offline storage.
 
-Use **GitHub Copilot** for at least one service-unit-test draft (e.g. OutboxService with Moq) and one Gherkin feature plus bindings. ChatGPT-generated material is not evidence of a Copilot run. Save exact prompts, relevant generated output and kept/changed/rejected decisions in COPILOT-LOG.md. Mark actually assisted classes with a comment; do not mark handwritten code as Copilot-produced.
+Bindings share constructor-injected ShipmentScenarioState. Tagged async BeforeScenario
+and AfterScenario hooks initialize/dispose resources, including setup-failure cleanup.
+There is no static mutable scenario state or ScenarioContext.Current. Existing helper
+source is linked into Specs rather than copied or referenced through another test
+assembly. Generated feature code stays in obj. The extension supports editing;
+Reqnroll.xUnit supplies generation/runtime. No SpecFlow migration was needed.
 
-Reject weak non-null-only assertions, tests that duplicate implementation logic, incorrect expectations/mock setups, wall-clock sleeps and missing negative boundaries. Strengthen accepted drafts with meaningful state/call verification. For two genuinely generated tests, deliberately introduce a small known production defect, run the targeted tests to observe failure, restore the code and rerun green. Record the actual mutation, command and results. Never submit broken production changes or a fabricated mutation result. Copilot output/review and mutation demonstrations remain pending until performed.
+The initial invalid-weight failures caught an incorrect test media-type expectation:
+MVC validation used application/json, while the exception handler used problem+json.
+The corrected test still verifies 400, a WeightKg error and no persisted shipment.
+The real Windows eight-case run passed; binding-only dry-run output is not used as
+business evidence. See evidence/week5/bdd.txt and the final full-run log.
 
-## 12. Execution, results and definition of done
+## 11. Copilot drafting, human review and mutations
 
-Baseline evidence in `evidence/week4-partD/tests-windows.txt` records 99 + 30 + 19 = **148 passed, 0 failed, 0 skipped**. That is historical Week 4 evidence, not a Week 5 run. No Week 5 test total or coverage percentage is claimed yet.
+GitHub Copilot drafted OutboxService unit tests and a creation feature with
+context, hooks and bindings. COPILOT-LOG.md records prompts and
+kept/changed/rejected decisions; docs/week5/COPILOT-BDD-DRAFT.md preserves the draft.
+Assisted classes carry attribution comments. COPILOT-LOG.md distinguishes
+Copilot drafts from subsequent assisted implementation and review work.
 
-Planned standard commands from the root after projects/fixtures are implemented:
+Review rejected invalid sample identifiers, redundant non-null assertions and a
+hardcoded identity assertion that could pass without testing authentication. The BDD
+draft also missed imports, duplicated infrastructure and lacked complete cleanup.
+Those were corrected while preserving meaningful status/field/no-write assertions.
+One redundant post-action Setup remains as a documented readability limitation.
+
+Two temporary production mutations proved generated tests can detect defects:
+
+1. Persist Failed even after a successful upload: targeted Theory produced one
+   failure and one pass; restoring the conditional returned all six outbox cases green.
+2. Swallow upload cancellation: the targeted case failed because no cancellation was
+   thrown; restoring the rethrow returned all six cases green.
+
+See evidence/week5/copilot. Neither defect remains in submitted production code.
+The evidence covers these two mutations; no code-coverage measurement was performed.
+
+## 12. Actual results and submission status
+
+Verified code: adc53976c978ff1a2f185b1eef0f88284fde9dac, week5-testing.
+Windows evidence supplied on 15 November 2026:
+
+| Project | Passed | Failed | Skipped |
+| --- | ---: | ---: | ---: |
+| ApexPost.Tests | 99 | 0 | 0 |
+| ApexPost.Api.Tests | 30 | 0 | 0 |
+| ApexPost.Courier.Integration.Tests | 19 | 0 | 0 |
+| ApexPost.IntegrationTests | 19 | 0 | 0 |
+| ApexPost.UnitTests | 22 | 0 | 0 |
+| ApexPost.Specs | 8 | 0 | 0 |
+| **Total** | **197** | **0** | **0** |
+
+The build recorded zero warnings/errors in 20.15 seconds. Test logs list per-project
+durations (4s, 4s, 7s, 7s, 36s and 281ms); no precise total wall duration was supplied,
+so these rounded values are not presented as a measured overall duration.
+Evidence: evidence/week5/build-after-sql-cleanup.txt and tests-after-sql-cleanup.txt.
+Earlier full/targeted logs are historical milestones, not substitutes for this run.
+No code-coverage measurement was supplied.
+
+From the solution root, run the build first and stop on failure:
 
 ```powershell
-dotnet build ApexPost.slnx -m:1
-dotnet test ApexPost.slnx --no-build -m:1 --logger trx --results-directory evidence/week5/test-results
+dotnet build ApexPost.slnx -m:1 -warnaserror
+dotnet test ApexPost.slnx --no-build -m:1 --logger "console;verbosity=minimal"
 ```
 
-Test Explorer should discover the same cases. Document a fast unit-only command and its exact scope after project organization is in place. The full suite must report passes/failures/skips explicitly; any unintended skip blocks final acceptance. Log actual environment/prerequisites and run duration. Optional coverage is diagnostic evidence, not a target; explain uncovered risk rather than chase 100%.
+Fast isolated run: `dotnet test ApexPost.UnitTests -m:1` (22 cases, no SQL).
+See README for prerequisites, other focused commands and recording fresh evidence.
+Test Explorer discovers the same cases. Default Windows LocalDB needs no environment
+assignment; optional private-server configuration must never name a production DB.
 
-Definition of done: strategy precedes tests; review covers every baseline class with no unexplained deletions; named unit/Moq/boundary tests; real repository and API/database integration; deterministic fixtures/time; real TDD commit trail; two Reqnroll features with hooks/injection/outline/background; actual Copilot review and two mutation demonstrations; README commands and fresh results; final reflection and viva preparation. Preserve RED/GREEN/REFACTOR commits when merging week5-testing through a normal merge rather than squash.
+The initial strategy, test projects, genuine TDD commits, Moq/native/API coverage,
+BDD features and Copilot evidence are included. The feature branch has not yet
+been merged. Use a normal merge commit
+from week5-testing into the repository's existing default master branch (the brief's
+main equivalent); do not squash/rebase away RED/GREEN/REFACTOR history. Remaining
+legacy determinism constraints in section 7 are not marked complete.
 
-## 13. Reflection (complete after execution)
+## 13. Reflection
 
-Pending, intentionally not written as a success claim before tests exist. At completion, replace this section with about half a page based on actual observations: defects or regressions caught and by which level; cost/limitations of mocks versus native/database tests; what changed after failed runs/review; which tests gave the most confidence per minute; remaining risks and the next improvement. Link concrete failing/passing evidence and record one real rejected Copilot test for the five-minute viva. Update this document as decisions change rather than retroactively pretending the initial plan was fully delivered.
+The most useful outcome was distinguishing a passing assertion from credible
+behavioral evidence. The Delivered test first failed because ReplaceDetails accepted
+changes after delivery. A small guard made it pass, and the later real API/SQL test
+showed that the client receives 409 while stored details remain unchanged. The TDD
+history makes that progression inspectable rather than relying on a final green log.
+
+Moq outbox tests gave quick feedback on summary values, state preservation and
+cancellation. Mutating successful uploads to Failed, then swallowing cancellation,
+caused the intended tests to fail. These checks were inexpensive and gave high
+confidence per minute for orchestration, but they could not establish native document
+serialization or restart durability. The fifteen real Couchbase cases filled that
+gap. Similarly, the API/SQL tests used real services and independent verification
+contexts so a correct HTTP response could not conceal a missing database write.
+
+BDD made creation and scan replay expectations readable. It also exposed an error
+in the test itself: all three invalid-weight examples expected the wrong media type.
+The API returned valid weight errors as JSON. Correcting that expectation while
+retaining the status, error-field and no-write assertions was better than weakening
+the tests or changing working production validation to satisfy an assumption.
+
+The initial shared SQL fixture and environment-controlled skips were weaknesses even
+though a configured run passed. Automatic LocalDB and a fresh migrated/seeded database
+per case removed those dependencies. The resulting legacy project run took 36 seconds
+versus the earlier logged 10 seconds; stronger isolation has a visible setup cost.
+The full post-cleanup run passed 197 tests with no failures/skips and a clean build.
+
+I would next control legacy clocks and scheduling, replace audit polling with an
+observable completion signal, and isolate process-wide test configuration. Those
+issues remain disclosed. The 70/25/5 target also shifted because real persistence
+gaps deserved priority; I would optimize fixture setup only after measuring it and
+preserving isolation. For fast service changes the focused unit/mutation checks gave
+the best feedback per minute; for persistence, native and SQL tests supplied confidence
+that mocks could not. Passing counts guide review but do not establish coverage of
+every risk or establish complete determinism.
 
 ## References
 
-- Assignment: Week5(1).txt supplied by the trainer.
-- Microsoft EF Core testing strategy: https://learn.microsoft.com/ef/core/testing/choosing-a-testing-strategy
-- Reqnroll xUnit: https://docs.reqnroll.net/latest/integrations/xunit.html
-- Reqnroll context injection: https://docs.reqnroll.net/latest/automation/context-injection.html
-- Reqnroll hooks: https://docs.reqnroll.net/latest/automation/hooks.html
-
-
-## Week 5 BDD implemented feature levels
-
-| Feature | Level | Reason |
-| --- | --- | --- |
-| ShipmentCreation (5 cases) | API + real SQL Server | Acceptance of valid details, duplicate tracking and weight validation must agree with persisted state. |
-| ScanUpload (3 cases) | API + real SQL Server | New, replayed and conflicting scan IDs must preserve actual database history. |
-
-These features use injected scenario state, tagged async hooks and the existing
-SQL/auth helpers as linked source. They do not test native outbox execution, MAUI,
-JWT cryptography or the typed client's retries. See docs/week5/BDD-STRATEGY.md for
-commands, isolation and limitations. Linux compilation and binding-only dry run
-were checked; actual Windows/SQL execution must be recorded in evidence/week5/bdd.txt.
-This update does not replace the final full-suite result or reflection.
+- Trainer assignment: Week5(1).txt.
+- https://learn.microsoft.com/ef/core/testing/choosing-a-testing-strategy
+- https://docs.reqnroll.net/latest/integrations/xunit.html
+- https://docs.reqnroll.net/latest/automation/context-injection.html
+- https://docs.reqnroll.net/latest/automation/hooks.html
+- https://docs.reqnroll.net/latest/execution/dry-run.html

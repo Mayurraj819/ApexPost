@@ -1,4 +1,4 @@
-# ApexPost Counter Platform — Week 3
+# ApexPost Counter Platform — Weeks 3–5
 
 .NET 10 / C# 14 MVC application, SQL Server + EF Core 10, layered Domain/Application/Infrastructure/Web/Tests. JSON runtime persistence has been removed. No database migration runs automatically on application startup.
 
@@ -44,7 +44,14 @@ Counter clerks can create/pay sales. Corrections require an active Branch Manage
 dotnet test ApexPost.slnx
 ```
 
-SQL tests explicitly skip unless APEXPOST_TEST_SQLSERVER is set. Give it a connection to **master** on a disposable/local test server with create/drop-database permission. The fixture creates ApexPost_Test_<random>, migrates/seeds it, and drops only that database. It refuses a base connection naming ApexPostDb or another database. Never use a shared server.
+Week 5 SQL setup now defaults automatically to installed Windows LocalDB. Each SQL
+case owns a separate disposable database; migrations and legacy seed data run in the
+test lifecycle, never against ApexPostDb. Missing SQL infrastructure fails clearly
+instead of silently skipping. An optional APEXPOST_TEST_SQLSERVER override must
+name **master** on a private test server with database-create/drop rights. No override
+is needed for the standard Windows run. See the Week 5 section below.
+
+Optional override for a different private test environment:
 
 ```powershell
 $env:APEXPOST_TEST_SQLSERVER = 'Server=(localdb)\MSSQLLocalDB;Database=master;Trusted_Connection=True;TrustServerCertificate=True'
@@ -142,3 +149,99 @@ migration before applying it. No EnsureCreated or automatic startup migration is
 ## Week 4 Part D
 
 See [PARTD-START-HERE.md](PARTD-START-HERE.md) for API security and MAUI setup. Earlier API requests now require a bearer token. Use ApexPost.Mobile.slnx for the native app; ApexPost.slnx is the portable server/test solution.
+
+
+## Week 5 — testing strategy, TDD, BDD and evidence
+
+Verified code revision: `adc53976c978ff1a2f185b1eef0f88284fde9dac`
+(`week5-testing`, automatic legacy SQL setup and per-test database isolation).
+Windows execution on 15 November 2026 recorded **197 passed, 0 failed, 0 skipped**.
+The build recorded **0 warnings and 0 errors**. The committed logs record one full-suite run, rather than a sum of targeted runs
+or a Reqnroll dry run.
+
+| Test project | Passed | Failed | Skipped |
+| --- | ---: | ---: | ---: |
+| ApexPost.Tests | 99 | 0 | 0 |
+| ApexPost.Api.Tests | 30 | 0 | 0 |
+| ApexPost.Courier.Integration.Tests | 19 | 0 | 0 |
+| ApexPost.IntegrationTests | 19 | 0 | 0 |
+| ApexPost.UnitTests | 22 | 0 | 0 |
+| ApexPost.Specs | 8 | 0 | 0 |
+| **Total** | **197** | **0** | **0** |
+
+Evidence:
+- [Full build after SQL cleanup](evidence/week5/build-after-sql-cleanup.txt), 20.15 seconds.
+- [Full suite after SQL cleanup](evidence/week5/tests-after-sql-cleanup.txt).
+- [Strategy and reflection](TESTING-STRATEGY.md).
+- [TDD history and rule](TDD-LOG.md).
+- [Actual Copilot prompts, reviews and mutation evidence](COPILOT-LOG.md).
+- [Five-minute viva preparation](docs/week5/VIVA-NOTES.md).
+- [Requirement-to-evidence map and remaining limits](docs/week5/REQUIREMENT-COVERAGE.md).
+
+### Run all backend tests
+
+Prerequisites: .NET 10 SDK, installed Windows SQL Server Express LocalDB and the
+native Couchbase Lite dependency supplied by the existing package. Open the normal
+ApexPost.slnx solution, not ApexPost.Mobile.slnx. No MAUI workload, manually running
+API, JWT, application user-secret, manual database creation or seed command is
+required for tests. Initial restore may need package-feed access.
+
+From the repository root in PowerShell:
+
+```powershell
+dotnet restore ApexPost.slnx
+dotnet build ApexPost.slnx --no-restore -m:1 -warnaserror
+# Run only after the build succeeds:
+dotnet test ApexPost.slnx --no-build -m:1 --logger "console;verbosity=minimal"
+```
+
+To reproduce the recorded automatic LocalDB path, use a shell without
+APEXPOST_TEST_SQLSERVER set. Do not set REQNROLL_DRY_RUN for the real suite. An
+explicit private test-server override is supported on other environments; protect
+its credentials in local/CI configuration. No production server may be used.
+Missing engines are failures, not silently skipped integration coverage.
+
+To record fresh evidence without overwriting the submitted run:
+
+```powershell
+New-Item -ItemType Directory -Force evidence/week5 | Out-Null
+dotnet build ApexPost.slnx -m:1 -warnaserror 2>&1 | Tee-Object evidence/week5/build-rerun.txt
+# Run only after the build succeeds:
+dotnet test ApexPost.slnx --no-build -m:1 --logger "console;verbosity=minimal" 2>&1 | Tee-Object evidence/week5/tests-rerun.txt
+```
+
+### Fast and focused runs
+
+```powershell
+# 22 isolated tests; no SQL server or real HTTP:
+dotnet test ApexPost.UnitTests -m:1
+# 15 native Couchbase cases, without SQL:
+dotnet test ApexPost.IntegrationTests -m:1 --filter "FullyQualifiedName~CouchbaseRepositoryTests"
+# Four real API/SQL cases:
+dotnet test ApexPost.IntegrationTests -m:1 --filter "FullyQualifiedName~ShipmentApiDatabaseTests"
+# Eight real API/SQL BDD scenarios:
+dotnet test ApexPost.Specs -m:1
+```
+
+Test Explorer discovers the same cases. The Reqnroll extension helps feature
+editing/navigation; the existing NuGet integration supplies generation/runtime.
+Do not commit generated obj/*.feature.cs files. Dry runs are binding checks only.
+
+### What the evidence proves and what remains
+
+New coverage includes the Delivered-details rule, Moq outbox interaction/cancellation,
+tracking and weight boundaries, fake-handler client contracts, real Couchbase durability
+and queries, real API/SQL persisted outcomes, and business-readable Reqnroll scenarios.
+SQL helpers create/drop a uniquely named database per test/scenario; native tests own
+private temporary directories. No test was deleted to obtain the passing count.
+
+Preserve RED `bb70931`, GREEN `d11b3d8` and REFACTOR `2262c0b` in Git history. Merge
+week5-testing through a normal merge commit into this repository's default **master**
+branch when ready; do not squash or rebase away the evidence. The assignment calls
+the target main; master is this repository's established equivalent. The merge has
+not been claimed as completed by these documents.
+
+**Known limitation:** some retained legacy tests still use current time, timer delays,
+asynchronous audit polling or process-wide test configuration. SQL state isolation
+has been corrected, but a passing run does not establish complete determinism. See
+TESTING-STRATEGY.md section 7. No measured code-coverage percentage is claimed.
