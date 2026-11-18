@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 namespace ApexPost.Tests.SqlServer;
 
 [Collection("SqlServer"), Trait("Category", "SqlServer")]
-public sealed class RetrySafetyTests(SqlServerFixture fixture)
+public sealed class RetrySafetyTests : SqlServerTestBase
 {
     private sealed class CommitFailure : DbTransactionInterceptor
     {
@@ -89,7 +89,7 @@ public sealed class RetrySafetyTests(SqlServerFixture fixture)
         }
         finally
         {
-            // Restore the shared disposable fixture, including when an assertion fails.
+            // Restore this test's disposable fixture, including when an assertion fails.
             await using var reset = fixture.Create();
             if (changed)
                 await reset.Set<Product>().ExecuteUpdateAsync(s => s.SetProperty(p => p.UnitPrice.Amount,

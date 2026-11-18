@@ -9,7 +9,7 @@ using Xunit.Abstractions;
 namespace ApexPost.Tests.SqlServer;
 
 [Collection("SqlServer"), Trait("Category", "SqlServer")]
-public sealed class QueryShapeTests(SqlServerFixture fixture, ITestOutputHelper output)
+public sealed class QueryShapeTests(ITestOutputHelper output) : SqlServerTestBase
 {
     private sealed class Counter : DbCommandInterceptor
     {

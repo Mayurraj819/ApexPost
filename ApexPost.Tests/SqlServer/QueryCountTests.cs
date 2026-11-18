@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace ApexPost.Tests.SqlServer;
 [Collection("SqlServer"), Trait("Category", "SqlServer")]
-public sealed class QueryCountTests(SqlServerFixture fixture)
+public sealed class QueryCountTests : SqlServerTestBase
 {
     private sealed class Counter : DbCommandInterceptor
     {

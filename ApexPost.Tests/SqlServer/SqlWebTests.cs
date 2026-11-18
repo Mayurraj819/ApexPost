@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ApexPost.Tests.SqlServer;
 [Collection("SqlServer"), Trait("Category", "WebSql")]
-public sealed class SqlWebTests(SqlServerFixture fixture)
+public sealed class SqlWebTests : SqlServerTestBase
 {
     private sealed class Factory(string connection, Guid branch, Guid staff, string role, SaveChangesInterceptor? interceptor = null, bool failAudit = false) : WebApplicationFactory<Program>
     {
